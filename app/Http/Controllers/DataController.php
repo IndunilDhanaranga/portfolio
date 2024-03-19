@@ -7,16 +7,23 @@ use Illuminate\Http\Request;
 
 use App\Models\PortfolioUser;
 use App\Models\PortfolioUserConnection;
+use App\Models\SchoolAndCollage;
+use App\Models\EducationLevel;
 
 class DataController extends Controller
 {
     public function getBasicDetails(){
-        $basic_details = PortfolioUser::with('connections','userImage','coverImage')->first();
-        return $basic_details;
+        $data = PortfolioUser::with('connections','userImage','coverImage')->first();
+        return $data;
     }
 
-    public function getPortfolioConnections(){
-        $portfolio_connections = PortfolioUserConnection::all();
-        return $portfolio_connections;
+    public function getSchoolDetails(){
+        $data = SchoolAndCollage::all();
+        return $data;
+    }
+
+    public function getEducationLevel(){
+        $data = EducationLevel::all();
+        return $data;
     }
 }

@@ -1,5 +1,5 @@
 <div class="card">
-    <form action="" method="post">
+    <form action="/create-education-level" method="post">
         @csrf
         <div class="card card-info">
             <div class="card-header">
@@ -25,3 +25,6 @@
         </div>
     </form>
 </div>
+<script>
+    var education_level = <?php echo json_encode($education_level); ?>;
+</script>

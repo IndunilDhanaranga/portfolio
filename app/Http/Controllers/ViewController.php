@@ -157,6 +157,7 @@ class ViewController extends DataController
         $data = [
             'title' => 'Schools & Collages',
             'view' => 'back-end.schools-collages',
+            'school_details' => $this->getSchoolDetails(),
             'script' => array(config('site-specific.schools-collages-init-js')),
         ];
 
@@ -173,6 +174,7 @@ class ViewController extends DataController
         $data = [
             'title' => 'Education Levels',
             'view' => 'back-end.education-levels',
+            'education_level' => $this->getEducationLevel(),
             'script' => array(config('site-specific.education-levels-init-js')),
         ];
 

@@ -78,6 +78,8 @@ Route::group([
     Route::get('/basic-details'                          , 'ViewController@basicDetails')->name('basic-details');
 
     Route::post('/basic-details-create'                          , 'ActionController@createBasicDetails')->name('basic-details-create');
+    Route::post('/create-school'                          , 'ActionController@createSchool')->name('create-school');
+    Route::post('/create-education-level'                          , 'ActionController@createEducationLevel')->name('create-education-level');
 
 
     Route::get('/schools-collages'                          , 'ViewController@schoolCollages')->name('schools-collages');
