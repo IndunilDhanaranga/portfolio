@@ -71,6 +71,10 @@ return [
 
         'summernote-min-css'       =>'/assets/back-end/default/plugins/summernote/summernote-bs4.min.css',
 
+        'sweetalert-css'                        => '/assets/back-end/default/plugins/sweetalert2/sweetalert2.min.css',
+
+        'toastr-css'                            => '/assets/back-end/default/plugins/toastr/toastr.min.css',
+
         /*
         ----------------------------------------------------------------------------------------------------------------------------------
         Default JAVA SCRIPT
@@ -107,6 +111,10 @@ return [
 
         'dashboard-min-js'       =>'/assets/back-end/default/dist/js/pages/dashboard.js',
 
+        'sweetalert2-js'                        => '/assets/back-end/default/plugins/sweetalert2/sweetalert2.min.js',
+
+        'toastr-js'                             => '/assets/back-end/default/plugins/toastr/toastr.min.js',
+
 
 
         /*
@@ -116,6 +124,10 @@ return [
         */
 
         'basic-details-init-js'       =>'/assets/back-end/custom/js/basic-details-init.js',
+
+        'schools-collages-init-js'       =>'/assets/back-end/custom/js/school-collages-init.js',
+
+        'education-levels-init-js'       =>'/assets/back-end/custom/js/education-levels-init.js',
 
         'education-qualification-init-js'       =>'/assets/back-end/custom/js/education-qualification-init.js',
 

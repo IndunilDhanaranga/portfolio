@@ -323,6 +323,78 @@
               .addClass('active');
       });
       </script>
+      @if (session('temp-success'))
+      <script>
+          $(document).ready(function() {
+              var successMessage = "{{ session('message') }}";
+
+              if (successMessage) {
+                  var Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 3000
+                  });
+
+                  Toast.fire({
+                      icon: 'success',
+                      title: successMessage
+                  });
+              }
+          });
+      </script>
+  @endif
+
+  @if (session('temp-error'))
+      <script>
+          $(document).ready(function() {
+              var errorMessage = "{{ session('message') }}";
+
+              if (errorMessage) {
+                  var Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 3000
+                  });
+
+                  Toast.fire({
+                      icon: 'error',
+                      title: errorMessage
+                  });
+              }
+          });
+      </script>
+  @endif
+
+  @if (session('success'))
+      <script>
+          $(document).ready(function() {
+              var successMessage = "{{ session('message') }}";
+
+              if (successMessage) {
+                  Swal.fire("Good Job !", successMessage, "success");
+              }
+          });
+      </script>
+  @endif
+
+  @if (session('error'))
+      <script>
+          $(document).ready(function() {
+              var errorMessage = "{{ session('message') }}";
+              var title = "{{ session('title') }}";
+
+              if (!title) {
+                  title = 'Oops!';
+              }
+
+              if (errorMessage) {
+                  Swal.fire(title, errorMessage, "error");
+              }
+          });
+      </script>
+  @endif
 </body>
 
 </html>

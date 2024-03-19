@@ -36,6 +36,7 @@ class ViewController extends DataController
 
         $data['css'] = $css;
         $data['script'] = $script;
+        $data['basic_details'] = $this->getBasicDetails();
         return view::make( 'front-end.home', $data );
     }
     /*
@@ -78,6 +79,8 @@ class ViewController extends DataController
             config( 'site-specific.OverlayScrollbars-min-css' ),
             config( 'site-specific.daterangepicker-min-css' ),
             config( 'site-specific.summernote-min-css' ),
+            config( 'site-specific.sweetalert-css' ),
+            config( 'site-specific.toastr-css' ),
         );
 
         $script = array(
@@ -95,6 +98,8 @@ class ViewController extends DataController
             config( 'site-specific.summernote-min-js' ),
             config( 'site-specific.jquery-overlayScrollbars-min-js' ),
             config( 'site-specific.adminlte-min-js' ),
+            config( 'site-specific.sweetalert2-js' ),
+            config( 'site-specific.toastr-js' ),
         );
 
         if ( isset( $data[ 'css' ] ) ) {
@@ -135,7 +140,40 @@ class ViewController extends DataController
         $data = [
             'title' => 'Basic Details',
             'view' => 'back-end.basic-details',
+            'basic_details' => $this->getBasicDetails(),
             'script' => array(config('site-specific.basic-details-init-js')),
+        ];
+        // return $data['basic_details'];
+        return $this->default($data);
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW SCHOOLS & COLLAGES
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function schoolCollages(){
+        $data = [
+            'title' => 'Schools & Collages',
+            'view' => 'back-end.schools-collages',
+            'script' => array(config('site-specific.schools-collages-init-js')),
+        ];
+
+        return $this->default($data);
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW EDUCATION LEVELS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function educationLevels(){
+        $data = [
+            'title' => 'Education Levels',
+            'view' => 'back-end.education-levels',
+            'script' => array(config('site-specific.education-levels-init-js')),
         ];
 
         return $this->default($data);

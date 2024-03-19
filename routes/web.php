@@ -76,5 +76,11 @@ Route::group([
 
     Route::get('/dashboard'                              , 'ViewController@dashboard')->name('dashboard');
     Route::get('/basic-details'                          , 'ViewController@basicDetails')->name('basic-details');
+
+    Route::post('/basic-details-create'                          , 'ActionController@createBasicDetails')->name('basic-details-create');
+
+
+    Route::get('/schools-collages'                          , 'ViewController@schoolCollages')->name('schools-collages');
+    Route::get('/education-levels'                          , 'ViewController@educationLevels')->name('education-levels');
     Route::get('/education-qualification'                , 'ViewController@educationQualification')->name('education-qualification');
 });

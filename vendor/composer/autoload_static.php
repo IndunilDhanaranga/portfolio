@@ -40,6 +40,7 @@ class ComposerStaticInit968f73bcf5520ee401d641d0d79555ec
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
         'b0bb8ba44464b7a68381e1741e0e97f0' => __DIR__ . '/../..' . '/app/Helper/permission.php',
+        '1ee7c1a667535569af82a87041f62739' => __DIR__ . '/../..' . '/app/Helper/images.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -541,12 +542,17 @@ class ComposerStaticInit968f73bcf5520ee401d641d0d79555ec
     );
 
     public static $classMap = array (
+        'App\\Http\\Controllers\\ActionController' => __DIR__ . '/../..' . '/app/Http/Controllers/ActionController.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DataController' => __DIR__ . '/../..' . '/app/Http/Controllers/DataController.php',
         'App\\Http\\Controllers\\ViewController' => __DIR__ . '/../..' . '/app/Http/Controllers/ViewController.php',
         'App\\Http\\Middleware\\EnsureTokenIsValid' => __DIR__ . '/../..' . '/app/Http/Middleware/EnsureTokenIsValid.php',
         'App\\Http\\Middleware\\Login' => __DIR__ . '/../..' . '/app/Http/Middleware/Login.php',
+        'App\\Models\\PortfolioCoverImage' => __DIR__ . '/../..' . '/app/Models/PortfolioCoverImage.php',
+        'App\\Models\\PortfolioUser' => __DIR__ . '/../..' . '/app/Models/PortfolioUser.php',
+        'App\\Models\\PortfolioUserConnection' => __DIR__ . '/../..' . '/app/Models/PortfolioUserConnection.php',
+        'App\\Models\\PortfolioUserImage' => __DIR__ . '/../..' . '/app/Models/PortfolioUserImage.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

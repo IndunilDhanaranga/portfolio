@@ -19,6 +19,24 @@ function getAllPermissions(){
                 ['title' => 'Education Qualification','permission'=>'education-qualification','show_in_sidebar'=>true],
             )
         ],
+        [
+            'group'=>'Schools & Collages',
+            'icon'=>'nav-icon fas fa-pen',
+            'type'=>'single',
+            'data'=>array(
+                ['title' => 'School & Collages View','permission'=>'schools-collages','show_in_sidebar'=>true],
+                ['title' => 'Education Qualification','permission'=>'education-qualification','show_in_sidebar'=>false],
+            )
+        ],
+        [
+            'group'=>'Education Levels',
+            'icon'=>'nav-icon fas fa-pen',
+            'type'=>'single',
+            'data'=>array(
+                ['title' => 'Education Level View','permission'=>'education-levels','show_in_sidebar'=>true],
+                ['title' => 'Education Qualification','permission'=>'education-qualification','show_in_sidebar'=>false],
+            )
+        ],
     );
 }
 
