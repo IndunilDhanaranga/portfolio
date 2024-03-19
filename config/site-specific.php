@@ -107,4 +107,16 @@ return [
 
         'dashboard-min-js'       =>'/assets/back-end/default/dist/js/pages/dashboard.js',
 
+
+
+        /*
+        ----------------------------------------------------------------------------------------------------------------------------------
+        CUSTOM JAVA SCRIPT
+        ----------------------------------------------------------------------------------------------------------------------------------
+        */
+
+        'basic-details-init-js'       =>'/assets/back-end/custom/js/basic-details-init.js',
+
+        'education-qualification-init-js'       =>'/assets/back-end/custom/js/education-qualification-init.js',
+
 ];

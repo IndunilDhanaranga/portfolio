@@ -85,7 +85,7 @@ class ViewController extends DataController
             config( 'site-specific.jquery-ui-min-js' ),
             config( 'site-specific.bootstrap-bundle-min-js' ),
             config( 'site-specific.Chart-min-js' ),
-            config( 'site-specific.sparkline-min-js' ),
+            // config( 'site-specific.sparkline-min-js' ),
             config( 'site-specific.jquery-vmap-min-js' ),
             config( 'site-specific.jquery-vmap-usa-min-js' ),
             config( 'site-specific.jquery-knob-min-js' ),
@@ -95,7 +95,6 @@ class ViewController extends DataController
             config( 'site-specific.summernote-min-js' ),
             config( 'site-specific.jquery-overlayScrollbars-min-js' ),
             config( 'site-specific.adminlte-min-js' ),
-            config( 'site-specific.dashboard-min-js' ),
         );
 
         if ( isset( $data[ 'css' ] ) ) {
@@ -113,13 +112,46 @@ class ViewController extends DataController
 
     /*
     ----------------------------------------------------------------------------------------------------------
-    PUBLIC FUNCTION VIEW DASHBORD
+    PUBLIC FUNCTION VIEW DASHBOARD
     ----------------------------------------------------------------------------------------------------------
     */
 
     public function dashboard(){
         $data = [
-            'view' =>'hello',
+            'title' => 'Dashboard',
+            'view' => 'back-end.dashboard',
+        ];
+
+        return $this->default($data);
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW BASIC DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function basicDetails(){
+        $data = [
+            'title' => 'Basic Details',
+            'view' => 'back-end.basic-details',
+            'script' => array(config('site-specific.basic-details-init-js')),
+        ];
+
+        return $this->default($data);
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW EDUCATION QUALIFICATION
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function educationQualification(){
+        $data = [
+            'title' => 'Education Qualification',
+            'view' => 'back-end.education-qualification',
+            'script' => array(config('site-specific.education-qualification-init-js')),
         ];
 
         return $this->default($data);

@@ -75,4 +75,6 @@ Route::group([
     */
 
     Route::get('/dashboard'                              , 'ViewController@dashboard')->name('dashboard');
+    Route::get('/basic-details'                          , 'ViewController@basicDetails')->name('basic-details');
+    Route::get('/education-qualification'                , 'ViewController@educationQualification')->name('education-qualification');
 });
