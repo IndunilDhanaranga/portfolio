@@ -8,7 +8,7 @@
 
     <!-- Google Font: Source Sans Pro -->
     @foreach ($css as $path)
-        <link rel="stylesheet"href="{{ $path }}">
+        <link rel="stylesheet"href="{{config('site-specific.live-path').$path }}">
     @endforeach
 </head>
 
@@ -292,7 +292,7 @@
 
     <!-- jQuery -->
     @foreach ($script as $path)
-        <script src="{{ $path }}"></script>
+        <script src="{{config('site-specific.live-path').$path }}"></script>
     @endforeach
 
     <script>

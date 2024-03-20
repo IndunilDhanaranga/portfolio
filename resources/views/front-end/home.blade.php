@@ -9,7 +9,7 @@
     <title>{{ $basic_details->d_name }} | Portfolio</title>
     <!-- font icons -->
     @foreach ($css as $path)
-        <link rel="stylesheet" href="{{ $path }}">
+        <link rel="stylesheet" href="{{config('site-specific.live-path').$path }}">
     @endforeach
 
 </head>
@@ -880,7 +880,7 @@
 
     <!-- core  -->
     @foreach ($script as $path)
-        <script src="{{ $path }}"></script>
+        <script src="{{config('site-specific.live-path').$path }}"></script>
     @endforeach
 </body>
 

@@ -138,4 +138,8 @@ return [
 
         'education-qualification-init-js'       =>'/assets/back-end/custom/js/education-qualification-init.js',
 
+
+
+        'live-path' => ''
+
 ];

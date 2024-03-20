@@ -10,11 +10,11 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="/assets/back-end/default/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="{{config('site-specific.live-path')}}/assets/back-end/default/plugins/fontawesome-free/css/all.min.css">
     <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="/assets/back-end/default/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="{{config('site-specific.live-path')}}/assets/back-end/default/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="/assets/back-end/default/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{{config('site-specific.live-path')}}/assets/back-end/default/dist/css/adminlte.min.css">
 </head>
 
 <body class="hold-transition login-page">
@@ -22,7 +22,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="/assets/back-end/default/index2.html" class="h1"><b>Admin</b>LTE</a>
+                <a href="/" class="h1"><b>Portfolio</b>WEB</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
@@ -70,11 +70,11 @@
     <!-- /.login-box -->
 
     <!-- jQuery -->
-    <script src="/assets/back-end/default/plugins/jquery/jquery.min.js"></script>
+    <script src="{{config('site-specific.live-path')}}/assets/back-end/default/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="/assets/back-end/default/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{config('site-specific.live-path')}}/assets/back-end/default/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="/assets/back-end/default/dist/js/adminlte.min.js"></script>
+    <script src="{{config('site-specific.live-path')}}/assets/back-end/default/dist/js/adminlte.min.js"></script>
 </body>
 
 </html>
