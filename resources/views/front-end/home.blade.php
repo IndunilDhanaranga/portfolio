@@ -9,7 +9,7 @@
     <title>{{ $basic_details->d_name }} | Portfolio</title>
     <!-- font icons -->
     @foreach ($css as $path)
-        <link rel="stylesheet" href="{{config('site-specific.live-path').$path }}">
+        <link rel="stylesheet" href="{{ config('site-specific.live-path') . $path }}">
     @endforeach
 
 </head>
@@ -17,8 +17,9 @@
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
     {{-- <a href="components.html" class="btn btn-primary btn-component" data-spy="affix" data-offset-top="600"><i
             class="ti-shift-left-alt"></i> Components</a> --}}
-    <header class="header" style="background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url({{getUploadImage($basic_details->CoverImage->image_name, 'cover_image')}});
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url({{getUploadImage($basic_details->CoverImage->image_name, 'cover_image')}});">
+    <header class="header"
+        style="background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url({{ getUploadImage($basic_details->CoverImage->image_name, 'cover_image') }});
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url({{ getUploadImage($basic_details->CoverImage->image_name, 'cover_image') }});">
         <div class="container">
             <ul class="social-icons pt-3">
                 @foreach ($basic_details->Connections as $item)
@@ -64,7 +65,8 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav brand">
-                    <img src="{{getUploadImage($basic_details->UserImage->image_name, 'user_image')}}" alt="" class="brand-img">
+                    <img src="{{ getUploadImage($basic_details->UserImage->image_name, 'user_image') }}" alt=""
+                        class="brand-img">
                     <li class="brand-txt">
                         <h5 class="brand-title">{{ $basic_details->d_name }}</h5>
                         <div class="brand-subtitle">{{ $basic_details->m_path }}</div>
@@ -89,9 +91,8 @@
             <div class="col-lg-4 about-card">
                 <h3 class="font-weight-light">Who am I ?</h3>
                 <span class="line mb-5"></span>
-                <h5 class="mb-3">A Web Designer / Developer Located In Our Lovely Earth</h5>
-                <p class="mt-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit.sit amet, Qui deserunt
-                    consequatur fugit repellendusillo voluptas?</p>
+                <h5 class="mb-3">{{ $basic_details->caption }}</h5>
+                <p class="mt-20">{{ $basic_details->about }}</p>
                 <button class="btn btn-outline-danger"><i class="icon-down-circled2 "></i>Download My CV</button>
             </div>
             <div class="col-lg-4 about-card">
@@ -105,8 +106,8 @@
                 </ul>
                 <ul class="social-icons pt-3">
                     @foreach ($basic_details->Connections as $item)
-                        <li class="social-item"><a class="social-link" href="{{ $item->link }}"><i class="ti-{{ $item->icon }}"
-                                    aria-hidden="true"></i></a></li>
+                        <li class="social-item"><a class="social-link" href="{{ $item->link }}"><i
+                                    class="ti-{{ $item->icon }}" aria-hidden="true"></i></a></li>
                     @endforeach
                     {{-- <li class="social-item"><a class="social-link" href="#"><i class="ti-facebook"
                                 aria-hidden="true"></i></a></li>
@@ -123,15 +124,18 @@
             <div class="col-lg-4 about-card">
                 <h3 class="font-weight-light">My Expertise</h3>
                 <span class="line mb-5"></span>
-                <div class="row">
-                    <div class="col-1 text-danger pt-1"><i class="ti-widget icon-lg"></i></div>
-                    <div class="col-10 ml-auto mr-3">
-                        <h6>UX Design</h6>
-                        <p class="subtitle"> exercitat Repellendus, corrupt.</p>
-                        <hr>
+                @foreach ($expertise as $item)
+                    <div class="row">
+                        <div class="col-1 text-danger pt-1"><i class="fab fa-2xl fa-{{ $item->icon }}"></i></div>
+                        <div class="col-10 ml-auto mr-3">
+                            <h6>{{ $item->title }}</h6>
+                            <p class="subtitle">{{ $item->short_title }}</p>
+                            <hr>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
+                @endforeach
+
+                {{-- <div class="row">
                     <div class="col-1 text-danger pt-1"><i class="ti-paint-bucket icon-lg"></i></div>
                     <div class="col-10 ml-auto mr-3">
                         <h6>Web Development</h6>
@@ -146,7 +150,7 @@
                         <p class="subtitle">voluptate commodi illo voluptatib.</p>
                         <hr>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -156,33 +160,7 @@
         <div class="container">
             <h2 class="mb-5"><span class="text-danger">My</span> Resume</h2>
             <div class="row">
-                <div class="col-md-6 col-lg-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="mt-2">
-                                <h4>Expertise</h4>
-                                <span class="line"></span>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="title text-danger">2017 - Present</h6>
-                            <P>UX Developer</P>
-                            <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum
-                                recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
-                            <hr>
-                            <h6 class="title text-danger">2016 - 2017</h6>
-                            <P>Front-end Developer</P>
-                            <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum
-                                recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
-                            <hr>
-                            <h6 class="title text-danger">2015 - 2016</h6>
-                            <P>UX Designer</P>
-                            <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum
-                                recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-3">
                     <div class="card">
                         <div class="card-header">
                             <div class="mt-2">
@@ -191,26 +169,18 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h6 class="title text-danger">2017 - Present</h6>
-                            <P>B.E Computer Engineering</P>
-                            <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error
-                                corrupti recusandae obcaecati odit repellat ducimus cum, minus tempora aperiam at.</P>
-                            <hr>
-                            <h6 class="title text-danger">2016 - 2017</h6>
-                            <P>Diploma in Computer Engineering</P>
-                            <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, id
-                                officiis quas placeat quia voluptas dolorum rem animi nostrum quae.aliquid repudiandae
-                                saepe!.</P>
-                            <hr>
-                            <h6 class="title text-danger">2015 - 2016</h6>
-                            <P>High School Degree</P>
-                            <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum
-                                recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
-
+                            @foreach ($education as $item)
+                                <h6 class="title text-danger">{{ $item->SchoolDetails->from }} -
+                                    {{ $item->SchoolDetails->to }}</h6>
+                                <P><b>{{ $item->SchoolDetails->title }}</b></P>
+                                <P><b>{{ $item->EducationDetails->title }} - {{ $item->title }}</b></P>
+                                <P class="subtitle">{{ $item->description }}</P>
+                                <hr>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-md-6 col-lg-3">
                     <div class="card">
                         <div class="card-header">
                             <div class="pull-left">
@@ -219,36 +189,14 @@
                             </div>
                         </div>
                         <div class="card-body pb-2">
-                            <h6>hTL5 &amp; CSS3</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 97%"
-                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h6>JavaScript</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 85%"
-                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h6>PHP</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 80%"
-                                    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h6>SQL</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 90%"
-                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h6>Laborum</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 90%"
-                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h6>Tempora</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 90%"
-                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            @foreach ($skills as $item)
+                                <h6>{{ $item->skill }}</h6>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar bg-danger" role="progressbar"
+                                        style="width: {{ $item->percentage }}%" aria-valuenow="25" aria-valuemin="0"
+                                        aria-valuemax="100"></div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="card">
@@ -259,24 +207,74 @@
                             </div>
                         </div>
                         <div class="card-body pb-2">
-                            <h6>English</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 80%"
-                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h6>French</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 45%"
-                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h6>Spanish</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 67%"
-                                    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            @foreach ($languages as $item)
+                                <h6>{{ $item->languages }}</h6>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar bg-danger" role="progressbar"
+                                        style="width: {{ $item->percentage }}%" aria-valuenow="25" aria-valuemin="0"
+                                        aria-valuemax="100"></div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="mt-2">
+                                <h4>Expertise</h4>
+                                <span class="line"></span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            @foreach ($expertise as $item)
+                                <h6 class="title text-danger">{{ $item->title }}</h6>
+                                <p><b>{{ $item->short_title }}</b></p>
+                                <P class="subtitle">{{ $item->description }}</P>
+                                <hr>
+                            @endforeach
+
+                            {{-- <h6 class="title text-danger">2016 - 2017</h6>
+                            <P>Front-end Developer</P>
+                            <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum
+                                recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
+                            <hr>
+                            <h6 class="title text-danger">2015 - 2016</h6>
+                            <P>UX Designer</P>
+                            <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum
+                                recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P> --}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="mt-2">
+                                <h4>Work Experience</h4>
+                                <span class="line"></span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            @foreach ($work_experience as $item)
+                                <h6 class="title text-danger">{{ $item->company }}</h6>
+                                <P><b>{{ $item->position }}</b></P>
+                                <P><b>{{ $item->from }} - {{ $item->to }}</b></P>
+                                <hr>
+                            @endforeach
+
+                            {{-- <h6 class="title text-danger">2016 - 2017</h6>
+                            <P>Front-end Developer</P>
+                            <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum
+                                recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
+                            <hr>
+                            <h6 class="title text-danger">2015 - 2016</h6>
+                            <P>UX Designer</P>
+                            <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum
+                                recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P> --}}
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -871,16 +869,16 @@
                 &copy;
                 <script>
                     document.write(new Date().getFullYear())
-                </script> Created With <i class="ti-heart text-danger"></i> By <a
-                    href="http://devcrud.com" target="_blank"><span class="text-danger"
-                        title="Bootstrap 4 Themes and Dashboards">DevCRUD</span></a>
+                </script> Created <i class="ti-heart text-danger"></i> By <a href="http://devcrud.com"
+                    target="_blank"><span class="text-danger"
+                        title="Bootstrap 4 Themes and Dashboards">IDK</span></a>
             </p>
         </div>
     </footer>
 
     <!-- core  -->
     @foreach ($script as $path)
-        <script src="{{config('site-specific.live-path').$path }}"></script>
+        <script src="{{ config('site-specific.live-path') . $path }}"></script>
     @endforeach
 </body>
 

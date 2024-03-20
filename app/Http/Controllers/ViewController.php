@@ -22,6 +22,7 @@ class ViewController extends DataController {
         $css = array(
             config( 'site-specific.themify-icons-css' ),
             config( 'site-specific.johndoe-css' ),
+            config( 'site-specific.fontawesome-css' ),
 
         );
 
@@ -37,6 +38,11 @@ class ViewController extends DataController {
         $data[ 'css' ] = $css;
         $data[ 'script' ] = $script;
         $data[ 'basic_details' ] = $this->getBasicDetails();
+        $data[ 'education' ] = $this->getEducationQualification();
+        $data[ 'expertise' ] = $this->getExpertise();
+        $data['skills'] = $this->getSkills();
+        $data['languages'] = $this->getLanguages();
+        $data['work_experience'] = $this->getWorkExperience();
         return view::make( 'front-end.home', $data );
     }
     /*
@@ -198,7 +204,45 @@ class ViewController extends DataController {
             'education_qualification' => $this->getEducationQualification(),
             'script' => array( config( 'site-specific.education-qualification-init-js' ) ),
         ];
+        // return $data['education_qualification'];
+        return $this->default( $data );
+    }
 
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW EDUCATION QUALIFICATION
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function expertiseView() {
+        $data = [
+            'title' => 'Expertise',
+            'view' => 'back-end.expertise',
+            'expertise' => $this->getExpertise(),
+            'script' => array( config( 'site-specific.expertise-init-js' ) ),
+        ];
+        // return $data['education_qualification'];
+        return $this->default( $data );
+    }
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW EDUCATION QUALIFICATION
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function additionalDetails() {
+        $data = [
+            'title' => 'Additional Details',
+            'view' => 'back-end.additional-details',
+            'skills' => $this->getSkills(),
+            'languages' => $this->getLanguages(),
+            'work_experience' => $this->getWorkExperience(),
+            'script' => array( config( 'site-specific.additional-details-init-js' ) ),
+        ];
+        // return $data['education_qualification'];
         return $this->default( $data );
     }
 

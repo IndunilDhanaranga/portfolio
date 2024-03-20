@@ -10,6 +10,10 @@ use App\Models\PortfolioUserConnection;
 use App\Models\SchoolAndCollage;
 use App\Models\EducationLevel;
 use App\Models\EducationQualification;
+use App\Models\Expertise;
+use App\Models\WorkExperience;
+use App\Models\Skills;
+use App\Models\Languages;
 
 class DataController extends Controller
 {
@@ -29,7 +33,27 @@ class DataController extends Controller
     }
 
     public function getEducationQualification(){
-        $data = EducationQualification::all();
+        $data = EducationQualification::with('educationDetails','schoolDetails')->get();
+        return $data;
+    }
+
+    public function getExpertise(){
+        $data = Expertise::all();
+        return $data;
+    }
+
+    public function getSkills(){
+        $data = Skills::all();
+        return $data;
+    }
+
+    public function getLanguages(){
+        $data = Languages::all();
+        return $data;
+    }
+
+    public function getWorkExperience(){
+        $data = WorkExperience::all();
         return $data;
     }
 }

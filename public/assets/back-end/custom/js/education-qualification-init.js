@@ -14,7 +14,6 @@ $(document).ready(function () {
 
 function addQualification(school, education_levels, title, description) {
     let index = parseInt($("#qualification-attempt").val());
-    console.log(index);
     let html =
         '<div class="row mt-2" id="qualification_div_' +
         index +

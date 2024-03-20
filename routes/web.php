@@ -76,14 +76,18 @@ Route::group([
 
     Route::get('/dashboard'                              , 'ViewController@dashboard')->name('dashboard');
     Route::get('/basic-details'                          , 'ViewController@basicDetails')->name('basic-details');
+    Route::get('/expertise'                          , 'ViewController@expertiseView')->name('expertise');
 
     Route::post('/basic-details-create'                          , 'ActionController@createBasicDetails')->name('basic-details-create');
     Route::post('/create-school'                          , 'ActionController@createSchool')->name('create-school');
     Route::post('/create-education-level'                          , 'ActionController@createEducationLevel')->name('create-education-level');
     Route::post('/create-education-qualification'                          , 'ActionController@createEducationQualification')->name('create-education-qualification');
+    Route::post('/create-expertise'                          , 'ActionController@createExpertise')->name('create-expertise');
+    Route::post('/create-additional-details'                          , 'ActionController@createAdditionalDetails')->name('create-additional-details');
 
 
     Route::get('/schools-collages'                          , 'ViewController@schoolCollages')->name('schools-collages');
     Route::get('/education-levels'                          , 'ViewController@educationLevels')->name('education-levels');
     Route::get('/education-qualification'                , 'ViewController@educationQualification')->name('education-qualification');
+    Route::get('/additional-details'                , 'ViewController@additionalDetails')->name('additional-details');
 });

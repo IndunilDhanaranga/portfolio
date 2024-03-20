@@ -13,6 +13,10 @@ use App\Models\PortfolioCoverImage;
 use App\Models\SchoolAndCollage;
 use App\Models\EducationLevel;
 use App\Models\EducationQualification;
+use App\Models\Expertise;
+use App\Models\WorkExperience;
+use App\Models\Skills;
+use App\Models\Languages;
 
 class ActionController extends Controller {
 
@@ -29,6 +33,8 @@ class ActionController extends Controller {
                 'link' => 'array|required',
                 'icon' => 'array|required',
                 'm_path' => 'required',
+                'caption' => 'required',
+                'about' => 'required',
             ] );
 
             if ( $validator->fails() ) {
@@ -51,6 +57,8 @@ class ActionController extends Controller {
                 'address' => $request->address,
                 'email' => $request->email,
                 'm_path' => $request->m_path,
+                'caption' => $request->caption,
+                'about' => $request->about,
             ] );
 
             foreach ( $request->platform as $key => $value ) {
@@ -170,6 +178,90 @@ class ActionController extends Controller {
             }
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'Education Qualification Created Successfully!' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+
+    public function createExpertise( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'title' => 'array|required',
+                'short_title' => 'array|required',
+                'icon' => 'array|required',
+                'description' => 'array|required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+            Expertise::truncate();
+            DB::beginTransaction();
+
+            foreach ( $request->title as $key => $value ) {
+                Expertise::create( [
+                    'title' => $value,
+                    'short_title' => $request->short_title[ $key ],
+                    'icon' => $request->icon[ $key ],
+                    'description' => $request->description[ $key ],
+                ] );
+            }
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Expertise Details Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+
+
+    public function createAdditionalDetails( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'company' => 'array|required',
+                'position' => 'array|required',
+                'from' => 'array|required',
+                'to' => 'array|required',
+
+                'skill' => 'array|required',
+                'percentage' => 'array|required',
+
+                'languages' => 'array|required',
+                'lang_percentage' => 'array|required',
+
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+            WorkExperience::truncate();
+            DB::beginTransaction();
+
+            foreach ( $request->company as $key => $value ) {
+                WorkExperience::create( [
+                    'company' => $value,
+                    'position' => $request->position[ $key ],
+                    'from' => $request->from[ $key ],
+                    'to' => $request->to[ $key ],
+                ] );
+            }
+            foreach ( $request->skill as $key => $value ) {
+                Skills::create( [
+                    'skill' => $value,
+                    'percentage' => $request->percentage[ $key ],
+                ] );
+            }
+            foreach ( $request->languages as $key => $value ) {
+                Languages::create( [
+                    'languages' => $value,
+                    'percentage' => $request->lang_percentage[ $key ],
+                ] );
+            }
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Additional Details Created Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );

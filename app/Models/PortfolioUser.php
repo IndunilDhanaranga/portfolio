@@ -26,6 +26,8 @@ class PortfolioUser extends Model
         'address',
         'email',
         'm_path',
+        'caption',
+        'about',
         'created_at',
         'updated_at',
     ];

@@ -105,6 +105,18 @@
                         <input type="text" class="form-control" id="m-path" placeholder="Main Path"
                             name="m_path" value="{{ $basic_details->m_path }}">
                     </div>
+                    <div class="col-md-6 col-12">
+                        <label for="m-path">Caption</label>
+                        <input type="text" class="form-control" id="caption" placeholder="Caption"
+                            name="caption" value="{{ $basic_details->caption }}">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-12 col-12">
+                        <label for="m-path">About</label>
+                        <textarea type="address" name="about" id="about" class="form-control" rows="4" placeholder="About"
+                            data-listener-added_df30a99f="true">{{ $basic_details->about }}</textarea>
+                    </div>
                 </div>
             </div>
         </div>

@@ -18,6 +18,8 @@ return [
 
         'johndoe-css'                   => '/assets/front-end/default/css/johndoe.css',
 
+        'fontawesome-css'                   => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+
 
         /*
         ----------------------------------------------------------------------------------------------------------------------------------
@@ -137,6 +139,10 @@ return [
         'education-levels-init-js'       =>'/assets/back-end/custom/js/education-levels-init.js',
 
         'education-qualification-init-js'       =>'/assets/back-end/custom/js/education-qualification-init.js',
+
+        'expertise-init-js'       =>'/assets/back-end/custom/js/expertise-init.js',
+
+        'additional-details-init-js'       =>'/assets/back-end/custom/js/additional-details-init.js',
 
 
 

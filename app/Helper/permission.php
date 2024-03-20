@@ -17,6 +17,8 @@ function getAllPermissions(){
             'data'=>array(
                 ['title' => 'Basic Details','permission'=>'basic-details','show_in_sidebar'=>true],
                 ['title' => 'Education Qualification','permission'=>'education-qualification','show_in_sidebar'=>true],
+                ['title' => 'Expertise','permission'=>'expertise','show_in_sidebar'=>true],
+                ['title' => 'Additional Details','permission'=>'additional-details','show_in_sidebar'=>true],
             )
         ],
         [

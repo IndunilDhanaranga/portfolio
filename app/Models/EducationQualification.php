@@ -24,4 +24,13 @@ class EducationQualification extends Model {
         'created_at',
         'updated_at',
     ];
+
+    public function educationDetails() {
+        return $this->hasOne( EducationLevel::class, 'id', 'education_level' );
+    }
+
+    public function schoolDetails() {
+        return $this->hasOne( SchoolAndCollage::class, 'id', 'school' );
+    }
+
 }
