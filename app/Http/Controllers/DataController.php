@@ -9,6 +9,7 @@ use App\Models\PortfolioUser;
 use App\Models\PortfolioUserConnection;
 use App\Models\SchoolAndCollage;
 use App\Models\EducationLevel;
+use App\Models\EducationQualification;
 
 class DataController extends Controller
 {
@@ -24,6 +25,11 @@ class DataController extends Controller
 
     public function getEducationLevel(){
         $data = EducationLevel::all();
+        return $data;
+    }
+
+    public function getEducationQualification(){
+        $data = EducationQualification::all();
         return $data;
     }
 }

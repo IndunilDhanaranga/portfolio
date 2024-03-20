@@ -63,8 +63,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="" alt="User Avatar"
-                                    class="img-size-50 mr-3 img-circle">
+                                <img src="" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Brad Diesel
@@ -80,8 +79,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="" alt="User Avatar"
-                                    class="img-size-50 img-circle mr-3">
+                                <img src="" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         John Pierce
@@ -97,8 +95,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="" alt="User Avatar"
-                                    class="img-size-50 img-circle mr-3">
+                                <img src="" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Nora Silvester
@@ -174,7 +171,7 @@
                         <img src="" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">{{Auth::user()->name}}</a>
+                        <a href="#" class="d-block">{{ Auth::user()->name }}</a>
                     </div>
                 </div>
 
@@ -213,15 +210,15 @@
                                     if ($item['show_in_sidebar'] && isPermissions($item['permission'])) {
                                         $links .=
                                             ' <li class="nav-item">
-                                                                                            <a href="' .
+                                                                                                                            <a href="' .
                                             route($item['permission']) .
                                             '" class="nav-link">
-                                                                                              <i class="far fa-circle nav-icon"></i>
-                                                                                              <p class="text-capitalize">' .
+                                                                                                                              <i class="far fa-circle nav-icon"></i>
+                                                                                                                              <p class="text-capitalize">' .
                                             $item['title'] .
                                             '</p>
-                                                                                            </a>
-                                                                                          </li>';
+                                                                                                                            </a>
+                                                                                                                          </li>';
                                     }
                                 }
                                 ?>
@@ -255,12 +252,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">{{$title}}</h1>
+                            <h1 class="m-0">{{ $title }}</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">{{$title}}</li>
+                                <li class="breadcrumb-item active">{{ $title }}</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -302,99 +299,101 @@
         $.widget.bridge('uibutton', $.ui.button)
     </script>
     <script>
-        $(function () {
-          var url = window.location;
-          console.log(url);
-          // for single sidebar menu
-          $('ul.nav-sidebar li ul a').filter(function () {
-              return this.href == url;
-          }).find('i').addClass('fa-dot-circle');
+        $(function() {
+            var url = window.location;
+            $('.select2').select2();
+            // for single sidebar menu
+            $('ul.nav-sidebar li ul a').filter(function() {
+                return this.href == url;
+            }).find('i').addClass('fa-dot-circle');
 
-          $('ul.nav-sidebar .single a').filter(function () {
-              return this.href == url;
-          }).addClass('active');
+            $('ul.nav-sidebar .single a').filter(function() {
+                return this.href == url;
+            }).addClass('active');
 
-          // for sidebar menu and treeview
-          $('ul.nav-treeview a').filter(function () {
-              return this.href == url;
-          }).parentsUntil(".nav-sidebar > .nav-treeview")
-              .css({'display': 'block'})
-              .addClass('menu-open').prev('a')
-              .addClass('active');
-      });
-      </script>
-      @if (session('temp-success'))
-      <script>
-          $(document).ready(function() {
-              var successMessage = "{{ session('message') }}";
+            // for sidebar menu and treeview
+            $('ul.nav-treeview a').filter(function() {
+                    return this.href == url;
+                }).parentsUntil(".nav-sidebar > .nav-treeview")
+                .css({
+                    'display': 'block'
+                })
+                .addClass('menu-open').prev('a')
+                .addClass('active');
+        });
+    </script>
+    @if (session('temp-success'))
+        <script>
+            $(document).ready(function() {
+                var successMessage = "{{ session('message') }}";
 
-              if (successMessage) {
-                  var Toast = Swal.mixin({
-                      toast: true,
-                      position: 'top-end',
-                      showConfirmButton: false,
-                      timer: 3000
-                  });
+                if (successMessage) {
+                    var Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
 
-                  Toast.fire({
-                      icon: 'success',
-                      title: successMessage
-                  });
-              }
-          });
-      </script>
-  @endif
+                    Toast.fire({
+                        icon: 'success',
+                        title: successMessage
+                    });
+                }
+            });
+        </script>
+    @endif
 
-  @if (session('temp-error'))
-      <script>
-          $(document).ready(function() {
-              var errorMessage = "{{ session('message') }}";
+    @if (session('temp-error'))
+        <script>
+            $(document).ready(function() {
+                var errorMessage = "{{ session('message') }}";
 
-              if (errorMessage) {
-                  var Toast = Swal.mixin({
-                      toast: true,
-                      position: 'top-end',
-                      showConfirmButton: false,
-                      timer: 3000
-                  });
+                if (errorMessage) {
+                    var Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
 
-                  Toast.fire({
-                      icon: 'error',
-                      title: errorMessage
-                  });
-              }
-          });
-      </script>
-  @endif
+                    Toast.fire({
+                        icon: 'error',
+                        title: errorMessage
+                    });
+                }
+            });
+        </script>
+    @endif
 
-  @if (session('success'))
-      <script>
-          $(document).ready(function() {
-              var successMessage = "{{ session('message') }}";
+    @if (session('success'))
+        <script>
+            $(document).ready(function() {
+                var successMessage = "{{ session('message') }}";
 
-              if (successMessage) {
-                  Swal.fire("Good Job !", successMessage, "success");
-              }
-          });
-      </script>
-  @endif
+                if (successMessage) {
+                    Swal.fire("Good Job !", successMessage, "success");
+                }
+            });
+        </script>
+    @endif
 
-  @if (session('error'))
-      <script>
-          $(document).ready(function() {
-              var errorMessage = "{{ session('message') }}";
-              var title = "{{ session('title') }}";
+    @if (session('error'))
+        <script>
+            $(document).ready(function() {
+                var errorMessage = "{{ session('message') }}";
+                var title = "{{ session('title') }}";
 
-              if (!title) {
-                  title = 'Oops!';
-              }
+                if (!title) {
+                    title = 'Oops!';
+                }
 
-              if (errorMessage) {
-                  Swal.fire(title, errorMessage, "error");
-              }
-          });
-      </script>
-  @endif
+                if (errorMessage) {
+                    Swal.fire(title, errorMessage, "error");
+                }
+            });
+        </script>
+    @endif
 </body>
 
 </html>

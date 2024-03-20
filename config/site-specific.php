@@ -75,6 +75,11 @@ return [
 
         'toastr-css'                            => '/assets/back-end/default/plugins/toastr/toastr.min.css',
 
+        'select2-css'                           => '/assets/back-end/default/plugins/select2/css/select2.min.css',
+
+        'select2-bootstrap4-css'                => '/assets/back-end/default/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css',
+
+
         /*
         ----------------------------------------------------------------------------------------------------------------------------------
         Default JAVA SCRIPT
@@ -114,6 +119,8 @@ return [
         'sweetalert2-js'                        => '/assets/back-end/default/plugins/sweetalert2/sweetalert2.min.js',
 
         'toastr-js'                             => '/assets/back-end/default/plugins/toastr/toastr.min.js',
+
+        'select2-js'                            => '/assets/back-end/default/plugins/select2/js/select2.full.min.js',
 
 
 

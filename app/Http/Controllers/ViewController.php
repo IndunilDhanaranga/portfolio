@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-class ViewController extends DataController
-{
+class ViewController extends DataController {
 
     /*---------------------------------------------------------------------------------------------------------------------------------------------------------- */
-                                                                        /*FRONT-END */
+    /*FRONT-END */
     /*---------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
     /*
@@ -17,7 +16,8 @@ class ViewController extends DataController
     START FRONT-END VIEW
     ----------------------------------------------------------------------------------------------------------------------------------
     */
-    public function frontend( ) {
+
+    public function frontend() {
 
         $css = array(
             config( 'site-specific.themify-icons-css' ),
@@ -34,9 +34,9 @@ class ViewController extends DataController
             config( 'site-specific.johnedoe-init-js' ),
         );
 
-        $data['css'] = $css;
-        $data['script'] = $script;
-        $data['basic_details'] = $this->getBasicDetails();
+        $data[ 'css' ] = $css;
+        $data[ 'script' ] = $script;
+        $data[ 'basic_details' ] = $this->getBasicDetails();
         return view::make( 'front-end.home', $data );
     }
     /*
@@ -45,9 +45,8 @@ class ViewController extends DataController
     ----------------------------------------------------------------------------------------------------------------------------------
     */
 
-
     /*---------------------------------------------------------------------------------------------------------------------------------------------------------- */
-                                                                        /*BACK-END */
+    /*BACK-END */
     /*---------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
     /*
@@ -56,8 +55,8 @@ class ViewController extends DataController
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function login(){
-        return view::make( 'back-end.login');
+    public function login() {
+        return view::make( 'back-end.login' );
     }
 
     /*
@@ -81,6 +80,8 @@ class ViewController extends DataController
             config( 'site-specific.summernote-min-css' ),
             config( 'site-specific.sweetalert-css' ),
             config( 'site-specific.toastr-css' ),
+            config( 'site-specific.select2-css' ),
+            config( 'site-specific.select2-bootstrap4-css' ),
         );
 
         $script = array(
@@ -100,6 +101,7 @@ class ViewController extends DataController
             config( 'site-specific.adminlte-min-js' ),
             config( 'site-specific.sweetalert2-js' ),
             config( 'site-specific.toastr-js' ),
+            config( 'site-specific.select2-js' ),
         );
 
         if ( isset( $data[ 'css' ] ) ) {
@@ -121,13 +123,13 @@ class ViewController extends DataController
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function dashboard(){
+    public function dashboard() {
         $data = [
             'title' => 'Dashboard',
             'view' => 'back-end.dashboard',
         ];
 
-        return $this->default($data);
+        return $this->default( $data );
     }
 
     /*
@@ -136,15 +138,15 @@ class ViewController extends DataController
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function basicDetails(){
+    public function basicDetails() {
         $data = [
             'title' => 'Basic Details',
             'view' => 'back-end.basic-details',
             'basic_details' => $this->getBasicDetails(),
-            'script' => array(config('site-specific.basic-details-init-js')),
+            'script' => array( config( 'site-specific.basic-details-init-js' ) ),
         ];
-        // return $data['basic_details'];
-        return $this->default($data);
+        // return $data[ 'basic_details' ];
+        return $this->default( $data );
     }
 
     /*
@@ -153,15 +155,15 @@ class ViewController extends DataController
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function schoolCollages(){
+    public function schoolCollages() {
         $data = [
             'title' => 'Schools & Collages',
             'view' => 'back-end.schools-collages',
             'school_details' => $this->getSchoolDetails(),
-            'script' => array(config('site-specific.schools-collages-init-js')),
+            'script' => array( config( 'site-specific.schools-collages-init-js' ) ),
         ];
 
-        return $this->default($data);
+        return $this->default( $data );
     }
 
     /*
@@ -170,15 +172,15 @@ class ViewController extends DataController
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function educationLevels(){
+    public function educationLevels() {
         $data = [
             'title' => 'Education Levels',
             'view' => 'back-end.education-levels',
             'education_level' => $this->getEducationLevel(),
-            'script' => array(config('site-specific.education-levels-init-js')),
+            'script' => array( config( 'site-specific.education-levels-init-js' ) ),
         ];
 
-        return $this->default($data);
+        return $this->default( $data );
     }
 
     /*
@@ -187,16 +189,17 @@ class ViewController extends DataController
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function educationQualification(){
+    public function educationQualification() {
         $data = [
             'title' => 'Education Qualification',
             'view' => 'back-end.education-qualification',
-            'script' => array(config('site-specific.education-qualification-init-js')),
+            'education_level' => $this->getEducationLevel(),
+            'school_details' => $this->getSchoolDetails(),
+            'education_qualification' => $this->getEducationQualification(),
+            'script' => array( config( 'site-specific.education-qualification-init-js' ) ),
         ];
 
-        return $this->default($data);
+        return $this->default( $data );
     }
-
-
 
 }

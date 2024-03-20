@@ -12,6 +12,7 @@ use App\Models\PortfolioUserImage;
 use App\Models\PortfolioCoverImage;
 use App\Models\SchoolAndCollage;
 use App\Models\EducationLevel;
+use App\Models\EducationQualification;
 
 class ActionController extends Controller {
 
@@ -35,7 +36,12 @@ class ActionController extends Controller {
             }
             PortfolioUser::truncate();
             PortfolioUserConnection::truncate();
-            PortfolioUserImage::truncate();
+            if ( $request->has( 'user_image' ) ) {
+                PortfolioUserImage::truncate();
+            }
+            if ( $request->has( 'cover_image' ) ) {
+                PortfolioCoverImage::truncate();
+            }
             DB::beginTransaction();
             $portfolio_user = PortfolioUser::create( [
                 'f_name' => $request->f_name,
@@ -124,14 +130,46 @@ class ActionController extends Controller {
             foreach ( $request->title as $key => $value ) {
                 EducationLevel::create( [
                     'title' => $value,
-                    'is_completed' => $request->is_completed[$key],
-                    'end_year' => $request->has('year') ? $request->year[$key] : null,
-                    'index_no' => $request->has('indexno') ? $request->indexno[$key] : null,
+                    'is_completed' => $request->is_completed[ $key ],
+                    'end_year' => $request->has( 'year' ) ? $request->year[ $key ] : null,
+                    'index_no' => $request->has( 'indexno' ) ? $request->indexno[ $key ] : null,
                 ] );
             }
 
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'Education Level Created Successfully!' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    public function createEducationQualification( Request $request ) {
+        try {
+
+            $validator = Validator::make( $request->all(), [
+                'school' => 'array|required',
+                'title' => 'array|required',
+                'description' => 'array|required',
+                'education_level' => 'array|required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            EducationQualification::truncate();
+            DB::beginTransaction();
+            foreach ( $request->title as $key => $value ) {
+                EducationQualification::create( [
+                    'title' => $value,
+                    'education_level' => $request->education_level[ $key ],
+                    'school' => $request->school[ $key ],
+                    'description' => $request->description[ $key ],
+                ] );
+            }
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Education Qualification Created Successfully!' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );

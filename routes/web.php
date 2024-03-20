@@ -80,6 +80,7 @@ Route::group([
     Route::post('/basic-details-create'                          , 'ActionController@createBasicDetails')->name('basic-details-create');
     Route::post('/create-school'                          , 'ActionController@createSchool')->name('create-school');
     Route::post('/create-education-level'                          , 'ActionController@createEducationLevel')->name('create-education-level');
+    Route::post('/create-education-qualification'                          , 'ActionController@createEducationQualification')->name('create-education-qualification');
 
 
     Route::get('/schools-collages'                          , 'ViewController@schoolCollages')->name('schools-collages');
