@@ -43,6 +43,10 @@ class ViewController extends DataController {
         $data['skills'] = $this->getSkills();
         $data['languages'] = $this->getLanguages();
         $data['work_experience'] = $this->getWorkExperience();
+        $data['my_service'] = null;
+        $data['pricing'] = null;
+        $data['freelance'] = null;
+        $data['news'] = null;
         return view::make( 'front-end.home', $data );
     }
     /*
