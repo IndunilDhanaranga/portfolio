@@ -22,6 +22,18 @@ function getAllPermissions(){
             )
         ],
         [
+            'group'=>'Projects',
+            'icon'=>'nav-icon fas fa-pen',
+            'type'=>'multiple',
+            'data'=>array(
+                ['title' => 'Create Project','permission'=>'basic-details','show_in_sidebar'=>true],
+                ['title' => 'Create Clients','permission'=>'education-qualification','show_in_sidebar'=>true],
+                ['title' => 'View Projects','permission'=>'expertise','show_in_sidebar'=>true],
+                ['title' => 'View Clients','permission'=>'additional-details','show_in_sidebar'=>true],
+                ['title' => 'Project Types','permission'=>'project-type','show_in_sidebar'=>true],
+            )
+        ],
+        [
             'group'=>'Schools & Collages',
             'icon'=>'nav-icon fas fa-pen',
             'type'=>'single',

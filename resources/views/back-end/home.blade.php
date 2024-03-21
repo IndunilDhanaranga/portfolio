@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{Auth::user()->name}} | {{$title}}</title>
+    <title>{{ Auth::user()->name }} | {{ $title }}</title>
 
     <!-- Google Font: Source Sans Pro -->
     @foreach ($css as $path)
-        <link rel="stylesheet"href="{{config('site-specific.live-path').$path }}">
+        <link rel="stylesheet"href="{{ config('site-specific.live-path') . $path }}">
     @endforeach
 </head>
 
@@ -210,15 +210,15 @@
                                     if ($item['show_in_sidebar'] && isPermissions($item['permission'])) {
                                         $links .=
                                             ' <li class="nav-item">
-                                                                                                                            <a href="' .
+                                                                                                                                                            <a href="' .
                                             route($item['permission']) .
                                             '" class="nav-link">
-                                                                                                                              <i class="far fa-circle nav-icon"></i>
-                                                                                                                              <p class="text-capitalize">' .
+                                                                                                                                                              <i class="far fa-circle nav-icon"></i>
+                                                                                                                                                              <p class="text-capitalize">' .
                                             $item['title'] .
                                             '</p>
-                                                                                                                            </a>
-                                                                                                                          </li>';
+                                                                                                                                                            </a>
+                                                                                                                                                          </li>';
                                     }
                                 }
                                 ?>
@@ -292,7 +292,7 @@
 
     <!-- jQuery -->
     @foreach ($script as $path)
-        <script src="{{config('site-specific.live-path').$path }}"></script>
+        <script src="{{ config('site-specific.live-path') . $path }}"></script>
     @endforeach
 
     <script>

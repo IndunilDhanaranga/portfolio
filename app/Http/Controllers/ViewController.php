@@ -40,13 +40,13 @@ class ViewController extends DataController {
         $data[ 'basic_details' ] = $this->getBasicDetails();
         $data[ 'education' ] = $this->getEducationQualification();
         $data[ 'expertise' ] = $this->getExpertise();
-        $data['skills'] = $this->getSkills();
-        $data['languages'] = $this->getLanguages();
-        $data['work_experience'] = $this->getWorkExperience();
-        $data['my_service'] = null;
-        $data['pricing'] = null;
-        $data['freelance'] = null;
-        $data['news'] = null;
+        $data[ 'skills' ] = $this->getSkills();
+        $data[ 'languages' ] = $this->getLanguages();
+        $data[ 'work_experience' ] = $this->getWorkExperience();
+        $data[ 'my_service' ] = null;
+        $data[ 'pricing' ] = null;
+        $data[ 'freelance' ] = null;
+        $data[ 'news' ] = null;
         return view::make( 'front-end.home', $data );
     }
     /*
@@ -58,6 +58,12 @@ class ViewController extends DataController {
     /*---------------------------------------------------------------------------------------------------------------------------------------------------------- */
     /*BACK-END */
     /*---------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    FUNCTIONS FOR VIEW PORTFOLIO DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
 
     /*
     ----------------------------------------------------------------------------------------------------------
@@ -208,10 +214,9 @@ class ViewController extends DataController {
             'education_qualification' => $this->getEducationQualification(),
             'script' => array( config( 'site-specific.education-qualification-init-js' ) ),
         ];
-        // return $data['education_qualification'];
+        // return $data[ 'education_qualification' ];
         return $this->default( $data );
     }
-
 
     /*
     ----------------------------------------------------------------------------------------------------------
@@ -226,10 +231,9 @@ class ViewController extends DataController {
             'expertise' => $this->getExpertise(),
             'script' => array( config( 'site-specific.expertise-init-js' ) ),
         ];
-        // return $data['education_qualification'];
+        // return $data[ 'education_qualification' ];
         return $this->default( $data );
     }
-
 
     /*
     ----------------------------------------------------------------------------------------------------------
@@ -246,7 +250,26 @@ class ViewController extends DataController {
             'work_experience' => $this->getWorkExperience(),
             'script' => array( config( 'site-specific.additional-details-init-js' ) ),
         ];
-        // return $data['education_qualification'];
+        // return $data[ 'education_qualification' ];
+        return $this->default( $data );
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW PROJECT TYPES
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function projectTypes() {
+        $data = [
+            'title' => 'Project Types',
+            'view' => 'back-end.additional-details',
+            'skills' => $this->getSkills(),
+            'languages' => $this->getLanguages(),
+            'work_experience' => $this->getWorkExperience(),
+            'script' => array( config( 'site-specific.additional-details-init-js' ) ),
+        ];
+        // return $data[ 'education_qualification' ];
         return $this->default( $data );
     }
 

@@ -6,31 +6,25 @@ $(document).ready(function () {
                 element.company,
                 element.position,
                 element.from,
-                element.to,
+                element.to
             );
         });
     }
     if (skills.length > 0) {
         $("#skills-attempt").val(skills.length);
         skills.forEach((element) => {
-            addSkills(
-                element.skill,
-                element.percentage,
-            );
+            addSkills(element.skill, element.percentage);
         });
     }
     if (languages.length > 0) {
         $("#languages-attempt").val(languages.length);
         languages.forEach((element) => {
-            addLanguages(
-                element.languages,
-                element.percentage,
-            );
+            addLanguages(element.languages, element.percentage);
         });
     }
 });
 
-function addWork(company, position,from,to) {
+function addWork(company, position, from, to) {
     let index = parseInt($("#company-attempt").val());
     let html =
         '<div class="row mt-2" id="company_div_' +
@@ -86,7 +80,6 @@ function removeWork() {
     }
 }
 
-
 function addSkills(skill, percentage) {
     let index = parseInt($("#skills-attempt").val());
     let html =
@@ -126,7 +119,6 @@ function removeSkills() {
         $("#skills-attempt").val(attempt - 1);
     }
 }
-
 
 function addLanguages(languages, percentage) {
     let index = parseInt($("#languages-attempt").val());

@@ -8,10 +8,8 @@
                         <div class="card-title">Schools & Colleges</div>
                     </div>
                     <div class="col-md-1">
-                        <span class="btn btn-warning btn-xs" onclick="addSchool()"><i
-                                class="fa fa-plus"></i></span>
-                        <span class="btn btn-warning btn-xs" onclick="removeSchool()"><i
-                                class="fa fa-minus"></i></span>
+                        <span class="btn btn-warning btn-xs" onclick="addSchool()"><i class="fa fa-plus"></i></span>
+                        <span class="btn btn-warning btn-xs" onclick="removeSchool()"><i class="fa fa-minus"></i></span>
                     </div>
                     <input hidden type="number" value="1" id="school-attempt">
                 </div>

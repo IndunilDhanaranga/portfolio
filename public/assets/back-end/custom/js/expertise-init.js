@@ -6,13 +6,13 @@ $(document).ready(function () {
                 element.title,
                 element.description,
                 element.short_title,
-                element.icon,
+                element.icon
             );
         });
     }
 });
 
-function addExpertise(title, description,short_title) {
+function addExpertise(title, description, short_title) {
     let index = parseInt($("#expertise-attempt").val());
     let html =
         '<div class="row mt-2" id="expertise_div_' +

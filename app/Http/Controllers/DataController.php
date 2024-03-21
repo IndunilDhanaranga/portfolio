@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
 use App\Models\PortfolioUser;
 use App\Models\PortfolioUserConnection;
 use App\Models\SchoolAndCollage;
@@ -15,44 +14,97 @@ use App\Models\WorkExperience;
 use App\Models\Skills;
 use App\Models\Languages;
 
-class DataController extends Controller
-{
-    public function getBasicDetails(){
-        $data = PortfolioUser::with('connections','userImage','coverImage')->first();
+class DataController extends Controller {
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    FUNCTIONS FOR GET PORTFOLIO DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET BASIC DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getBasicDetails() {
+        $data = PortfolioUser::with( 'connections', 'userImage', 'coverImage' )->first();
         return $data;
     }
 
-    public function getSchoolDetails(){
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET SCHOOLS DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getSchoolDetails() {
         $data = SchoolAndCollage::all();
         return $data;
     }
 
-    public function getEducationLevel(){
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET EDUCATION LEVEL DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getEducationLevel() {
         $data = EducationLevel::all();
         return $data;
     }
 
-    public function getEducationQualification(){
-        $data = EducationQualification::with('educationDetails','schoolDetails')->get();
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET EDUCATION QUALIFICATION DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getEducationQualification() {
+        $data = EducationQualification::with( 'educationDetails', 'schoolDetails' )->get();
         return $data;
     }
 
-    public function getExpertise(){
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET EXPERTISE DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getExpertise() {
         $data = Expertise::all();
         return $data;
     }
 
-    public function getSkills(){
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET SKILLS DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getSkills() {
         $data = Skills::all();
         return $data;
     }
 
-    public function getLanguages(){
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET LANGUAGES DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getLanguages() {
         $data = Languages::all();
         return $data;
     }
 
-    public function getWorkExperience(){
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET WORK EXPERIENCE DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getWorkExperience() {
         $data = WorkExperience::all();
         return $data;
     }

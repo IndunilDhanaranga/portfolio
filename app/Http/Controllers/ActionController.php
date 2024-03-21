@@ -20,6 +20,18 @@ use App\Models\Languages;
 
 class ActionController extends Controller {
 
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    FUNCTIONS FOR PORTFOLIO DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE BASIC DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
     public function createBasicDetails( Request $request ) {
         try {
             $validator = Validator::make( $request->all(), [
@@ -91,6 +103,12 @@ class ActionController extends Controller {
         }
     }
 
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE SCHOOLS DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
     public function createSchool( Request $request ) {
         try {
             $validator = Validator::make( $request->all(), [
@@ -119,6 +137,12 @@ class ActionController extends Controller {
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
         }
     }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE EDUCATION LEVEL DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
 
     public function createEducationLevel( Request $request ) {
         try {
@@ -152,6 +176,12 @@ class ActionController extends Controller {
         }
     }
 
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE EDUCATION QUALIFICATION DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
     public function createEducationQualification( Request $request ) {
         try {
 
@@ -184,6 +214,11 @@ class ActionController extends Controller {
         }
     }
 
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE EXPERTISE DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
 
     public function createExpertise( Request $request ) {
         try {
@@ -216,7 +251,11 @@ class ActionController extends Controller {
         }
     }
 
-
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE ADDITIONAL DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
 
     public function createAdditionalDetails( Request $request ) {
         try {
