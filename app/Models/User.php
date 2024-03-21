@@ -22,6 +22,7 @@ class User extends Authenticatable {
         'email',
         'password',
         'is_active',
+        'user_roll',
     ];
 
     /**
@@ -44,5 +45,9 @@ class User extends Authenticatable {
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function userRollDetails() {
+        return $this->hasOne( UserRoll::class, 'id', 'user_roll' );
     }
 }

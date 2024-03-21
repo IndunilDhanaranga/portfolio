@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\UserRoll;
+use App\Models\User;
 use App\Models\PortfolioUser;
 use App\Models\PortfolioUserConnection;
 use App\Models\SchoolAndCollage;
@@ -15,11 +17,44 @@ use App\Models\Skills;
 use App\Models\Languages;
 
 class DataController extends Controller {
+
+    //                                  FUNCTIONS FOR GET DEVELOPER TOOLS DETAILS
+
+
     /*
     ----------------------------------------------------------------------------------------------------------
-    FUNCTIONS FOR GET PORTFOLIO DETAILS
+    PUBLIC FUNCTION GET USER ROLL
     ----------------------------------------------------------------------------------------------------------
     */
+
+    public function getUserRoll($is_active = null){
+        $data = UserRoll::query();
+        if($is_active){
+            $data->where('is_active',$is_active);
+        }
+        $data = $data->get();
+        return $data;
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET USER
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getUser($is_active = null){
+        $data = User::with('userRollDetails');
+        if($is_active){
+            $data->where('is_active',$is_active);
+        }
+        $data = $data->get();
+        return $data;
+    }
+
+
+
+     //                                  FUNCTIONS FOR GET PORTFOLIO DETAILS
+
 
     /*
     ----------------------------------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 <?php
-
+use App\Models\UserImage;
 /*
 ----------------------------------------------------------------------------------------------------------
 UPLOAD IMAGE
@@ -31,6 +31,21 @@ function getUploadImage( $image, $disk )
         $filePath = 'images/' .$disk.'/'. $image;
         $imageUrl =  config( 'site-specific.live-path' ) . '/uploads/' . $filePath;
         return $imageUrl;
+    }
+    return null;
+}
+
+/*
+----------------------------------------------------------------------------------------------------------
+HELPER FUNCTION GET AUTH IMAGE
+----------------------------------------------------------------------------------------------------------
+*/
+
+function getAuthImage( $disk )
+ {
+    $image = UserImage::select( 'image_name' )->where( 'user_id', Auth::id() )->latest()->first();
+    if ( $image ) {
+        return getUploadImage( $image->image_name, $disk );
     }
     return null;
 }

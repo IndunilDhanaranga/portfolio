@@ -18,8 +18,8 @@
     {{-- <a href="components.html" class="btn btn-primary btn-component" data-spy="affix" data-offset-top="600"><i
             class="ti-shift-left-alt"></i> Components</a> --}}
     <header class="header"
-        style="background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url({{ getUploadImage($basic_details->CoverImage->image_name, 'cover_image') }});
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url({{ getUploadImage($basic_details->CoverImage->image_name, 'cover_image') }});">
+        style="background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url({{ getUploadImage($basic_details->CoverImage->image_name, 'portfolio_cover_image') }});
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url({{ getUploadImage($basic_details->CoverImage->image_name, 'portfolio_cover_image') }});">
         <div class="container">
             <ul class="social-icons pt-3">
                 @foreach ($basic_details->Connections as $item)
@@ -65,7 +65,7 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav brand">
-                    <img src="{{ getUploadImage($basic_details->UserImage->image_name, 'user_image') }}" alt=""
+                    <img src="{{ getUploadImage($basic_details->UserImage->image_name, 'portfolio_user_image') }}" alt=""
                         class="brand-img">
                     <li class="brand-txt">
                         <h5 class="brand-title">{{ $basic_details->d_name }}</h5>

@@ -61,12 +61,6 @@ class ViewController extends DataController {
 
     /*
     ----------------------------------------------------------------------------------------------------------
-    FUNCTIONS FOR VIEW PORTFOLIO DETAILS
-    ----------------------------------------------------------------------------------------------------------
-    */
-
-    /*
-    ----------------------------------------------------------------------------------------------------------
     PUBLIC FUNCTION VIEW LOGIN
     ----------------------------------------------------------------------------------------------------------
     */
@@ -147,6 +141,63 @@ class ViewController extends DataController {
 
         return $this->default( $data );
     }
+
+    //                                                  FUNCTIONS FOR VIEW DEVELOPER TOOL
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION USER ROLL DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function userRoll() {
+        $data = [
+            'title'     => 'User Roll',
+            'view'      => 'back-end.user-roll',
+            'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
+                                config( 'site-specific.buttons-bootstrap-min-css' ) ),
+            'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
+                                config( 'site-specific.jszip-min-js' ),config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
+                                config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
+                                config( 'site-specific.user-roll-init-js' )
+                             ),
+            'user_roll' => $this->getUserRoll(),
+        ];
+        return $this->default( $data );
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION USER DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function userDetails() {
+        $data = [
+            'title'     => 'User',
+            'view'      => 'back-end.user',
+            'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
+                                config( 'site-specific.buttons-bootstrap-min-css' ) ),
+            'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
+                                config( 'site-specific.jszip-min-js' ),config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
+                                config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
+                                config( 'site-specific.user-init-js' )
+                             ),
+            'user_roll' => $this->getUserRoll(1),
+            'user'      => $this->getUser(),
+        ];
+        return $this->default( $data );
+    }
+
+
+
+    //                                          FUNCTIONS FOR VIEW PORTFOLIO DETAILS
 
     /*
     ----------------------------------------------------------------------------------------------------------

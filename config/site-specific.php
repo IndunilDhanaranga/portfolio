@@ -80,6 +80,18 @@ return [
 
     /*
     ----------------------------------------------------------------------------------------------------------------------------------
+    DATATABLE CSS
+    ----------------------------------------------------------------------------------------------------------------------------------
+    */
+
+    'datatable-bootstrap-min-css'       =>'/assets/back-end/default/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css',
+
+    'responsive-bootstrap-min-css'      =>'/assets/back-end/default/plugins/datatables-responsive/css/responsive.bootstrap4.min.css',
+
+    'buttons-bootstrap-min-css'         =>'/assets/back-end/default/plugins/datatables-buttons/css/buttons.bootstrap4.min.css',
+
+    /*
+    ----------------------------------------------------------------------------------------------------------------------------------
     Default JAVA SCRIPT
     ----------------------------------------------------------------------------------------------------------------------------------
     */
@@ -122,6 +134,36 @@ return [
 
     /*
     ----------------------------------------------------------------------------------------------------------------------------------
+    DATATABLE JAVA SCRIPT
+    ----------------------------------------------------------------------------------------------------------------------------------
+    */
+
+    'jquery-datatable-min-js'           =>'/assets/back-end/default/plugins/datatables/jquery.dataTables.min.js',
+
+    'datatable-bootstrap-min-js'        =>'/assets/back-end/default/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js',
+
+    'datatable-responsive-min-js'       =>'/assets/back-end/default/plugins/datatables-responsive/js/dataTables.responsive.min.js',
+
+    'responsive-bootstrap-min-js'       =>'/assets/back-end/default/plugins/datatables-responsive/js/responsive.bootstrap4.min.js',
+
+    'datatable-buttons-min-js'          =>'/assets/back-end/default/plugins/datatables-buttons/js/dataTables.buttons.min.js',
+
+    'buttons-bootstrap-min-js'          =>'/assets/back-end/default/plugins/datatables-buttons/js/buttons.bootstrap4.min.js',
+
+    'jszip-min-js'                      =>'/assets/back-end/default/plugins/jszip/.min.js',
+
+    'pdfmake-min-js'                    =>'/assets/back-end/default/plugins/pdfmake/pdfmake.min.js',
+
+    'vfs_fonts-min-js'                  =>'/assets/back-end/default/plugins/pdfmake/vfs_fonts.js',
+
+    'buttons-html5-min-js'              =>'/assets/back-end/default/plugins/datatables-buttons/js/buttons.html5.min.js',
+
+    'buttons-print-min-js'              =>'/assets/back-end/default/plugins/datatables-buttons/js/buttons.print.min.js',
+
+    'buttons-colvis-min-js'             =>'/assets/back-end/default/plugins/datatables-buttons/js/buttons.colVis.min.js',
+
+    /*
+    ----------------------------------------------------------------------------------------------------------------------------------
     CUSTOM JAVA SCRIPT
     ----------------------------------------------------------------------------------------------------------------------------------
     */
@@ -137,6 +179,10 @@ return [
     'expertise-init-js'                 =>'/assets/back-end/custom/js/expertise-init.js',
 
     'additional-details-init-js'        =>'/assets/back-end/custom/js/additional-details-init.js',
+
+    'user-roll-init-js'                 =>'/assets/back-end/custom/js/user-roll-init.js',
+
+    'user-init-js'                      =>'/assets/back-end/custom/js/user-init.js',
 
     'live-path'                         => ''
 

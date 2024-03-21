@@ -51,6 +51,15 @@ function getAllPermissions(){
                 ['title' => 'Education Qualification','permission'=>'education-qualification','show_in_sidebar'=>false],
             )
         ],
+        [
+            'group'=>'Developer Tools',
+            'icon'=>'nav-icon fas fa-pen',
+            'type'=>'multiple',
+            'data'=>array(
+                ['title' => 'User','permission'=>'user','show_in_sidebar'=>true],
+                ['title' => 'User Roll','permission'=>'user-roll','show_in_sidebar'=>true],
+            )
+        ],
     );
 }
 
