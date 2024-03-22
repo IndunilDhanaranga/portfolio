@@ -27,7 +27,7 @@ function getAllPermissions() {
             'icon'=>'nav-icon fas fa-project-diagram',
             'type'=>'multiple',
             'data'=>array(
-                [ 'title' => 'Project Types', 'permission'=>'project-type', 'show_in_sidebar'=>true ],
+                [ 'title' => 'Project Types', 'permission'=>'create-project-type', 'show_in_sidebar'=>true ],
             )
         ],
         [

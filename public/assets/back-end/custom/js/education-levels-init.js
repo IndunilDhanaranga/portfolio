@@ -1,7 +1,6 @@
+var input_attempt;
 $(document).ready(function () {
-    console.log(education_level);
     if (education_level.length > 0) {
-        $("#level-attempt").val(education_level.length);
         education_level.forEach((element) => {
             addLevel(
                 element.title,
@@ -11,7 +10,9 @@ $(document).ready(function () {
             );
             status();
         });
+        input_attempt = education_level.length;
     }
+    dNoneClass('remove_level',education_level.length);
 });
 
 function addLevel(title, is_completed, end_year, index_no) {
@@ -84,6 +85,16 @@ function addLevel(title, is_completed, end_year, index_no) {
 
     $("#additional-level").append(html);
     $("#level-attempt").val(index + 1);
+    dNoneClass('remove_level',$("#level-attempt").val());
+}
+
+function dNoneClass(id,value) {
+    console.log(value);
+    if (value <= input_attempt + 1) {
+        $("#"+id).addClass("d-none");
+    } else {
+        $("#"+id).removeClass("d-none");
+    }
 }
 
 function status(param) {
@@ -106,4 +117,5 @@ function removeLevel() {
         $("#level_div_" + (attempt - 1)).remove();
         $("#level-attempt").val(attempt - 1);
     }
+    dNoneClass('remove_level',$("#level-attempt").val());
 }

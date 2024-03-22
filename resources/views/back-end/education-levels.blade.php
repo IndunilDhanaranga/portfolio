@@ -9,7 +9,7 @@
                     </div>
                     <div class="col-md-1">
                         <span class="btn btn-warning btn-xs" onclick="addLevel()"><i class="fa fa-plus"></i></span>
-                        <span class="btn btn-warning btn-xs" onclick="removeLevel()"><i class="fa fa-minus"></i></span>
+                        <span class="btn btn-warning btn-xs" id="remove_level" onclick="removeLevel()"><i class="fa fa-minus"></i></span>
                     </div>
                     <input hidden type="number" value="1" id="level-attempt">
                 </div>

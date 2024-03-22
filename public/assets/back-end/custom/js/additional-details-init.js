@@ -1,6 +1,5 @@
 $(document).ready(function () {
     if (work_experience.length > 0) {
-        $("#company-attempt").val(work_experience.length);
         work_experience.forEach((element) => {
             addWork(
                 element.company,
@@ -9,20 +8,28 @@ $(document).ready(function () {
                 element.to
             );
         });
+
     }
     if (skills.length > 0) {
-        $("#skills-attempt").val(skills.length);
         skills.forEach((element) => {
             addSkills(element.skill, element.percentage);
         });
     }
     if (languages.length > 0) {
-        $("#languages-attempt").val(languages.length);
         languages.forEach((element) => {
             addLanguages(element.languages, element.percentage);
         });
     }
 });
+
+function dNoneClass(id,value) {
+    console.log(value);
+    if (value == 1) {
+        $("#"+id).addClass("d-none");
+    } else {
+        $("#"+id).removeClass("d-none");
+    }
+}
 
 function addWork(company, position, from, to) {
     let index = parseInt($("#company-attempt").val());
@@ -70,6 +77,7 @@ function addWork(company, position, from, to) {
 
     $("#company").append(html);
     $("#company-attempt").val(index + 1);
+    // dNoneClass('remove_work',$("#company-attempt").val());
 }
 
 function removeWork() {
@@ -78,6 +86,7 @@ function removeWork() {
         $("#company_div_" + (attempt - 1)).remove();
         $("#company-attempt").val(attempt - 1);
     }
+    // dNoneClass('remove_work',$("#company-attempt").val());
 }
 
 function addSkills(skill, percentage) {
@@ -110,6 +119,7 @@ function addSkills(skill, percentage) {
 
     $("#skills").append(html);
     $("#skills-attempt").val(index + 1);
+    dNoneClass('remove_skill',$("#skills-attempt").val());
 }
 
 function removeSkills() {
@@ -118,6 +128,7 @@ function removeSkills() {
         $("#skills_div_" + (attempt - 1)).remove();
         $("#skills-attempt").val(attempt - 1);
     }
+    dNoneClass('remove_skill',$("#skills-attempt").val());
 }
 
 function addLanguages(languages, percentage) {
@@ -150,6 +161,7 @@ function addLanguages(languages, percentage) {
 
     $("#languages").append(html);
     $("#languages-attempt").val(index + 1);
+    dNoneClass('remove_lang',$("#languages-attempt").val());
 }
 
 function removeLanguages() {
@@ -158,4 +170,5 @@ function removeLanguages() {
         $("#languages_div_" + (attempt - 1)).remove();
         $("#languages-attempt").val(attempt - 1);
     }
+    dNoneClass('remove_lang',$("#languages-attempt").val());
 }

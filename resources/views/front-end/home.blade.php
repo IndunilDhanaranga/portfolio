@@ -123,21 +123,22 @@
                                 aria-hidden="true"></i></a></li> --}}
                 </ul>
             </div>
-            <div class="col-lg-4 about-card">
-                <h3 class="font-weight-light">My Expertise</h3>
-                <span class="line mb-5"></span>
-                @foreach ($expertise as $item)
-                    <div class="row">
-                        <div class="col-1 text-danger pt-1"><i class="fab fa-2xl fa-{{ $item->icon }}"></i></div>
-                        <div class="col-10 ml-auto mr-3">
-                            <h6>{{ $item->title }}</h6>
-                            <p class="subtitle">{{ $item->short_title }}</p>
-                            <hr>
+            @if (count($expertise) > 0)
+                <div class="col-lg-4 about-card">
+                    <h3 class="font-weight-light">My Expertise</h3>
+                    <span class="line mb-5"></span>
+                    @foreach ($expertise as $item)
+                        <div class="row">
+                            <div class="col-1 text-danger pt-1"><i class="fab fa-2xl fa-{{ $item->icon }}"></i></div>
+                            <div class="col-10 ml-auto mr-3">
+                                <h6>{{ $item->title }}</h6>
+                                <p class="subtitle">{{ $item->short_title }}</p>
+                                <hr>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
 
-                {{-- <div class="row">
+                    {{-- <div class="row">
                     <div class="col-1 text-danger pt-1"><i class="ti-paint-bucket icon-lg"></i></div>
                     <div class="col-10 ml-auto mr-3">
                         <h6>Web Development</h6>
@@ -153,7 +154,8 @@
                         <hr>
                     </div>
                 </div> --}}
-            </div>
+                </div>
+            @endif
         </div>
     </div>
 
@@ -220,23 +222,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="mt-2">
-                                <h4>Expertise</h4>
-                                <span class="line"></span>
+                @if (count($expertise) > 0)
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="mt-2">
+                                    <h4>Expertise</h4>
+                                    <span class="line"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            @foreach ($expertise as $item)
-                                <h6 class="title text-danger">{{ $item->title }}</h6>
-                                <p><b>{{ $item->short_title }}</b></p>
-                                <P class="subtitle">{{ $item->description }}</P>
-                                <hr>
-                            @endforeach
+                            <div class="card-body">
+                                @foreach ($expertise as $item)
+                                    <h6 class="title text-danger">{{ $item->title }}</h6>
+                                    <p><b>{{ $item->short_title }}</b></p>
+                                    <P class="subtitle">{{ $item->description }}</P>
+                                    <hr>
+                                @endforeach
 
-                            {{-- <h6 class="title text-danger">2016 - 2017</h6>
+                                {{-- <h6 class="title text-danger">2016 - 2017</h6>
                             <P>Front-end Developer</P>
                             <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum
                                 recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
@@ -245,26 +248,28 @@
                             <P>UX Designer</P>
                             <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum
                                 recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P> --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="mt-2">
-                                <h4>Work Experience</h4>
-                                <span class="line"></span>
                             </div>
                         </div>
-                        <div class="card-body">
-                            @foreach ($work_experience as $item)
-                                <h6 class="title text-danger">{{ $item->company }}</h6>
-                                <P><b>{{ $item->position }}</b></P>
-                                <P><b>{{ $item->from }} - {{ $item->to }}</b></P>
-                                <hr>
-                            @endforeach
+                    </div>
+                @endif
+                @if (count($work_experience) > 0)
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="mt-2">
+                                    <h4>Work Experience</h4>
+                                    <span class="line"></span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                @foreach ($work_experience as $item)
+                                    <h6 class="title text-danger">{{ $item->company }}</h6>
+                                    <P><b>{{ $item->position }}</b></P>
+                                    <P><b>{{ $item->from }} - {{ $item->to }}</b></P>
+                                    <hr>
+                                @endforeach
 
-                            {{-- <h6 class="title text-danger">2016 - 2017</h6>
+                                {{-- <h6 class="title text-danger">2016 - 2017</h6>
                             <P>Front-end Developer</P>
                             <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum
                                 recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
@@ -273,9 +278,10 @@
                             <P>UX Designer</P>
                             <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum
                                 recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P> --}}
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
 
             </div>
         </div>

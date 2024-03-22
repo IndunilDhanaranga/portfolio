@@ -323,20 +323,26 @@ class ViewController extends DataController {
         return $this->default( $data );
     }
 
+
+
+
+
+    //                                          FUNCTIONS FOR VIEW PROJECT DETAILS
+
     /*
     ----------------------------------------------------------------------------------------------------------
     PUBLIC FUNCTION VIEW PROJECT TYPES
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function projectTypes() {
+    public function createProjectTypes() {
         $data = [
-            'title' => 'Project Types',
-            'view' => 'back-end.additional-details',
+            'title' => 'Create Project Types',
+            'view' => 'back-end.project-type',
             'skills' => $this->getSkills(),
             'languages' => $this->getLanguages(),
             'work_experience' => $this->getWorkExperience(),
-            'script' => array( config( 'site-specific.additional-details-init-js' ) ),
+            'script' => array( config( 'site-specific.project-type-init-js' ) ),
         ];
         // return $data[ 'education_qualification' ];
         return $this->default( $data );

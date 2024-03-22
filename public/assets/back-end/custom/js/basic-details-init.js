@@ -41,6 +41,15 @@ function addConnections(link, platform, icon) {
 
     $("#additional-connection").append(html);
     $("#connection-attempt").val(index + 1);
+    dNoneClass('remove_connection',$("#connection-attempt").val());
+}
+
+function dNoneClass(id,value) {
+    if (value == 2) {
+        $("#"+id).addClass("d-none");
+    } else {
+        $("#"+id).removeClass("d-none");
+    }
 }
 
 function removeConnections() {
@@ -49,4 +58,5 @@ function removeConnections() {
         $("#additional-connection").find(".row:last").remove();
         $("#connection-attempt").val(attempt - 1);
     }
+    dNoneClass('remove_connection',$("#connection-attempt").val());
 }

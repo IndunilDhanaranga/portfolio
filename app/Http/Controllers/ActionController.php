@@ -397,26 +397,30 @@ class ActionController extends Controller {
 
     public function createExpertise( Request $request ) {
         try {
-            $validator = Validator::make( $request->all(), [
-                'title' => 'array|required',
-                'short_title' => 'array|required',
-                'icon' => 'array|required',
-                'description' => 'array|required',
-            ] );
-
-            if ( $validator->fails() ) {
-                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            if ( $request->title ) {
+                $validator = Validator::make( $request->all(), [
+                    'title' => 'array|required',
+                    'short_title' => 'array|required',
+                    'icon' => 'array|required',
+                    'description' => 'array|required',
+                ] );
+                if ( $validator->fails() ) {
+                    return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+                }
             }
+
             Expertise::truncate();
             DB::beginTransaction();
 
-            foreach ( $request->title as $key => $value ) {
-                Expertise::create( [
-                    'title' => $value,
-                    'short_title' => $request->short_title[ $key ],
-                    'icon' => $request->icon[ $key ],
-                    'description' => $request->description[ $key ],
-                ] );
+            if ( $request->title ) {
+                foreach ( $request->title as $key => $value ) {
+                    Expertise::create( [
+                        'title' => $value,
+                        'short_title' => $request->short_title[ $key ],
+                        'icon' => $request->icon[ $key ],
+                        'description' => $request->description[ $key ],
+                    ] );
+                }
             }
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'Expertise Details Created Successfully !' ] );
@@ -435,10 +439,10 @@ class ActionController extends Controller {
     public function createAdditionalDetails( Request $request ) {
         try {
             $validator = Validator::make( $request->all(), [
-                'company' => 'array|required',
-                'position' => 'array|required',
-                'from' => 'array|required',
-                'to' => 'array|required',
+                // 'company' => 'array|required',
+                // 'position' => 'array|required',
+                // 'from' => 'array|required',
+                // 'to' => 'array|required',
 
                 'skill' => 'array|required',
                 'percentage' => 'array|required',
@@ -452,15 +456,19 @@ class ActionController extends Controller {
                 return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
             }
             WorkExperience::truncate();
+            Skills::truncate();
+            Languages::truncate();
             DB::beginTransaction();
 
-            foreach ( $request->company as $key => $value ) {
-                WorkExperience::create( [
-                    'company' => $value,
-                    'position' => $request->position[ $key ],
-                    'from' => $request->from[ $key ],
-                    'to' => $request->to[ $key ],
-                ] );
+            if ( $request->company ) {
+                foreach ( $request->company as $key => $value ) {
+                    WorkExperience::create( [
+                        'company' => $value,
+                        'position' => $request->position[ $key ],
+                        'from' => $request->from[ $key ],
+                        'to' => $request->to[ $key ],
+                    ] );
+                }
             }
             foreach ( $request->skill as $key => $value ) {
                 Skills::create( [

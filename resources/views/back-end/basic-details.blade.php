@@ -80,7 +80,7 @@
                     <div class="col-md-1">
                         <span class="btn btn-warning btn-xs" onclick="addConnections()"><i
                                 class="fa fa-plus"></i></span>
-                        <span class="btn btn-warning btn-xs" onclick="removeConnections()"><i
+                        <span class="btn btn-warning btn-xs" id="remove_connection" onclick="removeConnections()"><i
                                 class="fa fa-minus"></i></span>
                     </div>
                     <input hidden type="number" value="1" id="connection-attempt">

@@ -107,7 +107,7 @@ Route::group([
 
     Route::get('/education-levels'                  , 'ViewController@educationLevels')->name('education-levels');
 
-    Route::get('/project-type'                      , 'ViewController@projectTypes')->name('project-type');
+    Route::get('/create-project-type'                      , 'ViewController@createProjectTypes')->name('create-project-type');
 
 
 

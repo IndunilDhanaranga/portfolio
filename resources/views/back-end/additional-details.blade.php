@@ -9,7 +9,7 @@
                     </div>
                     <div class="col-md-1">
                         <span class="btn btn-warning btn-xs" onclick="addSkills()"><i class="fa fa-plus"></i></span>
-                        <span class="btn btn-warning btn-xs" onclick="removeSkills()"><i class="fa fa-minus"></i></span>
+                        <span class="btn btn-warning btn-xs" id="remove_skill" onclick="removeSkills()"><i class="fa fa-minus"></i></span>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-md-1">
                         <span class="btn btn-warning btn-xs" onclick="addLanguages()"><i class="fa fa-plus"></i></span>
-                        <span class="btn btn-warning btn-xs" onclick="removeLanguages()"><i
+                        <span class="btn btn-warning btn-xs" id="remove_lang" onclick="removeLanguages()"><i
                                 class="fa fa-minus"></i></span>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-md-1">
                         <span class="btn btn-warning btn-xs" onclick="addWork()"><i class="fa fa-plus"></i></span>
-                        <span class="btn btn-warning btn-xs" onclick="removeWork()"><i class="fa fa-minus"></i></span>
+                        <span class="btn btn-warning btn-xs" id="remove_work" onclick="removeWork()"><i class="fa fa-minus"></i></span>
                     </div>
                 </div>
             </div>
