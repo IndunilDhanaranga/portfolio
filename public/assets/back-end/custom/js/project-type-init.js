@@ -1,59 +1,39 @@
-$(document).ready(function () {
-    if (skills.length > 0) {
-        $("#skills-attempt").val(skills.length);
-        skills.forEach((element) => {
-            addSkills(element.skill, element.percentage);
-        });
-    }
-    dNoneClass('remove',$("#skills-attempt").val());
-});
-
-function dNoneClass(id,value) {
-    if (value == 2) {
-        $("#"+id).addClass("d-none");
-    } else {
-        $("#"+id).removeClass("d-none");
-    }
-}
-
-function addSkills(skill, percentage) {
-    let index = parseInt($("#skills-attempt").val());
-    let html =
-        '<div class="row mt-2" id="skills_div_' +
-        index +
-        '">' +
-        '<div class="col-md-6 col-12">' +
-        '<div class="row ">' +
-        '<div class="col-md-12 col-12">' +
-        '<label for="title">Skill</label>' +
-        '<input type="text" value="' +
-        (typeof skill !== "undefined" ? skill : "") +
-        '" class="form-control" placeholder="Title" name="skill[]">' +
-        "</div>" +
-        "</div>" +
-        "</div>" +
-        '<div class="col-md-6 col-12">' +
-        '<div class="row ">' +
-        '<div class="col-md-12 col-12">' +
-        '<label for="title">Percentage (%)</label>' +
-        '<input type="number" min="0" max="100" value="' +
-        (typeof percentage !== "undefined" ? percentage : "") +
-        '" class="form-control" placeholder="Percentage" name="percentage[]">' +
-        "</div>" +
-        "</div>" +
+function addTechnology(value = null) {
+    var html =
+        '<div class="row mt-2">' +
+        '<div class="col-md-12">' +
+        '<input type="text" class="form-control" ' + (value ? 'value="' + value + '"' : '') + ' name="technologies[]" placeholder="Technology">' +
         "</div>" +
         "</div>";
 
-    $("#skills").append(html);
-    $("#skills-attempt").val(index + 1);
-    dNoneClass('remove',$("#skills-attempt").val());
+    $("#additional_technology").append(html);
 }
 
-function removeSkills() {
-    let attempt = parseInt($("#skills-attempt").val());
-    if (attempt > 0) {
-        $("#skills_div_" + (attempt - 1)).remove();
-        $("#skills-attempt").val(attempt - 1);
-    }
-    dNoneClass('remove',$("#skills-attempt").val());
+
+function removeTechnology() {
+    $("#additional_technology").find(".row:last").remove();
+}
+
+$("#project_type_table")
+    .DataTable({
+        responsive: true,
+        lengthChange: false,
+        autoWidth: false,
+        buttons: ["copy", "csv", "excel", "pdf", "print"],
+    })
+    .buttons()
+    .container()
+    .appendTo("#project_type_table_wrapper .col-md-6:eq(0)");
+
+function editProjectType(param) {
+    var project_type = JSON.parse($(param).attr("data-project_type"));
+    console.log(project_type);
+    $('#project_type').val(project_type.type);
+    $('#form_title').text('Update Project Type');
+    $('#technologies').remove();
+    $('#additional_technology').html('');
+    project_type.technology_details.forEach(element => {
+        addTechnology(element.technology);
+    });
+    $('#form_project_type').attr('action', '/update-project-type/'+project_type.id);
 }

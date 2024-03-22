@@ -107,7 +107,25 @@ Route::group([
 
     Route::get('/education-levels'                  , 'ViewController@educationLevels')->name('education-levels');
 
-    Route::get('/create-project-type'                      , 'ViewController@createProjectTypes')->name('create-project-type');
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+                                                    PROJECT DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    Route::get('/create-project-type'               , 'ViewController@createProjectTypes')->name('create-project-type');
+
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+                                                    CLIENT DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    Route::get('/create-client'                     , 'ViewController@createClient')->name('create-client');
+
 
 
 
@@ -148,6 +166,18 @@ Route::group([
     Route::post('/create-school'                    , 'ActionController@createSchool')->name('create-school');
 
     Route::post('/create-education-level'           , 'ActionController@createEducationLevel')->name('create-education-level');
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+                                                    PROJECT DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    Route::post('/add-project-type'                 , 'ActionController@addProjectTypes')->name('add-project-type');
+
+    Route::post('/update-project-type/{id?}'        , 'ActionController@updateProjectTypes')->name('update-project-type');
+
 
 
 });

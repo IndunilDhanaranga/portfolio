@@ -31,6 +31,14 @@ function getAllPermissions() {
             )
         ],
         [
+            'group'=>'Clients',
+            'icon'=>'nav-icon fas fa-user-astronaut',
+            'type'=>'multiple',
+            'data'=>array(
+                [ 'title' => 'Create Client', 'permission'=>'create-client', 'show_in_sidebar'=>true ],
+            )
+        ],
+        [
             'group'=>'Education',
             'icon'=>'nav-icon fas fa-graduation-cap',
             'type'=>'multiple',

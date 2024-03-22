@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\UserRoll;
 use App\Models\UserRollPermission;
 use App\Models\User;
+
 use App\Models\PortfolioUser;
 use App\Models\PortfolioUserConnection;
 use App\Models\SchoolAndCollage;
@@ -16,6 +17,8 @@ use App\Models\Expertise;
 use App\Models\WorkExperience;
 use App\Models\Skills;
 use App\Models\Languages;
+
+use App\Models\ProjectType;
 
 class DataController extends Controller {
 
@@ -160,6 +163,20 @@ class DataController extends Controller {
 
     public function getWorkExperience() {
         $data = WorkExperience::all();
+        return $data;
+    }
+
+
+    //                                  FUNCTIONS FOR GET PROJECT DETAILS
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET PROJECT TYPES
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getProjectType() {
+        $data = ProjectType::with( 'technologyDetails' )->get();
         return $data;
     }
 }

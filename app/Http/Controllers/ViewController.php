@@ -337,12 +337,37 @@ class ViewController extends DataController {
 
     public function createProjectTypes() {
         $data = [
-            'title' => 'Create Project Types',
+            'title' => 'Project Types',
             'view' => 'back-end.project-type',
-            'skills' => $this->getSkills(),
-            'languages' => $this->getLanguages(),
-            'work_experience' => $this->getWorkExperience(),
-            'script' => array( config( 'site-specific.project-type-init-js' ) ),
+            'project_type' => $this->getProjectType(),
+            'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
+                                config( 'site-specific.buttons-bootstrap-min-css' ) ),
+            'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
+                                config( 'site-specific.jszip-min-js' ),config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
+                                config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
+                                config( 'site-specific.project-type-init-js' )
+                             ),
+        ];
+        // return $data[ 'education_qualification' ];
+        return $this->default( $data );
+    }
+
+
+     //                                          FUNCTIONS FOR VIEW CLIENT DETAILS
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW CREATE CLIENT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function createClient() {
+        $data = [
+            'title' => 'Create Client',
+            'view' => 'back-end.create-client',
         ];
         // return $data[ 'education_qualification' ];
         return $this->default( $data );

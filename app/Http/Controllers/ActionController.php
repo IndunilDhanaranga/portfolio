@@ -11,6 +11,7 @@ use App\Models\UserRoll;
 use App\Models\UserRollPermission;
 use App\Models\User;
 use App\Models\UserImage;
+
 use App\Models\PortfolioUser;
 use App\Models\PortfolioUserConnection;
 use App\Models\PortfolioUserImage;
@@ -22,6 +23,9 @@ use App\Models\Expertise;
 use App\Models\WorkExperience;
 use App\Models\Skills;
 use App\Models\Languages;
+
+use App\Models\ProjectType;
+use App\Models\Technology;
 
 class ActionController extends Controller {
 
@@ -37,7 +41,7 @@ class ActionController extends Controller {
         try {
             $validator = Validator::make( $request->all(), [
                 'user_roll'     => 'required',
-                'permission'     => 'array|required',
+                'permission.*'     => 'required',
             ] );
 
             if ( $validator->fails() ) {
@@ -119,7 +123,7 @@ class ActionController extends Controller {
             $validator = Validator::make( $request->all(), [
                 'user_roll'         => 'required',
                 'is_active'         => 'required',
-                'permission'        => 'array|required',
+                'permission.*'        => 'required',
             ] );
 
             if ( $validator->fails() ) {
@@ -216,9 +220,9 @@ class ActionController extends Controller {
                 'phone' => 'required',
                 'address' => 'required',
                 'email' => 'required',
-                'platform' => 'array|required',
-                'link' => 'array|required',
-                'icon' => 'array|required',
+                'platform.*' => 'required',
+                'link.*' => 'required',
+                'icon.*' => 'required',
                 'm_path' => 'required',
                 'caption' => 'required',
                 'about' => 'required',
@@ -287,9 +291,9 @@ class ActionController extends Controller {
     public function createSchool( Request $request ) {
         try {
             $validator = Validator::make( $request->all(), [
-                'school' => 'array|required',
-                'from' => 'array|required',
-                'to' => 'array|required',
+                'school.*' => 'required',
+                'from.*' => 'required',
+                'to.*' => 'required',
             ] );
 
             if ( $validator->fails() ) {
@@ -322,7 +326,7 @@ class ActionController extends Controller {
     public function createEducationLevel( Request $request ) {
         try {
             $validator = Validator::make( $request->all(), [
-                'title' => 'array|required',
+                'title.*' => 'required',
                 'year' => 'required_if:is_completed,0|array',
                 'indexno' => 'required_if:is_completed,0|array',
             ] );
@@ -361,10 +365,10 @@ class ActionController extends Controller {
         try {
 
             $validator = Validator::make( $request->all(), [
-                'school' => 'array|required',
-                'title' => 'array|required',
-                'description' => 'array|required',
-                'education_level' => 'array|required',
+                'school.*' => 'required',
+                'title.*' => 'required',
+                'description.*' => 'required',
+                'education_level.*' => 'required',
             ] );
 
             if ( $validator->fails() ) {
@@ -399,10 +403,10 @@ class ActionController extends Controller {
         try {
             if ( $request->title ) {
                 $validator = Validator::make( $request->all(), [
-                    'title' => 'array|required',
-                    'short_title' => 'array|required',
-                    'icon' => 'array|required',
-                    'description' => 'array|required',
+                    'title.*' => 'required',
+                    'short_title.*' => 'required',
+                    'icon.*' => 'required',
+                    'description.*' => 'required',
                 ] );
                 if ( $validator->fails() ) {
                     return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
@@ -439,16 +443,16 @@ class ActionController extends Controller {
     public function createAdditionalDetails( Request $request ) {
         try {
             $validator = Validator::make( $request->all(), [
-                // 'company' => 'array|required',
-                // 'position' => 'array|required',
-                // 'from' => 'array|required',
-                // 'to' => 'array|required',
+                // 'company.*' => 'required',
+                // 'position.*' => 'required',
+                // 'from.*' => 'required',
+                // 'to.*' => 'required',
 
-                'skill' => 'array|required',
-                'percentage' => 'array|required',
+                'skill.*' => 'required',
+                'percentage.*' => 'required',
 
-                'languages' => 'array|required',
-                'lang_percentage' => 'array|required',
+                'languages.*' => 'required',
+                'lang_percentage.*' => 'required',
 
             ] );
 
@@ -484,6 +488,80 @@ class ActionController extends Controller {
             }
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'Additional Details Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    //                                  FUNCTIONS FOR PROJECT DETAILS
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE PROJECT TYPE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function addProjectTypes( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'project_type' => 'required',
+                'technologies.*' => 'required'
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $project_type = ProjectType::create( [
+                'type' => $request->project_type
+            ] );
+            foreach ( $request->technologies as $key => $value ) {
+                Technology::create( [
+                    'project_type_id'   => $project_type->id,
+                    'technology'        => $value,
+                ] );
+            }
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Project Type Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION UPDATE PROJECT TYPE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function updateProjectTypes( Request $request, $id ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'project_type' => 'required',
+                'technologies.*' => 'required'
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+
+            $project_type = ProjectType::find( $id );
+            $project_type->type = $request->project_type;
+            $project_type->save();
+            Technology::where( 'project_type_id', $id )->delete();
+            foreach ( $request->technologies as $key => $value ) {
+                Technology::create( [
+                    'project_type_id'   => $project_type->id,
+                    'technology'        => $value,
+                ] );
+            }
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Project Type Updated Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
