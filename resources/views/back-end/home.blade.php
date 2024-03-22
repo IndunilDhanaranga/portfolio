@@ -194,7 +194,6 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                            with font-awesome or any other icon font library -->
-                        <li>{{ isPermissions('dashboard') }}</li>
                         @foreach (getAllPermissions() as $group)
                             @if ($group['type'] == 'single')
                                 @if (isPermissions($group['data'][0]['permission']))
