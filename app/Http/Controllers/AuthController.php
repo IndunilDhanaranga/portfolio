@@ -39,7 +39,7 @@ class AuthController extends Controller {
                         Auth::logout();
                         return redirect()->route( 'login' )->withErrors( [ 'Your no longer available.Please contact system adminstrator.' ] );
                     }
-                    if(UserRoll::find(Auth::user()->user_roll)->where('is_active',0)->exists()){
+                    if ( UserRoll::find( Auth::user()->user_roll )->where( 'is_active', 0 )->exists() ) {
                         Auth::logout();
                         return redirect()->route( 'login' )->withErrors( [ 'Your User Roll no longer available.Please contact system adminstrator.' ] );
                     }

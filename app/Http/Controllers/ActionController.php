@@ -50,11 +50,11 @@ class ActionController extends Controller {
                 'is_active'     => 1,
             ] );
 
-            foreach ($request->permission as $key => $value) {
-                UserRollPermission::create([
+            foreach ( $request->permission as $key => $value ) {
+                UserRollPermission::create( [
                     'user_roll_id'       => $user_roll->id,
                     'permission'    => $value,
-                ]);
+                ] );
             }
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'User Roll Created Successfully !' ] );
@@ -113,7 +113,7 @@ class ActionController extends Controller {
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function updateUserRoll( Request $request,$id ) {
+    public function updateUserRoll( Request $request, $id ) {
         try {
             // return $request;
             $validator = Validator::make( $request->all(), [
@@ -131,17 +131,17 @@ class ActionController extends Controller {
             $user_roll->is_active   = $request->is_active;
             $user_roll->save();
 
-            UserRollPermission::where('user_roll_id',$id)->delete();
+            UserRollPermission::where( 'user_roll_id', $id )->delete();
 
-            foreach ($request->permission as $key => $value) {
-                UserRollPermission::create([
+            foreach ( $request->permission as $key => $value ) {
+                UserRollPermission::create( [
                     'user_roll_id'       => $id,
                     'permission'    => $value,
-                ]);
+                ] );
             }
 
             DB::commit();
-            return redirect()->route('user-roll')->with( [ 'success' => true, 'message' => 'User Roll Updated Successfully !' ] );
+            return redirect()->route( 'user-roll' )->with( [ 'success' => true, 'message' => 'User Roll Updated Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
@@ -184,9 +184,9 @@ class ActionController extends Controller {
                 $user->password = $request->password;
             }
             $user->save();
-            if ( $request->hasFile('image') ) {
+            if ( $request->hasFile( 'image' ) ) {
                 $user_image = uploadImage( $request->image, 'user_image' );
-                $user_image_table = UserImage::where('user_id',$request->id)->first();
+                $user_image_table = UserImage::where( 'user_id', $request->id )->first();
                 $user_image_table->image_name = $user_image;
                 $user_image_table->save();
             }

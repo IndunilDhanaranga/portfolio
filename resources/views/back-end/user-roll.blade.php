@@ -1,6 +1,6 @@
 <div class="card card-default">
     <div class="card-body">
-        <table id="user_roll" class="table table-striped table-bordered nowrap" style="width:100%">
+        <table id="user_roll_table" class="table table-striped table-bordered nowrap" style="width:100%">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -20,7 +20,7 @@
                             <td><span class="badge badge-success">Active</span></td>
                         @endif
                         <td>
-                            <a href="/edit-user-roll/{{$item->id}}"><i class="far fa-edit"></i></a>
+                            <a href="/edit-user-roll/{{ $item->id }}"><i class="far fa-edit"></i></a>
                         </td>
                     </tr>
                 @endforeach

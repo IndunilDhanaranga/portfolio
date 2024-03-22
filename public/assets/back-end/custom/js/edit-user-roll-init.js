@@ -1,13 +1,3 @@
-$("#user_roll_table").DataTable({
-        responsive: true,
-        lengthChange: false,
-        autoWidth: false,
-        buttons: ["copy", "csv", "excel", "pdf", "print"],
-    })
-    .buttons()
-    .container()
-    .appendTo("#user_roll_table_wrapper .col-md-6:eq(0)");
-
 $(document).ready(function () {
     $("#user-role tbody tr").each(function () {
         var allchecked = true;
@@ -19,7 +9,6 @@ $(document).ready(function () {
                 }
             });
         if (allchecked == true) {
-            console.log('hello');
             $(this).find(".select-all").prop("checked", true);
         }
     });

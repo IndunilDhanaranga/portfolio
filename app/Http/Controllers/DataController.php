@@ -21,17 +21,16 @@ class DataController extends Controller {
 
     //                                  FUNCTIONS FOR GET DEVELOPER TOOLS DETAILS
 
-
     /*
     ----------------------------------------------------------------------------------------------------------
     PUBLIC FUNCTION GET USER ROLL
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function getUserRoll($is_active = null){
+    public function getUserRoll( $is_active = null ) {
         $data = UserRoll::query();
-        if($is_active){
-            $data->where('is_active',$is_active);
+        if ( $is_active ) {
+            $data->where( 'is_active', $is_active );
         }
         $data = $data->get();
         return $data;
@@ -43,8 +42,8 @@ class DataController extends Controller {
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function getUserRollForEdit($id){
-        $data = UserRoll::find($id);
+    public function getUserRollForEdit( $id ) {
+        $data = UserRoll::find( $id );
         return $data;
     }
 
@@ -54,8 +53,8 @@ class DataController extends Controller {
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function getSelectedUserRollPermission($id){
-        $data = UserRollPermission::where('user_roll_id',$id)->get()->pluck('permission');
+    public function getSelectedUserRollPermission( $id ) {
+        $data = UserRollPermission::where( 'user_roll_id', $id )->get()->pluck( 'permission' );
         return $data;
     }
 
@@ -65,19 +64,16 @@ class DataController extends Controller {
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function getUser($is_active = null){
-        $data = User::with('userRollDetails');
-        if($is_active){
-            $data->where('is_active',$is_active);
+    public function getUser( $is_active = null ) {
+        $data = User::with( 'userRollDetails' );
+        if ( $is_active ) {
+            $data->where( 'is_active', $is_active );
         }
         $data = $data->get();
         return $data;
     }
 
-
-
-     //                                  FUNCTIONS FOR GET PORTFOLIO DETAILS
-
+    //                                  FUNCTIONS FOR GET PORTFOLIO DETAILS
 
     /*
     ----------------------------------------------------------------------------------------------------------

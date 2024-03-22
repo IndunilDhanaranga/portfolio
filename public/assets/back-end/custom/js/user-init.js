@@ -26,9 +26,9 @@ function editUser(div) {
             modal.find('[name="name"]').val(user.name);
             modal.find('[name="email"]').val(user.email);
             modal
-            .find('[name="user_roll"]')
-            .val(user.user_roll)
-            .trigger("change");
+                .find('[name="user_roll"]')
+                .val(user.user_roll)
+                .trigger("change");
             modal
                 .find('[name="is_active"]')
                 .val(user.is_active)
@@ -37,7 +37,6 @@ function editUser(div) {
         }
     });
 }
-
 
 $("#password-change").on("change", function () {
     var modal = $("#edit-user");

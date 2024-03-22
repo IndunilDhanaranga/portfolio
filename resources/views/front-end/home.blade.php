@@ -65,8 +65,8 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav brand">
-                    <img src="{{ getUploadImage($basic_details->UserImage->image_name, 'portfolio_user_image') }}" alt=""
-                        class="brand-img">
+                    <img src="{{ getUploadImage($basic_details->UserImage->image_name, 'portfolio_user_image') }}"
+                        alt="" class="brand-img">
                     <li class="brand-txt">
                         <h5 class="brand-title">{{ $basic_details->d_name }}</h5>
                         <div class="brand-subtitle">{{ $basic_details->m_path }}</div>

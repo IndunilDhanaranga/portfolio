@@ -182,6 +182,8 @@ return [
 
     'user-roll-init-js'                 =>'/assets/back-end/custom/js/user-roll-init.js',
 
+    'edit-user-roll-init-js'                 =>'/assets/back-end/custom/js/edit-user-roll-init.js',
+
     'user-init-js'                      =>'/assets/back-end/custom/js/user-init.js',
 
     'live-path'                         => ''
