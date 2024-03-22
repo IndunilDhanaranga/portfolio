@@ -13,7 +13,7 @@ function getAllPermissions() {
         ],
         [
             'group'=>'Portfolio',
-            'icon'=>'nav-icon fas fa-pen',
+            'icon'=>'nav-icon fas fa-briefcase',
             'type'=>'multiple',
             'data'=>array(
                 [ 'title' => 'Basic Details', 'permission'=>'basic-details', 'show_in_sidebar'=>true ],
@@ -24,31 +24,24 @@ function getAllPermissions() {
         ],
         [
             'group'=>'Projects',
-            'icon'=>'nav-icon fas fa-pen',
+            'icon'=>'nav-icon fas fa-project-diagram',
             'type'=>'multiple',
             'data'=>array(
                 [ 'title' => 'Project Types', 'permission'=>'project-type', 'show_in_sidebar'=>true ],
             )
         ],
         [
-            'group'=>'Schools & Collages',
-            'icon'=>'nav-icon fas fa-pen',
-            'type'=>'single',
+            'group'=>'Education',
+            'icon'=>'nav-icon fas fa-graduation-cap',
+            'type'=>'multiple',
             'data'=>array(
-                [ 'title' => 'School & Collages View', 'permission'=>'schools-collages', 'show_in_sidebar'=>true ],
-            )
-        ],
-        [
-            'group'=>'Education Levels',
-            'icon'=>'nav-icon fas fa-pen',
-            'type'=>'single',
-            'data'=>array(
-                [ 'title' => 'Education Level View', 'permission'=>'education-levels', 'show_in_sidebar'=>true ],
+                [ 'title' => 'Education Level', 'permission'=>'education-levels', 'show_in_sidebar'=>true ],
+                [ 'title' => 'School & Collages', 'permission'=>'schools-collages', 'show_in_sidebar'=>true ],
             )
         ],
         [
             'group'=>'Developer Tools',
-            'icon'=>'nav-icon fas fa-pen',
+            'icon'=>'nav-icon fas fa-people-carry',
             'type'=>'multiple',
             'data'=>array(
                 [ 'title' => 'User', 'permission'=>'user', 'show_in_sidebar'=>true ],
