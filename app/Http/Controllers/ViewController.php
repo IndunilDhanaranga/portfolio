@@ -171,6 +171,24 @@ class ViewController extends DataController {
 
     /*
     ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION EDIT USER ROLL DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function editUserRoll($id) {
+        $data = [
+            'title'     => 'Edit User Roll',
+            'view'      => 'back-end.edit-user-roll',
+            'script'            => array(config('site-specific.user-roll-init-js')),
+            'user_roll' => $this->getUserRollForEdit($id),
+            'user_roll_permission' => $this->getSelectedUserRollPermission($id),
+        ];
+        // return $data['user_roll'];
+        return $this->default( $data );
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
     PUBLIC FUNCTION USER DETAILS
     ----------------------------------------------------------------------------------------------------------
     */

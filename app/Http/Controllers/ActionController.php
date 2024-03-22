@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 
 use App\Models\UserRoll;
+use App\Models\UserRollPermission;
 use App\Models\User;
 use App\Models\UserImage;
 use App\Models\PortfolioUser;
@@ -36,6 +37,7 @@ class ActionController extends Controller {
         try {
             $validator = Validator::make( $request->all(), [
                 'user_roll'     => 'required',
+                'permission'     => 'array|required',
             ] );
 
             if ( $validator->fails() ) {
@@ -43,11 +45,17 @@ class ActionController extends Controller {
             }
             DB::beginTransaction();
 
-            UserRoll::create( [
+            $user_roll = UserRoll::create( [
                 'title'         => $request->user_roll,
                 'is_active'     => 1,
             ] );
 
+            foreach ($request->permission as $key => $value) {
+                UserRollPermission::create([
+                    'user_roll_id'       => $user_roll->id,
+                    'permission'    => $value,
+                ]);
+            }
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'User Roll Created Successfully !' ] );
         } catch ( \Throwable $th ) {
@@ -105,25 +113,35 @@ class ActionController extends Controller {
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function editUserRoll( Request $request ) {
+    public function updateUserRoll( Request $request,$id ) {
         try {
+            // return $request;
             $validator = Validator::make( $request->all(), [
-                'id'            => 'required',
-                'user_roll'     => 'required',
-                'is_active'     => 'required',
+                'user_roll'         => 'required',
+                'is_active'         => 'required',
+                'permission'        => 'array|required',
             ] );
 
             if ( $validator->fails() ) {
                 return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
             }
             DB::beginTransaction();
-            $user_roll              = UserRoll::find( $request->id );
+            $user_roll              = UserRoll::find( $id );
             $user_roll->title       = $request->user_roll;
             $user_roll->is_active   = $request->is_active;
             $user_roll->save();
 
+            UserRollPermission::where('user_roll_id',$id)->delete();
+
+            foreach ($request->permission as $key => $value) {
+                UserRollPermission::create([
+                    'user_roll_id'       => $id,
+                    'permission'    => $value,
+                ]);
+            }
+
             DB::commit();
-            return redirect()->back()->with( [ 'success' => true, 'message' => 'User Roll Updated Successfully !' ] );
+            return redirect()->route('user-roll')->with( [ 'success' => true, 'message' => 'User Roll Updated Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );

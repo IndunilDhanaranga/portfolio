@@ -7,6 +7,7 @@ use Validator;
 use Auth;
 
 use App\Models\User;
+use App\Models\UserRoll;
 
 class AuthController extends Controller {
     /*
@@ -37,6 +38,10 @@ class AuthController extends Controller {
                     if ( User::where( 'is_active', 0 )->exists() ) {
                         Auth::logout();
                         return redirect()->route( 'login' )->withErrors( [ 'Your no longer available.Please contact system adminstrator.' ] );
+                    }
+                    if(UserRoll::find(Auth::user()->user_roll)->where('is_active',0)->exists()){
+                        Auth::logout();
+                        return redirect()->route( 'login' )->withErrors( [ 'Your User Roll no longer available.Please contact system adminstrator.' ] );
                     }
                     $user = User::where( 'id', Auth::id() )->first();
                     return redirect()->route( 'dashboard' );

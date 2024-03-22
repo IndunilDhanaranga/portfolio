@@ -84,6 +84,8 @@ Route::group([
 
     Route::get('/user-roll'                         , 'ViewController@userRoll')->name('user-roll');
 
+    Route::get('/edit-user-roll/{id?}'                    , 'ViewController@editUserRoll')->name('edit-user-roll');
+
 
     /*
     ----------------------------------------------------------------------------------------------------------
@@ -123,11 +125,11 @@ Route::group([
 
     Route::post('/create-user-roll'                 , 'ActionController@createUserRoll')->name('create-user-roll');
 
-    Route::post('/edit-user-roll'                   , 'ActionController@editUserRoll')->name('edit-user-roll');
+    Route::post('/update-user-roll/{id?}'           , 'ActionController@updateUserRoll')->name('update-user-roll');
 
     Route::post('/create-user'                      , 'ActionController@createUser')->name('create-user');
 
-    Route::post('/edit-user'                      , 'ActionController@editUser')->name('edit-user');
+    Route::post('/edit-user'                        , 'ActionController@editUser')->name('edit-user');
 
     /*
     ----------------------------------------------------------------------------------------------------------

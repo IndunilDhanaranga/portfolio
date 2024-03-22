@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\UserRoll;
+use App\Models\UserRollPermission;
 use App\Models\User;
 use App\Models\PortfolioUser;
 use App\Models\PortfolioUserConnection;
@@ -33,6 +34,28 @@ class DataController extends Controller {
             $data->where('is_active',$is_active);
         }
         $data = $data->get();
+        return $data;
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET USER ROLL FOR EDIT USER ROLL
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getUserRollForEdit($id){
+        $data = UserRoll::find($id);
+        return $data;
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET USER ROLL PERMISSION FOR EDIT USER ROLL
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getSelectedUserRollPermission($id){
+        $data = UserRollPermission::where('user_roll_id',$id)->get()->pluck('permission');
         return $data;
     }
 
