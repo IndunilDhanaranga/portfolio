@@ -27,6 +27,8 @@ function getAllPermissions() {
             'icon'=>'nav-icon fas fa-project-diagram',
             'type'=>'multiple',
             'data'=>array(
+                [ 'title' => 'Project', 'permission'=>'project', 'show_in_sidebar'=>true ],
+                [ 'title' => 'Create Project', 'permission'=>'create-project', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Project Types', 'permission'=>'create-project-type', 'show_in_sidebar'=>true ],
             )
         ],
@@ -35,6 +37,7 @@ function getAllPermissions() {
             'icon'=>'nav-icon fas fa-user-astronaut',
             'type'=>'multiple',
             'data'=>array(
+                [ 'title' => 'Clients', 'permission'=>'view-client', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Create Client', 'permission'=>'create-client', 'show_in_sidebar'=>true ],
             )
         ],
@@ -61,7 +64,7 @@ function getAllPermissions() {
 
 if ( !function_exists( 'isPermissions' ) ) {
     function isPermissions( $permission ) {
-        $UserPermissions = UserRollPermission::where( 'user_roll_id', Auth::user()->user_roll )->where( 'permission', $permission )->count('id');
+        $UserPermissions = UserRollPermission::where( 'user_roll_id', Auth::user()->user_roll )->where( 'permission', $permission )->count( 'id' );
         if ( $UserPermissions == 1 ) {
             return true;
         }

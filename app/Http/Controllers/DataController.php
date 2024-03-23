@@ -19,6 +19,10 @@ use App\Models\Skills;
 use App\Models\Languages;
 
 use App\Models\ProjectType;
+use App\Models\ProjectStatus;
+use App\Models\Project;
+
+use App\Models\ProjectClient;
 
 class DataController extends Controller {
 
@@ -166,7 +170,6 @@ class DataController extends Controller {
         return $data;
     }
 
-
     //                                  FUNCTIONS FOR GET PROJECT DETAILS
 
     /*
@@ -177,6 +180,49 @@ class DataController extends Controller {
 
     public function getProjectType() {
         $data = ProjectType::with( 'technologyDetails' )->get();
+        return $data;
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET PROJECT TYPES
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getProjectStatus() {
+        $data = ProjectStatus::all();
+        return $data;
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET PROJECT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getProject( $status = null ) {
+        $data = Project::with( 'projectTypeDetails.technologyDetails', 'clientDetails', 'imageDetails', 'projectStatusDetails' );
+        if ( $status ) {
+            $data = $data->where( 'status', $status );
+        }
+        $data = $data->get();
+        return $data;
+    }
+
+    //                                  FUNCTIONS FOR GET CLIENT DETAILS
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET ALL CLIENTS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getAllClients( $is_active = null ) {
+        $data = ProjectClient::query();
+        if ( $is_active ) {
+            $data = $data->where( 'is_active', $is_active );
+        }
+        $data = $data->get();
         return $data;
     }
 }

@@ -188,6 +188,10 @@ return [
 
     'project-type-init-js'              =>'/assets/back-end/custom/js/project-type-init.js',
 
+    'project-client-init-js'            =>'/assets/back-end/custom/js/project-client-init.js',
+
+    'project-init-js'                   =>'/assets/back-end/custom/js/project-init.js',
+
     'live-path'                         => ''
 
 ];

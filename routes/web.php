@@ -114,6 +114,10 @@ Route::group([
     ----------------------------------------------------------------------------------------------------------
     */
 
+    Route::get('/project'                           , 'ViewController@viewProject')->name('project');
+
+    Route::get('/create-project'                    , 'ViewController@createProject')->name('create-project');
+
     Route::get('/create-project-type'               , 'ViewController@createProjectTypes')->name('create-project-type');
 
 
@@ -125,6 +129,8 @@ Route::group([
     */
 
     Route::get('/create-client'                     , 'ViewController@createClient')->name('create-client');
+
+    Route::get('/view-client'                       , 'ViewController@viewClient')->name('view-client');
 
 
 
@@ -177,6 +183,20 @@ Route::group([
     Route::post('/add-project-type'                 , 'ActionController@addProjectTypes')->name('add-project-type');
 
     Route::post('/update-project-type/{id?}'        , 'ActionController@updateProjectTypes')->name('update-project-type');
+
+    Route::post('/add-project'                      , 'ActionController@addProject')->name('add-project');
+
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+                                                    CLIENT DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    Route::post('/add-client'                       , 'ActionController@addClient')->name('add-client');
+
+    Route::post('/update-client'                    , 'ActionController@updateClient')->name('update-client');
 
 
 

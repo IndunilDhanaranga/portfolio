@@ -26,6 +26,8 @@ use App\Models\Languages;
 
 use App\Models\ProjectType;
 use App\Models\Technology;
+use App\Models\ProjectClient;
+use App\Models\Project;
 
 class ActionController extends Controller {
 
@@ -562,6 +564,124 @@ class ActionController extends Controller {
             }
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'Project Type Updated Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE PROJECT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function addProject( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'title' => 'required',
+                'type_id' => 'required',
+                'client_id' => 'required',
+                'estimate' => 'required',
+                'repository' => 'required',
+                'description' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $project = Project::create( [
+                'title' => $request->title,
+                'type_id' => $request->type_id,
+                'client_id' => $request->client_id,
+                'estimate' => $request->estimate,
+                'repository' => $request->repository,
+                'description' => $request->description,
+                'status' => 1,
+            ] );
+            if($request->hasFile('image')){
+                $project_image = uploadImage( $request->image, 'project_image' );
+                ProjectImage::create( [
+                    'project_id'       => $project->id,
+                    'image_name'    => $project_image,
+                ] );
+            }
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Project Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    //                                  FUNCTIONS FOR CLIENT DETAILS
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE CLIENT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function addClient( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'name' => 'required',
+                'email' => 'required',
+                'address' => 'required',
+                'phone' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $project_client = ProjectClient::create( [
+                'name' => $request->name,
+                'email' => $request->email,
+                'address' => $request->address,
+                'phone' => $request->phone,
+            ] );
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Client Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION UPDATE CLIENT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function updateClient( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'id' => 'required',
+                'name' => 'required',
+                'email' => 'required',
+                'address' => 'required',
+                'phone' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $project_client = ProjectClient::find( $request->id );
+            $project_client->name = $request->name;
+            $project_client->email = $request->email;
+            $project_client->address = $request->address;
+            $project_client->phone = $request->phone;
+            $project_client->is_active = $request->is_active;
+            $project_client->save();
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Client Updated Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );

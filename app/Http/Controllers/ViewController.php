@@ -355,6 +355,52 @@ class ViewController extends DataController {
         return $this->default( $data );
     }
 
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW CREATE PROJECT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function createProject() {
+        $data = [
+            'title' => 'Create Project',
+            'view' => 'back-end.create-project',
+            'project_type' => $this->getProjectType(),
+            'all_clients' => $this->getAllClients(1),
+        ];
+        // return $data[ 'education_qualification' ];
+        return $this->default( $data );
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW PROJECT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function viewProject() {
+        $data = [
+            'title' => 'Project',
+            'view' => 'back-end.view-project',
+            'project' => $this->getProject(),
+            'project_type' => $this->getProjectType(),
+            'project_status' => $this->getProjectStatus(),
+            'all_clients' => $this->getAllClients(1),
+            'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
+                                config( 'site-specific.buttons-bootstrap-min-css' ) ),
+            'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
+                                config( 'site-specific.jszip-min-js' ),config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
+                                config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
+                                config( 'site-specific.project-init-js' )
+                             ),
+        ];
+        // return $data[ 'project' ];
+        return $this->default( $data );
+    }
+
 
      //                                          FUNCTIONS FOR VIEW CLIENT DETAILS
 
@@ -368,6 +414,32 @@ class ViewController extends DataController {
         $data = [
             'title' => 'Create Client',
             'view' => 'back-end.create-client',
+        ];
+        // return $data[ 'education_qualification' ];
+        return $this->default( $data );
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW CLIENT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function viewClient() {
+        $data = [
+            'title' => 'Clients',
+            'view' => 'back-end.view-client',
+            'all_clients' => $this->getAllClients(),
+            'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
+                                config( 'site-specific.buttons-bootstrap-min-css' ) ),
+            'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
+                                config( 'site-specific.jszip-min-js' ),config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
+                                config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
+                                config( 'site-specific.project-client-init-js' )
+                             ),
         ];
         // return $data[ 'education_qualification' ];
         return $this->default( $data );
