@@ -43,21 +43,55 @@ function editProject(div) {
 
 function viewProject(div) {
     var project = JSON.parse($(div).attr("data-project"));
-    console.log(project);
-    var modal = $("#view-project");
-    $('#title').text(project.title);
-    $('#client').text(project.client_details.name);
-    $('#project_type').text(project.project_type_details.type);
-    var technology = '';
-    if (project.project_type_details.technology_details && project.project_type_details.technology_details.length > 0) {
-        project.project_type_details.technology_details.forEach(element => {
-            technology += '<li>' + element.technology + '</li>';
-        });
-    }
+    getTechnologyAjax(project);
+}
 
-    $('#technologies').append(technology);
-    $('#estimate').text(project.estimate);
-    $('#description').text(project.description);
-    $('#repository').text(project.repository);
-    modal.modal("show");
+function getTechnologyAjax(project) {
+    $.ajax({
+        type: "post",
+        url: "/get-technology",
+        headers: {
+            "X-CSRF-TOKEN": $("meta[name=token]").attr("content"),
+        },
+        data: {
+            _token: token,
+            type_id: project.type_id,
+        },
+        success: function (response) {
+            let formatted_estimate = new Intl.NumberFormat("en-US").format(
+                project.estimate
+            );
+            var image_selector = '';
+            if (project.image_details.length > 0) {
+                project.image_details.forEach((element) => {
+                    if (image_url.includes("test")) {
+                        new_image_url = image_url.replace(
+                            "test",
+                            element.image_name
+                        );
+                        image_selector += '<a target="_blank" class="mr-2" href="'+new_image_url+'"><i class="fa fa-image"></i></a>';
+                    }
+                });
+            }
+            $("#images").append(image_selector);
+
+            var modal = $("#view-project");
+            $("#title").text(project.title);
+            $("#client").text(project.client_details.name);
+            $("#project_type").text(project.project_type_details.type);
+            var technology = "";
+            if (response.data && response.data.length > 0) {
+                response.data.forEach((element) => {
+                    technology +=
+                        "<h5><li>" + element.technology + "</li></h5>";
+                });
+            }
+
+            $("#technologies").append(technology);
+            $("#estimate").text(formatted_estimate);
+            $("#description").text(project.description);
+            $("#repository").text(project.repository);
+            modal.modal("show");
+        },
+    });
 }

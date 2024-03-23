@@ -10,6 +10,9 @@
     @foreach ($css as $path)
         <link rel="stylesheet"href="{{ config('site-specific.live-path') . $path }}">
     @endforeach
+    <script>
+        var token = "{{ csrf_token() }}";
+    </script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -210,15 +213,15 @@
                                     if ($item['show_in_sidebar'] && isPermissions($item['permission'])) {
                                         $links .=
                                             ' <li class="nav-item">
-                                                                                                                                                                                                                            <a href="' .
+                                                                                                                                                                                                                                                                                            <a href="' .
                                             route($item['permission']) .
                                             '" class="nav-link">
-                                                                                                                                                                                                                              <i class="far fa-circle nav-icon"></i>
-                                                                                                                                                                                                                              <p class="text-capitalize">' .
+                                                                                                                                                                                                                                                                                              <i class="far fa-circle nav-icon"></i>
+                                                                                                                                                                                                                                                                                              <p class="text-capitalize">' .
                                             $item['title'] .
                                             '</p>
-                                                                                                                                                                                                                            </a>
-                                                                                                                                                                                                                          </li>';
+                                                                                                                                                                                                                                                                                            </a>
+                                                                                                                                                                                                                                                                                          </li>';
                                     }
                                 }
                                 ?>
@@ -394,6 +397,16 @@
             });
         </script>
     @endif
+    <script>
+        function ajaxSwal(icon, msg) {
+            Swal.fire({
+                title: (icon === 'success') ? 'Success !' : 'Oops !',
+                text: msg,
+                icon: icon,
+                confirmButtonText: "Ok",
+            });
+        }
+    </script>
 </body>
 
 </html>

@@ -5,7 +5,7 @@ function getAllPermissions() {
     return array(
         [
             'group'=>'Dashboard',
-            'icon'=>'nav-icon fas fa-tasks',
+            'icon'=>'nav-icon fas fa-tachometer-alt',
             'type'=>'single',
             'data'=>array(
                 [ 'title' => 'Dashboard', 'permission'=>'dashboard', 'show_in_sidebar'=>true ],
@@ -20,6 +20,14 @@ function getAllPermissions() {
                 [ 'title' => 'Education Qualification', 'permission'=>'education-qualification', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Expertise', 'permission'=>'expertise', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Additional Details', 'permission'=>'additional-details', 'show_in_sidebar'=>true ],
+            )
+        ],
+        [
+            'group'=>'Task',
+            'icon'=>'nav-icon fas fa-tasks',
+            'type'=>'multiple',
+            'data'=>array(
+                [ 'title' => 'Create Task', 'permission'=>'create-task', 'show_in_sidebar'=>true ],
             )
         ],
         [

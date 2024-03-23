@@ -28,6 +28,7 @@ use App\Models\ProjectType;
 use App\Models\Technology;
 use App\Models\ProjectClient;
 use App\Models\Project;
+use App\Models\ProjectImage;
 
 class ActionController extends Controller {
 
@@ -601,15 +602,68 @@ class ActionController extends Controller {
                 'description' => $request->description,
                 'status' => 1,
             ] );
-            if($request->hasFile('image')){
-                $project_image = uploadImage( $request->image, 'project_image' );
-                ProjectImage::create( [
-                    'project_id'       => $project->id,
-                    'image_name'    => $project_image,
-                ] );
+            if ( $request->hasFile( 'image' ) ) {
+                foreach ( $request->file( 'image' ) as $key => $value ) {
+                    $project_image = uploadImage( $value, 'project_image' );
+                    ProjectImage::create( [
+                        'project_id'       => $project->id,
+                        'image_name'    => $project_image,
+                    ] );
+                }
             }
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'Project Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION UPDATE PROJECT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function updateProject( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'id' => 'required',
+                'title' => 'required',
+                'type_id' => 'required',
+                'client_id' => 'required',
+                'estimate' => 'required',
+                'repository' => 'required',
+                'description' => 'required',
+                'status' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $project = Project::find( $request->id );
+            $project->title = $request->title;
+            $project->type_id = $request->type_id;
+            $project->client_id = $request->client_id;
+            $project->estimate = $request->estimate;
+            $project->repository = $request->repository;
+            $project->description = $request->description;
+            $project->status = $request->status;
+            $project->save();
+            if ( $request->hasFile( 'image' ) ) {
+                ProjectImage::where( 'project_id', $request->id )->delete();
+                foreach ( $request->file( 'image' ) as $key => $value ) {
+                    $project_image = uploadImage( $value, 'project_image' );
+                    ProjectImage::create( [
+                        'project_id'       => $request->id,
+                        'image_name'    => $project_image,
+                    ] );
+                }
+            }
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Project Updated Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );

@@ -14,28 +14,37 @@
                     <th>Title</th>
                     <th>Project Type</th>
                     <th>Client</th>
+                    <th>Image</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($project as $item)
+                @foreach ($project as $key => $item)
                     <tr>
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->title }}</td>
                         <td>{{ $item->ProjectTypeDetails->type }}</td>
-                        <td>{{ $item->clientDetails->name }}</td>
+                        <td>{{ $item->ClientDetails->name }}</td>
+                        <td>
+                            @foreach ($item->ImageDetails as $value)
+                                <a target="_blank" class="ml-2" href="{{ getUploadImage($value->image_name, 'project_image') }}"><i class="fa fa-image"></i></a>
+                            @endforeach
+                        </td>
                         <td><span
                                 class="badge badge-{{ $item->ProjectStatusDetails->badge_class }}">{{ $item->ProjectStatusDetails->title }}</span>
                         </td>
                         <td>
-                            <span class="ml-3" data-project = "{{ json_encode($item) }}"
-                                onclick = "viewProject(this)"><i class="far fa-eye"></i></span>
-                            <span class="ml-3" data-project = "{{ json_encode($item) }}"
-                                onclick = "editProject(this)"><i class="far fa-edit"></i></span>
+                            @if (!empty($item->ImageDetails))
+                                <span class="ml-3" data-project="{{ json_encode($item) }}"
+                                    onclick="viewProject(this)"><i class="far fa-eye"></i></span>
+                            @endif
+                            <span class="ml-3" data-project="{{ json_encode($item) }}" onclick="editProject(this)"><i
+                                    class="far fa-edit"></i></span>
                         </td>
                     </tr>
                 @endforeach
+
             </tbody>
         </table>
     </div>
@@ -49,9 +58,9 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="/update-project" method="post">
+            <form action="/update-project" method="post" enctype="multipart/form-data">
+                @csrf
                 <div class="modal-body">
-                    @csrf
                     <input hidden type="text" name="id">
                     <div class="row">
                         <div class="col-md-6 col-12">
@@ -108,7 +117,7 @@
                                     <label for="">Image</label>
                                 </div>
                                 <div class="col-12">
-                                    <input type="file" id="" name="image[]" multiple>
+                                    <input type="file" id="" name="image[]" multiple accept="image">
                                 </div>
                             </div>
                         </div>
@@ -144,40 +153,70 @@
 </div>
 <div class="modal fade" id="view-project" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="title"></h4>
+                <div class="col-md-12 col-12">
+                    <b>
+                        <h1 class="modal-title" id="title"></h1>
+                    </b>
+                </div>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12">
-                        <h6 id="client"></h6>
+                    <div class="col-md-3 col-3">
+                        <h5><b>Client :</b></h5>
+                    </div>
+                    <div class="col-md-9 col-9">
+                        <h5 id="client"></h5>
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6 col-12">
-                        <h6 id="project_type"></h6>
+                    <div class="col-md-3 col-3">
+                        <h5><b>Project Type :</b></h5>
                     </div>
-                    <div class="col-md-6 col-12">
+                    <div class="col-md-3 col-9">
+                        <h5 id="project_type"></h5>
+                    </div>
+                    <div class="col-md-3 col-3">
+                        <h5><b>Technologies :</b></h5>
+                    </div>
+                    <div class="col-md-3 col-9">
                         <ul id="technologies">
-                            
+
                         </ul>
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-12 col-12">
-                        <h6 id="estimate"></h6>
+                    <div class="col-md-3 col-3">
+                        <h5><b>Estimate Value (Rs.) :</b></h5>
+                    </div>
+                    <div class="col-md-9 col-9">
+                        <h5 id="estimate"></h5>
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-12 col-12">
-                        <h6 id="description"></h6>
+                    <div class="col-md-3 col-3">
+                        <h5><b>Description :</b></h5>
+                    </div>
+                    <div class="col-md-6 col-9">
+                        <h5 id="description"></h5>
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-12 col-12">
-                        <h6 id="repository"></h6>
+                    <div class="col-md-3 col-3">
+                        <h5><b>Repository Link :</b></h5>
+                    </div>
+                    <div class="col-md-9 col-9">
+                        <h5 id="repository"></h5>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-3 col-3">
+                        <h5><b>Images :</b></h5>
+                    </div>
+                    <div class="col-md-9 col-9">
+                        <h5 id="images"></h5>
                     </div>
                 </div>
             </div>
@@ -187,3 +226,10 @@
         </div>
     </div>
 </div>
+<?php
+    $image_url = getUploadImage('test', 'project_image');
+?>
+<script>
+    var image_url = "<?php echo $image_url ?>";
+</script>
+
