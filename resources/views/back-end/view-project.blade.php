@@ -72,7 +72,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group" data-select2-id="1">
                                 <label for="">Project Type</label>
-                                <select class="form-control select2 select2-hidden-accessible" name="type_id"
+                                <select class="form-control select2 " name="type_id"
                                     style="width: 100%;" data-select2-id="1" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($project_type as $item)
@@ -86,7 +86,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group" data-select2-id="2">
                                 <label for="">Client</label>
-                                <select class="form-control select2 select2-hidden-accessible" name="client_id"
+                                <select class="form-control select2 " name="client_id"
                                     style="width: 100%;" data-select2-id="2" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($all_clients as $item)
@@ -132,7 +132,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group" data-select2-id="3">
                                 <label for="">Project Status</label>
-                                <select class="form-control select2 select2-hidden-accessible" name="status"
+                                <select class="form-control select2 " name="status"
                                     style="width: 100%;" data-select2-id="3" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($project_status as $item)

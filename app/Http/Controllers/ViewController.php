@@ -445,4 +445,58 @@ class ViewController extends DataController {
         return $this->default( $data );
     }
 
+    //                                          FUNCTIONS FOR VIEW TASK DETAILS
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW TASK CATEGORY
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function viewTaskCategory() {
+        $data = [
+            'title' => 'Create Tasks',
+            'view' => 'back-end.create-task',
+            'project' => $this->getProject(),
+            'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
+                                config( 'site-specific.buttons-bootstrap-min-css' ) ),
+            'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
+                                config( 'site-specific.jszip-min-js' ),config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
+                                config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
+                                config( 'site-specific.project-type-init-js' )
+                             ),
+        ];
+        // return $data[ 'education_qualification' ];
+        return $this->default( $data );
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW CREATE TASK
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function viewCreateTask() {
+        $data = [
+            'title' => 'Create Tasks',
+            'view' => 'back-end.create-task',
+            'project' => $this->getProject(),
+            'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
+                                config( 'site-specific.buttons-bootstrap-min-css' ) ),
+            'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
+                                config( 'site-specific.jszip-min-js' ),config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
+                                config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
+                                config( 'site-specific.project-type-init-js' )
+                             ),
+        ];
+        // return $data[ 'education_qualification' ];
+        return $this->default( $data );
+    }
+
 }

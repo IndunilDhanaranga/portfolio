@@ -128,7 +128,9 @@ Route::group([
     ----------------------------------------------------------------------------------------------------------
     */
 
-    Route::get('/create-task'                           , 'ViewController@viewCreateTask')->name('create-task');
+    Route::get('/task-category'                     , 'ViewController@viewTaskCategory')->name('task-category');
+
+    Route::get('/create-task'                       , 'ViewController@viewCreateTask')->name('create-task');
 
 
 

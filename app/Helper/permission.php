@@ -12,6 +12,15 @@ function getAllPermissions() {
             )
         ],
         [
+            'group'=>'Task',
+            'icon'=>'nav-icon fas fa-tasks',
+            'type'=>'multiple',
+            'data'=>array(
+                [ 'title' => 'Create Task', 'permission'=>'create-task', 'show_in_sidebar'=>true ],
+                [ 'title' => 'Task Category', 'permission'=>'task-category', 'show_in_sidebar'=>true ],
+            )
+        ],
+        [
             'group'=>'Portfolio',
             'icon'=>'nav-icon fas fa-briefcase',
             'type'=>'multiple',
@@ -20,14 +29,6 @@ function getAllPermissions() {
                 [ 'title' => 'Education Qualification', 'permission'=>'education-qualification', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Expertise', 'permission'=>'expertise', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Additional Details', 'permission'=>'additional-details', 'show_in_sidebar'=>true ],
-            )
-        ],
-        [
-            'group'=>'Task',
-            'icon'=>'nav-icon fas fa-tasks',
-            'type'=>'multiple',
-            'data'=>array(
-                [ 'title' => 'Create Task', 'permission'=>'create-task', 'show_in_sidebar'=>true ],
             )
         ],
         [
