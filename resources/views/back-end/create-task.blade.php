@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <form action="/add-project" method="post" enctype="multipart/form-data">
+        <form action="/add-task" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card card-info">
                 <div class="card-header">
@@ -110,22 +110,16 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 div-12">
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="image[]" accept="image/*" >
-                                            <label class="custom-file-label">Choose
-                                                file</label>
-                                        </div>
-                                    </div>
+                                    <input type="file" name="image[]" accept="image/*">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 col-12 mt-2">
+                        <div class="col-md-6 col-12">
                             <div class="form-group" data-select2-id="6">
                                 <label for="">QA</label>
-                                <select class="form-control select2 " name="task_category_id" style="width: 100%;"
+                                <select class="form-control select2 " name="qa" style="width: 100%;"
                                     data-select2-id="6" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($users as $item)
@@ -139,7 +133,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group" data-select2-id="7">
                                 <label for="">Publisher</label>
-                                <select class="form-control select2 " name="task_category_id" style="width: 100%;"
+                                <select class="form-control select2 " name="live" style="width: 100%;"
                                     data-select2-id="7" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($users as $item)

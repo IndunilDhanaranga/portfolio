@@ -501,4 +501,33 @@ class ViewController extends DataController {
         return $this->default( $data );
     }
 
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW TASK
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function viewTask() {
+        $data = [
+            'title' => 'Tasks',
+            'view' => 'back-end.view-task',
+            'project' => $this->getProject(),
+            'project_type' => $this->getProjectType(),
+            'project_status' => $this->getProjectStatus(),
+            'all_clients' => $this->getAllClients(1),
+            'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
+                                config( 'site-specific.buttons-bootstrap-min-css' ) ),
+            'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
+                                config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
+                                config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
+                                config( 'site-specific.task-list-init-js' )
+                             ),
+        ];
+        // return $data[ 'project' ];
+        return $this->default( $data );
+    }
+
 }

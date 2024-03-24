@@ -31,6 +31,10 @@ use App\Models\Project;
 use App\Models\ProjectImage;
 
 use App\Models\TaskCategory;
+use App\Models\Task;
+use App\Models\TaskTime;
+use App\Models\TaskTeam;
+use App\Models\TaskAttachment;
 
 class ActionController extends Controller {
 
@@ -799,6 +803,67 @@ class ActionController extends Controller {
             $task_category->save();
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'Task Category Updated Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE TASK
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function addTask( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'project_id' => 'required',
+                'task_category_id' => 'required',
+                'title' => 'required',
+                'hours' => 'required',
+                'min' => 'required',
+                'description' => 'required',
+                'developer' => 'required',
+                'qa' => 'required',
+                'live' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            $allowcated_time = (($request->hours * 60) + $request->min);
+
+            DB::beginTransaction();
+            $task = Task::create( [
+                'project_id' => $request->project_id,
+                'task_category_id' => $request->task_category_id,
+                'title' => $request->title,
+                'description' => $request->description,
+            ] );
+            $task_time = TaskTime::create([
+                'task_id' => $task->id,
+                'remaining_time' => $allowcated_time,
+                'allowcated_full_time' => $allowcated_time,
+            ]);
+            $task_team = TaskTeam::create([
+                'task_id' => $task->id,
+                'developer_id' => $request->developer,
+                'qa_id' => $request->qa,
+                'publisher_id' => $request->live,
+            ]);
+            if ( $request->hasFile( 'image' ) ) {
+                foreach ( $request->file( 'image' ) as $key => $attachment ) {
+                    $task_attachment = uploadAttachment( $attachment, 'task_attachment' );
+                    TaskAttachment::create( [
+                        'task_id'       => $task->id,
+                        'attachment_name'    => $task_attachment,
+                    ] );
+                }
+            }
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Task Created Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );

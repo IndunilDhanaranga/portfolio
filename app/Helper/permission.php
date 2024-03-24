@@ -16,6 +16,7 @@ function getAllPermissions() {
             'icon'=>'nav-icon fas fa-tasks',
             'type'=>'multiple',
             'data'=>array(
+                [ 'title' => 'Task List', 'permission'=>'view-task', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Create Task', 'permission'=>'create-task', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Task Category', 'permission'=>'task-category', 'show_in_sidebar'=>true ],
             )
@@ -25,7 +26,7 @@ function getAllPermissions() {
             'icon'=>'nav-icon fas fa-project-diagram',
             'type'=>'multiple',
             'data'=>array(
-                [ 'title' => 'Project', 'permission'=>'project', 'show_in_sidebar'=>true ],
+                [ 'title' => 'Project List', 'permission'=>'project', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Create Project', 'permission'=>'create-project', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Project Types', 'permission'=>'create-project-type', 'show_in_sidebar'=>true ],
             )

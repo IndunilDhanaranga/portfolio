@@ -132,6 +132,8 @@ Route::group([
 
     Route::get('/create-task'                       , 'ViewController@viewCreateTask')->name('create-task');
 
+    Route::get('/view-task'                         , 'ViewController@viewTask')->name('view-task');
+
 
 
 
@@ -224,6 +226,8 @@ Route::group([
 
     Route::post('/update-task-category'             , 'ActionController@updateTaskCategory')->name('update-task-category');
 
+    Route::post('/add-task'                         , 'ActionController@addTask')->name('add-task');
+
 
 
     /*
@@ -241,6 +245,12 @@ Route::group([
 
     Route::post('/get-technology'                       , 'AjaxController@getTechnology')->name('get-technology');
 
+    /*
+    ----------------------------------------------------------------------------------------------------------
+                                                    TASK DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
 
+    Route::post('/get-task'                             , 'AjaxController@getTask')->name('get-task');
 
 });

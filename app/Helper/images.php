@@ -49,3 +49,39 @@ function getAuthImage( $disk )
     }
     return null;
 }
+
+
+/*
+----------------------------------------------------------------------------------------------------------
+HELPER FUNCTION UPLOAD ATTACHMENT
+----------------------------------------------------------------------------------------------------------
+*/
+
+function uploadAttachment( $attachment, $disk )
+ {
+    $extension = $attachment->getClientOriginalExtension();
+    $name = $attachment->getClientOriginalName();
+    $unique_name = md5( $name . time() );
+    $full_name = $unique_name . '.' . $extension;
+
+    Storage::disk( 'attachment' )->put( $disk.'/'.$full_name, File::get( $attachment ) );
+
+    return $full_name;
+}
+
+/*
+----------------------------------------------------------------------------------------------------------
+HELPER FUNCTION GET UPLOAD ATTACHMENT
+----------------------------------------------------------------------------------------------------------
+*/
+
+function getUploadAttachment( $attachment, $disk )
+ {
+
+    if ( $attachment ) {
+        $filePath = 'attachment/' .$disk.'/'.  $attachment;
+        $attachmentUrl =  '/uploads/'.$filePath;
+        return $attachmentUrl;
+    }
+    return null;
+}
