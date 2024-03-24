@@ -192,6 +192,8 @@ return [
 
     'project-init-js'                   =>'/assets/back-end/custom/js/project-init.js',
 
+    'task-category-init-js'             =>'/assets/back-end/custom/js/task-category-init.js',
+
     'live-path'                         => ''
 
 ];

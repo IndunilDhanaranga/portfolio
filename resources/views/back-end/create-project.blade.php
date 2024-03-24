@@ -58,11 +58,19 @@
                 </div>
                 <div class="col-md-6 col-12">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-md-12 col-12">
                             <label for="">Image</label>
                         </div>
-                        <div class="col-12">
-                            <input type="file" id="" name="image[]" multiple>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 div-12">
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="image[]" >
+                                    <label class="custom-file-label">Choose
+                                        file</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

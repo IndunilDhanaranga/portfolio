@@ -4,6 +4,7 @@ $(document).ready(function () {
         school_details.forEach((element) => {
             addSchool(element.title, element.from, element.to);
         });
+        $('#remove').addClass('d-none');
     }
 });
 
@@ -43,6 +44,9 @@ function addSchool(school, from, to) {
 
     $("#additional-school").append(html);
     $("#school-attempt").val(index + 1);
+    if(school_details.length <  $("#school-attempt").val() ){
+        $('#remove').removeClass('d-none');
+    }
 }
 
 function removeSchool() {
@@ -50,5 +54,8 @@ function removeSchool() {
     if (attempt > 0) {
         $("#additional-school").find(".row:last").remove();
         $("#school-attempt").val(attempt - 1);
+    }
+    if(school_details.length ==  $("#school-attempt").val() - school_details.length ){
+        $('#remove').addClass('d-none');
     }
 }

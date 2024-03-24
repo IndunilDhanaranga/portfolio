@@ -30,6 +30,8 @@ use App\Models\ProjectClient;
 use App\Models\Project;
 use App\Models\ProjectImage;
 
+use App\Models\TaskCategory;
+
 class ActionController extends Controller {
 
     //                                      FUNCTIONS FOR DEVELOPER TOOLS
@@ -736,6 +738,67 @@ class ActionController extends Controller {
             $project_client->save();
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'Client Updated Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    //                                  FUNCTIONS FOR TASK DETAILS
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE TASK CATEGORY
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function createTaskCategory( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'category' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $task_category = TaskCategory::create( [
+                'category' => $request->category,
+            ] );
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Task Category Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION UPDATE TASK CATEGORY
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function updateTaskCategory( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'id' => 'required',
+                'category' => 'required',
+                'status' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $task_category = TaskCategory::find($request->id);
+            $task_category->category = $request->category;
+            $task_category->status = $request->status;
+            $task_category->save();
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Task Category Updated Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );

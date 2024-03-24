@@ -1,3 +1,4 @@
+var count = 0;
 function addTechnology(value = null) {
     var html =
         '<div class="row mt-2">' +
@@ -7,11 +8,17 @@ function addTechnology(value = null) {
         "</div>";
 
     $("#additional_technology").append(html);
+    $('#remove').removeClass('d-none');
+    count = count + 1;
 }
 
 
 function removeTechnology() {
+    count = count - 1;
     $("#additional_technology").find(".row:last").remove();
+    if(count == 0){
+        $('#remove').addClass('d-none');
+    }
 }
 
 $("#project_type_table")

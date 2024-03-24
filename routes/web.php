@@ -214,6 +214,15 @@ Route::group([
     Route::post('/update-client'                    , 'ActionController@updateClient')->name('update-client');
 
 
+    /*
+    ----------------------------------------------------------------------------------------------------------
+                                                    TASK DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    Route::post('/create-task-category'             , 'ActionController@createTaskCategory')->name('create-task-category');
+
+    Route::post('/update-task-category'             , 'ActionController@updateTaskCategory')->name('update-task-category');
 
 
 

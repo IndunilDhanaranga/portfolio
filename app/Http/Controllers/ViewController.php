@@ -159,7 +159,7 @@ class ViewController extends DataController {
             'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
                                 config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
                                 config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
-                                config( 'site-specific.jszip-min-js' ),config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.pdfmake-min-js' ),
                                 config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
                                 config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
                                 config( 'site-specific.user-roll-init-js' )
@@ -202,7 +202,7 @@ class ViewController extends DataController {
             'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
                                 config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
                                 config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
-                                config( 'site-specific.jszip-min-js' ),config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.pdfmake-min-js' ),
                                 config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
                                 config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
                                 config( 'site-specific.user-init-js' )
@@ -345,7 +345,7 @@ class ViewController extends DataController {
             'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
                                 config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
                                 config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
-                                config( 'site-specific.jszip-min-js' ),config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.pdfmake-min-js' ),
                                 config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
                                 config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
                                 config( 'site-specific.project-type-init-js' )
@@ -391,7 +391,7 @@ class ViewController extends DataController {
             'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
                                 config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
                                 config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
-                                config( 'site-specific.jszip-min-js' ),config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.pdfmake-min-js' ),
                                 config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
                                 config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
                                 config( 'site-specific.project-init-js' )
@@ -435,7 +435,7 @@ class ViewController extends DataController {
             'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
                                 config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
                                 config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
-                                config( 'site-specific.jszip-min-js' ),config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.pdfmake-min-js' ),
                                 config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
                                 config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
                                 config( 'site-specific.project-client-init-js' )
@@ -455,18 +455,18 @@ class ViewController extends DataController {
 
     public function viewTaskCategory() {
         $data = [
-            'title' => 'Create Tasks',
-            'view' => 'back-end.create-task',
-            'project' => $this->getProject(),
+            'title' => 'Task Category',
+            'view' => 'back-end.task-category',
+            'task_category' => $this->getAllTaskCategory(),
             'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
                                 config( 'site-specific.buttons-bootstrap-min-css' ) ),
             'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
                                 config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
                                 config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
-                                config( 'site-specific.jszip-min-js' ),config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.pdfmake-min-js' ),
                                 config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
                                 config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
-                                config( 'site-specific.project-type-init-js' )
+                                config( 'site-specific.task-category-init-js' )
                              ),
         ];
         // return $data[ 'education_qualification' ];
@@ -484,12 +484,14 @@ class ViewController extends DataController {
             'title' => 'Create Tasks',
             'view' => 'back-end.create-task',
             'project' => $this->getProject(),
+            'task_category' => $this->getAllTaskCategory(1),
+            'users' => $this->getUser(1),
             'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
                                 config( 'site-specific.buttons-bootstrap-min-css' ) ),
             'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
                                 config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
                                 config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
-                                config( 'site-specific.jszip-min-js' ),config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.pdfmake-min-js' ),
                                 config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
                                 config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
                                 config( 'site-specific.project-type-init-js' )

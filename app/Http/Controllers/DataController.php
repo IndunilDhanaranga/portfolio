@@ -24,6 +24,8 @@ use App\Models\Project;
 
 use App\Models\ProjectClient;
 
+use App\Models\TaskCategory;
+
 class DataController extends Controller {
 
     //                                  FUNCTIONS FOR GET DEVELOPER TOOLS DETAILS
@@ -221,6 +223,23 @@ class DataController extends Controller {
         $data = ProjectClient::query();
         if ( $is_active ) {
             $data = $data->where( 'is_active', $is_active );
+        }
+        $data = $data->get();
+        return $data;
+    }
+
+    //                                  FUNCTIONS FOR GET TASK DETAILS
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET ALL TASK DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getAllTaskCategory( $status = null ) {
+        $data = TaskCategory::query();
+        if ( $status ) {
+            $data = $data->where( 'status', $status );
         }
         $data = $data->get();
         return $data;

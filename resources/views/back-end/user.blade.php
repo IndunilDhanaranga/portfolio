@@ -74,8 +74,8 @@
                         <div class="col-12">
                             <div class="form-group" data-select2-id="2">
                                 <label for="user_roll">User Roll</label>
-                                <select class="form-control select2 " name="user_roll"
-                                    style="width: 100%;" data-select2-id="2" aria-hidden="true">
+                                <select class="form-control select2 " name="user_roll" style="width: 100%;"
+                                    data-select2-id="2" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($user_roll as $item)
                                         <option value="{{ $item->id }}">{{ $item->title }}</option>
@@ -85,11 +85,17 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-12">
+                        <div class="col-md-12 col-12">
                             <label for="image">Image</label>
                         </div>
-                        <div class="col-12">
-                            <input type="file" id="image" name="image">
+                        <div class="col-md-12 div-12">
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="image" name="image">
+                                    <label class="custom-file-label">Choose
+                                        file</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -143,19 +149,25 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-12">
+                        <div class="col-md-12 col-12">
                             <label for="edit_image">Image</label>
                         </div>
-                        <div class="col-12">
-                            <input type="file" id="edit_image" name="image">
+                        <div class="col-md-12 div-12">
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="edit_image" name="image">
+                                    <label class="custom-file-label">Choose
+                                        file</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group" data-select2-id="2">
                                 <label for="">User Roll</label>
-                                <select class="form-control select2 " name="user_roll"
-                                    style="width: 100%;" data-select2-id="2" aria-hidden="true">
+                                <select class="form-control select2 " name="user_roll" style="width: 100%;"
+                                    data-select2-id="2" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($user_roll as $item)
                                         <option value="{{ $item->id }}">{{ $item->title }}</option>
@@ -166,8 +178,8 @@
                     </div>
                     <div class="form-group" data-select2-id="1">
                         <label for="">Status</label>
-                        <select class="form-control select2 " name="is_active"
-                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                        <select class="form-control select2 " name="is_active" style="width: 100%;"
+                            data-select2-id="1" tabindex="-1" aria-hidden="true">
                             <option value="">No Select</option>
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>

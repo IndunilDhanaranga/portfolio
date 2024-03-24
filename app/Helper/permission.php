@@ -21,17 +21,6 @@ function getAllPermissions() {
             )
         ],
         [
-            'group'=>'Portfolio',
-            'icon'=>'nav-icon fas fa-briefcase',
-            'type'=>'multiple',
-            'data'=>array(
-                [ 'title' => 'Basic Details', 'permission'=>'basic-details', 'show_in_sidebar'=>true ],
-                [ 'title' => 'Education Qualification', 'permission'=>'education-qualification', 'show_in_sidebar'=>true ],
-                [ 'title' => 'Expertise', 'permission'=>'expertise', 'show_in_sidebar'=>true ],
-                [ 'title' => 'Additional Details', 'permission'=>'additional-details', 'show_in_sidebar'=>true ],
-            )
-        ],
-        [
             'group'=>'Projects',
             'icon'=>'nav-icon fas fa-project-diagram',
             'type'=>'multiple',
@@ -48,6 +37,17 @@ function getAllPermissions() {
             'data'=>array(
                 [ 'title' => 'Clients', 'permission'=>'view-client', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Create Client', 'permission'=>'create-client', 'show_in_sidebar'=>true ],
+            )
+        ],
+        [
+            'group'=>'Portfolio',
+            'icon'=>'nav-icon fas fa-briefcase',
+            'type'=>'multiple',
+            'data'=>array(
+                [ 'title' => 'Basic Details', 'permission'=>'basic-details', 'show_in_sidebar'=>true ],
+                [ 'title' => 'Education Qualification', 'permission'=>'education-qualification', 'show_in_sidebar'=>true ],
+                [ 'title' => 'Expertise', 'permission'=>'expertise', 'show_in_sidebar'=>true ],
+                [ 'title' => 'Additional Details', 'permission'=>'additional-details', 'show_in_sidebar'=>true ],
             )
         ],
         [
