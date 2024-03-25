@@ -797,7 +797,7 @@ class ActionController extends Controller {
             }
 
             DB::beginTransaction();
-            $task_category = TaskCategory::find($request->id);
+            $task_category = TaskCategory::find( $request->id );
             $task_category->category = $request->category;
             $task_category->status = $request->status;
             $task_category->save();
@@ -833,7 +833,7 @@ class ActionController extends Controller {
                 return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
             }
 
-            $allowcated_time = (($request->hours * 60) + $request->min);
+            $allowcated_time = ( ( $request->hours * 60 ) + $request->min );
 
             DB::beginTransaction();
             $task = Task::create( [
@@ -842,17 +842,17 @@ class ActionController extends Controller {
                 'title' => $request->title,
                 'description' => $request->description,
             ] );
-            $task_time = TaskTime::create([
+            $task_time = TaskTime::create( [
                 'task_id' => $task->id,
                 'remaining_time' => $allowcated_time,
                 'allowcated_full_time' => $allowcated_time,
-            ]);
-            $task_team = TaskTeam::create([
+            ] );
+            $task_team = TaskTeam::create( [
                 'task_id' => $task->id,
                 'developer_id' => $request->developer,
                 'qa_id' => $request->qa,
                 'publisher_id' => $request->live,
-            ]);
+            ] );
             if ( $request->hasFile( 'image' ) ) {
                 foreach ( $request->file( 'image' ) as $key => $attachment ) {
                     $task_attachment = uploadAttachment( $attachment, 'task_attachment' );
@@ -864,6 +864,71 @@ class ActionController extends Controller {
             }
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'Task Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION UPDATE TASK
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function updateTask( Request $request, $id ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'project_id' => 'required',
+                'task_category_id' => 'required',
+                'title' => 'required',
+                'hours' => 'required',
+                'min' => 'required',
+                'description' => 'required',
+                'developer' => 'required',
+                'qa' => 'required',
+                'live' => 'required',
+                'status' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            $allowcated_time = ( ( $request->hours * 60 ) + $request->min );
+
+            DB::beginTransaction();
+            $task = Task::find( $id );
+            $task->project_id = $request->project_id;
+            $task->task_category_id = $request->task_category_id;
+            $task->title = $request->title;
+            $task->description = $request->description;
+            $task->status = $request->status;
+            $task->save();
+
+            $task_time = TaskTime::find( $id );
+            $task_time->remaining_time = $allowcated_time - $task_time->full_wasted_time;
+            $task_time->allowcated_full_time = $allowcated_time ;
+            $task_time->save() ;
+
+            $task_team = TaskTeam::find( $id );
+            $task_team->developer_id = $request->developer;
+            $task_team->qa_id = $request->qa;
+            $task_team->publisher_id = $request->live;
+            $task_team->save();
+
+            if ( $request->hasFile( 'image' ) ) {
+                TaskAttachment::where( 'task_id', $id )->delete();
+                foreach ( $request->file( 'image' ) as $key => $attachment ) {
+                    $task_attachment = uploadAttachment( $attachment, 'task_attachment' );
+                    TaskAttachment::create( [
+                        'task_id'       => $id,
+                        'attachment_name'    => $task_attachment,
+                    ] );
+                }
+            }
+            DB::commit();
+            return redirect()->route('view-task')->with( [ 'success' => true, 'message' => 'Task Updated Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );

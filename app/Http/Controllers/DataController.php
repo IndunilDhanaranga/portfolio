@@ -25,6 +25,8 @@ use App\Models\Project;
 use App\Models\ProjectClient;
 
 use App\Models\TaskCategory;
+use App\Models\Task;
+use App\Models\TaskStatus;
 
 class DataController extends Controller {
 
@@ -242,6 +244,28 @@ class DataController extends Controller {
             $data = $data->where( 'status', $status );
         }
         $data = $data->get();
+        return $data;
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET SELECTED TASK DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getSelectedTask( $id ) {
+        $data = Task::find( $id );
+        return $data;
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET TASK STATUS DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getTaskStatus() {
+        $data = TaskStatus::all();
         return $data;
     }
 }

@@ -10,7 +10,7 @@
             </button>
         </div>
     </div>
-    <div class="card-body p-0">
+    <div class="card-body mt-2">
         <table id="task-list"  class="table table-striped table-bordered nowrap" style="width:100%">
             <thead>
                 <tr>
@@ -24,6 +24,9 @@
                         Task Name
                     </th>
                     <th >
+                        Task Category
+                    </th>
+                    <th >
                         Team Members
                     </th>
                     <th >
@@ -31,6 +34,9 @@
                     </th>
                     <th >
                         Task Progress
+                    </th>
+                    <th >
+                        Task Attachment
                     </th>
                     <th class="text-center">
                         Status
@@ -41,41 +47,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- <tr>
-                    <td>
-                        #
-                    </td>
-                    <td>
-                        <a>
-                            AdminLTE v3
-                        </a>
-                        <br />
-                        <small>
-                            Created 01.01.2019
-                        </small>
-                    </td>
 
-                    <td class="">
-                        <span class="badge badge-success">Success</span>
-                    </td>
-                    <td class="project_progress">
-                        
-                    </td>
-                    <td class="project-state">
-                        <span class="badge badge-success">Success</span>
-                    </td>
-                    <td class="project-actions">
-                        <a  href="#">
-                            <i class="fas fa-folder">
-                            </i>
-                        </a>
-                        <a  href="#">
-                            <i class="fas fa-pencil-alt">
-                            </i>
-
-                        </a>
-                    </td>
-                </tr> --}}
             </tbody>
         </table>
     </div>

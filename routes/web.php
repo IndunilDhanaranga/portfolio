@@ -134,6 +134,9 @@ Route::group([
 
     Route::get('/view-task'                         , 'ViewController@viewTask')->name('view-task');
 
+    Route::get('/edit-task/{id?}'                   , 'ViewController@editTask')->name('edit-task');
+
+
 
 
 
@@ -227,6 +230,9 @@ Route::group([
     Route::post('/update-task-category'             , 'ActionController@updateTaskCategory')->name('update-task-category');
 
     Route::post('/add-task'                         , 'ActionController@addTask')->name('add-task');
+
+    Route::post('/update-task/{id?}'                , 'ActionController@updateTask')->name('update-task');
+
 
 
 
