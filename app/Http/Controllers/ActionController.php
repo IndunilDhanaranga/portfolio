@@ -24,6 +24,7 @@ use App\Models\Expertise;
 use App\Models\WorkExperience;
 use App\Models\Skills;
 use App\Models\Languages;
+use App\Models\PortfolioProjectDetails;
 
 use App\Models\ProjectType;
 use App\Models\Technology;
@@ -499,6 +500,49 @@ class ActionController extends Controller {
             }
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'Additional Details Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE PROJECT DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function projectDetails( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'project_id' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            if ( $request->hasFile( 'image' ) ) {
+                foreach ( $request->file( 'image' ) as $key => $value ) {
+                    $project_image = uploadImage( $value, 'portfolio_project' );
+                    PortfolioProjectDetails::create( [
+                        'project_id'       => $request->project_id,
+                        'image_name'    => $project_image,
+                    ] );
+                }
+            }
+            if ( $request->hasFile( 'video' ) ) {
+                foreach ( $request->file( 'video' ) as $key => $value ) {
+                    $project_video = uploadVideo( $value, 'portfolio_project' );
+                    PortfolioProjectDetails::create( [
+                        'project_id'       => $request->project_id,
+                        'video_name'    => $project_video,
+                    ] );
+                }
+            }
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Portfolio Projects Details Created Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );

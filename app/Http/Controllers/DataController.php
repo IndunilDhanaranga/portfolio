@@ -174,6 +174,32 @@ class DataController extends Controller {
         return $data;
     }
 
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET PROJECT DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getDetailsForPortfolio() {
+        $project = Project::with('projectTypeDetails','clientDetails','projectStatusDetails','imageDetails','portfolioProjectDetails');
+        $task = Task::with('projectDetails','taskCategoryDetails','taskStatusDetails','taskTimeDetails','taskTeamDetails','taskAttachmentDetails')->get();
+        $client = ProjectClient::query();
+        $project_type = ProjectType::query();
+
+
+        $totalHoursWorked = $task->sum(function ($tasks) {
+            return $tasks->taskTimeDetails->full_wasted_time;
+        });
+
+        $data['hours_worked'] = $totalHoursWorked;
+        $data['project_count'] = $project->count('id');
+        $data['client_count'] = $client->count('id');
+        $data['project_type'] = $project_type->get();
+        $data['project'] = $project->get();
+        return $data;
+    }
+
+
     //                                  FUNCTIONS FOR GET PROJECT DETAILS
 
     /*

@@ -46,6 +46,11 @@ return [
             'root' => public_path('uploads/attachment'),
         ],
 
+        'video' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/video'),
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

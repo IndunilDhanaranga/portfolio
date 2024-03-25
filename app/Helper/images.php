@@ -85,3 +85,38 @@ function getUploadAttachment( $attachment, $disk )
     }
     return null;
 }
+
+/*
+----------------------------------------------------------------------------------------------------------
+HELPER FUNCTION UPLOAD ATTACHMENT
+----------------------------------------------------------------------------------------------------------
+*/
+
+function uploadVideo( $video, $disk )
+ {
+    $extension = $video->getClientOriginalExtension();
+    $name = $video->getClientOriginalName();
+    $unique_name = md5( $name . time() );
+    $full_name = $unique_name . '.' . $extension;
+
+    Storage::disk( 'video' )->put( $disk.'/'.$full_name, File::get( $video ) );
+
+    return $full_name;
+}
+
+/*
+----------------------------------------------------------------------------------------------------------
+HELPER FUNCTION GET UPLOAD ATTACHMENT
+----------------------------------------------------------------------------------------------------------
+*/
+
+function getUploadVideo( $video, $disk )
+ {
+
+    if ( $video ) {
+        $filePath = 'video/' .$disk.'/'.  $video;
+        $attachmentUrl =  '/uploads/'.$filePath;
+        return $attachmentUrl;
+    }
+    return null;
+}

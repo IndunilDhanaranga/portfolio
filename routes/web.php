@@ -107,6 +107,8 @@ Route::group([
 
     Route::get('/education-levels'                  , 'ViewController@educationLevels')->name('education-levels');
 
+    Route::get('/project-details'                   , 'ViewController@projectDetails')->name('project-details');
+
 
     /*
     ----------------------------------------------------------------------------------------------------------
@@ -192,6 +194,8 @@ Route::group([
     Route::post('/create-school'                    , 'ActionController@createSchool')->name('create-school');
 
     Route::post('/create-education-level'           , 'ActionController@createEducationLevel')->name('create-education-level');
+
+    Route::post('/portfolio-project-details'        , 'ActionController@projectDetails')->name('portfolio-project-details');
 
 
     /*

@@ -62,38 +62,24 @@
                         <div class="col-md-6 col-12">
                             <div class="row">
                                 <div class="col-md-12 col-12">
-                                    <label for="user_image">User Image</label>
+                                    <label for="d-name">Profile Image</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 div-12">
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="user_image"
-                                                name="user_image">
-                                            <label class="custom-file-label">Choose
-                                                file</label>
-                                        </div>
-                                    </div>
+                                <div class="col-md-12 col-12">
+                                    <input type="file" placeholder="Display Name" value="" id="user_image" name="user_image"  accept="image">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="row">
                                 <div class="col-md-12 col-12">
-                                    <label for="cover_image">Cover Image</label>
+                                    <label for="d-name">Cover Image</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 div-12">
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="cover_image"
-                                                name="cover_image">
-                                            <label class="custom-file-label">Choose
-                                                file</label>
-                                        </div>
-                                    </div>
+                                <div class="col-md-12 col-12">
+                                    <input type="file" placeholder="Display Name" value="" id="cover_image" name="cover_image" accept="image">
                                 </div>
                             </div>
                         </div>

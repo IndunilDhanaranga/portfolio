@@ -43,10 +43,12 @@ class ViewController extends DataController {
         $data[ 'skills' ] = $this->getSkills();
         $data[ 'languages' ] = $this->getLanguages();
         $data[ 'work_experience' ] = $this->getWorkExperience();
+        $data[ 'details' ] = $this->getDetailsForPortfolio();
         $data[ 'my_service' ] = null;
         $data[ 'pricing' ] = null;
         $data[ 'freelance' ] = null;
         $data[ 'news' ] = null;
+        // return $data[ 'project_details' ];
         return view::make( 'front-end.home', $data );
     }
     /*
@@ -289,7 +291,7 @@ class ViewController extends DataController {
 
     /*
     ----------------------------------------------------------------------------------------------------------
-    PUBLIC FUNCTION VIEW EDUCATION QUALIFICATION
+    PUBLIC FUNCTION VIEW EXPERTISE
     ----------------------------------------------------------------------------------------------------------
     */
 
@@ -306,7 +308,7 @@ class ViewController extends DataController {
 
     /*
     ----------------------------------------------------------------------------------------------------------
-    PUBLIC FUNCTION VIEW EDUCATION QUALIFICATION
+    PUBLIC FUNCTION VIEW ADDITIONAL DETAILS
     ----------------------------------------------------------------------------------------------------------
     */
 
@@ -315,6 +317,25 @@ class ViewController extends DataController {
             'title' => 'Additional Details',
             'view' => 'back-end.additional-details',
             'skills' => $this->getSkills(),
+            'languages' => $this->getLanguages(),
+            'work_experience' => $this->getWorkExperience(),
+            'script' => array( config( 'site-specific.additional-details-init-js' ) ),
+        ];
+        // return $data[ 'education_qualification' ];
+        return $this->default( $data );
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW PROJECT DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function projectDetails() {
+        $data = [
+            'title' => 'Project Details',
+            'view' => 'back-end.project-details',
+            'project' => $this->getProject(),
             'languages' => $this->getLanguages(),
             'work_experience' => $this->getWorkExperience(),
             'script' => array( config( 'site-specific.additional-details-init-js' ) ),

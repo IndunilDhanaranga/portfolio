@@ -290,50 +290,51 @@
     <section class="section bg-dark text-center">
         <div class="container">
             <div class="row text-center">
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-4 col-lg-4">
                     <div class="row ">
                         <div class="col-5 text-right text-light border-right py-3">
                             <div class="m-auto"><i class="ti-alarm-clock icon-xl"></i></div>
                         </div>
                         <div class="col-7 text-left py-3">
-                            <h1 class="text-danger font-weight-bold font40">500</h1>
+                            <h1 class="text-danger font-weight-bold font40">
+                                {{ round($details['hours_worked'] / 60, 0) }}</h1>
                             <p class="text-light mb-1">Hours Worked</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-4 col-lg-4">
                     <div class="row">
                         <div class="col-5 text-right text-light border-right py-3">
                             <div class="m-auto"><i class="ti-layers-alt icon-xl"></i></div>
                         </div>
                         <div class="col-7 text-left py-3">
-                            <h1 class="text-danger font-weight-bold font40">50K</h1>
+                            <h1 class="text-danger font-weight-bold font40">{{ $details['project_count'] }}</h1>
                             <p class="text-light mb-1">Project Finished</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-4 col-lg-4">
                     <div class="row">
                         <div class="col-5 text-right text-light border-right py-3">
                             <div class="m-auto"><i class="ti-face-smile icon-xl"></i></div>
                         </div>
                         <div class="col-7 text-left py-3">
-                            <h1 class="text-danger font-weight-bold font40">200K</h1>
+                            <h1 class="text-danger font-weight-bold font40">{{ $details['client_count'] }}</h1>
                             <p class="text-light mb-1">Happy Clients</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
+                {{-- <div class="col-md-6 col-lg-3">
                     <div class="row">
                         <div class="col-5 text-right text-light border-right py-3">
                             <div class="m-auto"><i class="ti-heart-broken icon-xl"></i></div>
                         </div>
                         <div class="col-7 text-left py-3">
-                            <h1 class="text-danger font-weight-bold font40">2k</h1>
+                            <h1 class="text-danger font-weight-bold font40">200</h1>
                             <p class="text-light mb-1">Coffee Drinked</p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -542,7 +543,12 @@
             <h1 class="mb-5"><span class="text-danger">My</span> Projects</h1>
             <div class="portfolio">
                 <div class="filters">
-                    <a href="#" data-filter=".new" class="active">
+                    @foreach ($details['project_type'] as $item)
+                        <a href="#" data-filter=".{{ $item->id }}" id="active_class_{{ $item->id }}">
+                            {{ $item->type }}
+                        </a>
+                    @endforeach
+                    {{-- <a href="#" data-filter=".new" class="active">
                         New
                     </a>
                     <a href="#" data-filter=".advertising">
@@ -553,23 +559,27 @@
                     </a>
                     <a href="#" data-filter=".web">
                         Web
-                    </a>
+                    </a> --}}
                 </div>
                 <div class="portfolio-container">
-                    <div class="col-md-6 col-lg-4 web new">
-                        <div class="portfolio-item">
-                            <img src="assets/imgs/web-1.jpg" class="img-fluid"
-                                alt="Download free bootstrap 4 admin dashboard, free boootstrap 4 templates">
-                            <div class="content-holder">
-                                <a class="img-popup" href="assets/imgs/web-1.jpg"></a>
-                                <div class="text-holder">
-                                    <h6 class="title">WEB</h6>
-                                    <p class="subtitle">Expedita corporis doloremque velit in totam!</p>
+                    @foreach ($details['project'] as $item)
+                        <div class="col-md-6 col-lg-4 {{ $item->type_id }}">
+                            @foreach ($item->imageDetails as $value)
+                                <div class="portfolio-item">
+                                    <img src="{{ getUploadImage($value->image_name, 'project_image') }}"
+                                        class="img-fluid" alt="{{ $item->title }}">
+                                    <div class="content-holder">
+                                        <div class="text-holder">
+                                            <h6 class="title">{{ $item->title }}</h6>
+                                            <p class="subtitle">{{ $item->description }}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 web new">
+                    @endforeach
+
+                    {{-- <div class="col-md-6 col-lg-4 web new">
                         <div class="portfolio-item">
                             <img src="assets/imgs/web-2.jpg" class="img-fluid"
                                 alt="Download free bootstrap 4 admin dashboard, free boootstrap 4 templates">
@@ -726,7 +736,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -910,7 +920,7 @@
                     document.write(new Date().getFullYear())
                 </script> Created <i class="ti-heart text-danger"></i> By <a href="http://devcrud.com"
                     target="_blank"><span class="text-danger"
-                        title="Bootstrap 4 Themes and Dashboards">IDK</span></a>
+                        title="Bootstrap 4 Themes and Dashboards"><b>IDK</b> solution</span></a>
             </p>
         </div>
     </footer>
@@ -919,6 +929,14 @@
     @foreach ($script as $path)
         <script src="{{ config('site-specific.live-path') . $path }}"></script>
     @endforeach
+    <script>
+        window.addEventListener('load', (event) => {
+            var link = document.getElementById('active_class_1');
+            if (link) {
+                link.click();
+            }
+        });
+    </script>
 </body>
 
 </html>
