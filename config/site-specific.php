@@ -194,7 +194,9 @@ return [
 
     'task-category-init-js'             =>'/assets/back-end/custom/js/task-category-init.js',
 
-    'task-list-init-js'             =>'/assets/back-end/custom/js/task-list-init.js',
+    'task-list-init-js'                 =>'/assets/back-end/custom/js/task-list-init.js',
+
+    'todo-list-init-js'                 =>'/assets/back-end/custom/js/todo-list-init.js',
 
     'live-path'                         => ''
 

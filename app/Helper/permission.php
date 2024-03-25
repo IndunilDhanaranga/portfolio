@@ -12,6 +12,14 @@ function getAllPermissions() {
             )
         ],
         [
+            'group'=>'Todo List',
+            'icon'=>'nav-icon fas fa-clipboard-check',
+            'type'=>'single',
+            'data'=>array(
+                [ 'title' => 'Todo', 'permission'=>'todo', 'show_in_sidebar'=>true ],
+            )
+        ],
+        [
             'group'=>'Task',
             'icon'=>'nav-icon fas fa-tasks',
             'type'=>'multiple',

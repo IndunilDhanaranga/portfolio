@@ -136,6 +136,8 @@ Route::group([
 
     Route::get('/edit-task/{id?}'                   , 'ViewController@editTask')->name('edit-task');
 
+    Route::get('/todo'                              , 'ViewController@todoList')->name('todo');
+
 
 
 
@@ -258,5 +260,7 @@ Route::group([
     */
 
     Route::post('/get-task'                             , 'AjaxController@getTask')->name('get-task');
+
+    Route::post('/get-todo'                             , 'AjaxController@getTodo')->name('get-todo');
 
 });
