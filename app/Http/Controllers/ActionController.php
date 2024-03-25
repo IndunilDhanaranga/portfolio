@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use Carbon\Carbon;
 
 use App\Models\UserRoll;
 use App\Models\UserRollPermission;
@@ -35,6 +36,7 @@ use App\Models\Task;
 use App\Models\TaskTime;
 use App\Models\TaskTeam;
 use App\Models\TaskAttachment;
+use App\Models\TaskModificationHistory;
 
 class ActionController extends Controller {
 
@@ -928,7 +930,73 @@ class ActionController extends Controller {
                 }
             }
             DB::commit();
-            return redirect()->route('view-task')->with( [ 'success' => true, 'message' => 'Task Updated Successfully !' ] );
+            return redirect()->route( 'view-task' )->with( [ 'success' => true, 'message' => 'Task Updated Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION UPDATE TASK
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function taskStatusChange( $id, $status ) {
+        try {
+
+            DB::beginTransaction();
+            $last_modification = TaskModificationHistory::where( 'task_id', $id )->latest()->first();
+            $time = Carbon::now();
+            if ( $last_modification ) {
+                if ( $last_modification->start_time && !$last_modification->end_time ) {
+                    $old_status = $last_modification->status;
+                    $duration = ( $time->diffInMinutes( $last_modification->start_time )* -1 );
+                    $last_modification->status = $status;
+                    $last_modification->end_time = $time;
+                    $last_modification->duration = $duration;
+                    $last_modification->save();
+
+                    if($old_status == 2){
+                        $column = 'development_time';
+                    }else if($old_status == 6){
+                        $column = 'qa_time';
+                    }else if($old_status == 9){
+                        $column = 'publish_time';
+                    }
+
+                    $task_time = TaskTime::where('task_id',$id)->first();
+                    $task_time->$column = $task_time->$column + $duration;
+                    $task_time->remaining_time = $task_time->remaining_time - $duration;
+                    $task_time->full_wasted_time = $task_time->full_wasted_time + $duration;
+                    $task_time->save();
+
+                }else if($last_modification->start_time && $last_modification->end_time ){
+                    if($status != 1 && $status != 4 && $status != 5 && $status != 8){
+                        TaskModificationHistory::create( [
+                            'task_id' => $id,
+                            'status' => $status,
+                            'start_time' => $time,
+                        ] );
+                    }
+                }
+            } else {
+                if ( $status == 2 || $status == 6 || $status == 9 ) {
+                    TaskModificationHistory::create( [
+                        'task_id' => $id,
+                        'status' => $status,
+                        'start_time' => $time,
+                    ] );
+                }
+            }
+
+            $task = Task::find( $id );
+            $task->status = $status;
+            $task->save();
+
+            DB::commit();
+            return redirect()->back()->with( [ 'temp-success' => true, 'message' => 'Task Updated Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );

@@ -235,6 +235,8 @@ Route::group([
 
     Route::post('/update-task/{id?}'                , 'ActionController@updateTask')->name('update-task');
 
+    Route::get('/todo-status/{id?}/{status?}'       , 'ActionController@taskStatusChange')->name('todo-status');
+
 
 
 

@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Task List</h3>
+        <h3 class="card-title">Todo List</h3>
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                 <i class="fas fa-minus"></i>
@@ -12,7 +12,7 @@
     </div>
     <div class="card-body mt-2">
         <div class="row">
-            <div class="col-md-4 col-12">
+            <div class="col-md-3 col-12">
                 <div class="form-group" data-select2-id="1">
                     <label for="">Project</label>
                     <select class="form-control select2 " id="project_id" style="width: 100%;" data-select2-id="1"
@@ -24,7 +24,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-4 col-12">
+            <div class="col-md-3 col-12">
                 <div class="form-group" data-select2-id="3">
                     <label for="">Task Category</label>
                     <select class="form-control select2 " id="task_category_id" style="width: 100%;" data-select2-id="3"
@@ -36,7 +36,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-4 col-12">
+            <div class="col-md-6 col-12">
                 <div class="row">
                     <div class="col-md-12">
                         <label for="">Stages</label>

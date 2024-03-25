@@ -273,13 +273,14 @@ class AjaxController extends Controller {
             }else if($status == 2){
                 $query->where('status', 4);
             }else if($status == 3){
-                $query->where('status', 6);
+                $query->where('status', 5);
+                $query->orWhere('status', 6);
                 $query->orWhere('status', 7);
-                $query->orWhere('status', 8);
             }else if($status == 4){
-                $query->where('status', 7);
-            }else if($status == 5){
                 $query->where('status', 8);
+                $query->orWhere('status', 9);
+            }else if($status == 5){
+                $query->where('status', 10);
             }
         }
         // filter query
@@ -377,8 +378,7 @@ class AjaxController extends Controller {
 
             if($value->status == 1 ){
                 $action .=  '<div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item" href="/todo-status/'.$value->id.'/3">Pause</a>
-                                <a class="dropdown-item" href="/todo-status/'.$value->id.'/5">Test</a>
+                                <a class="dropdown-item" href="/todo-status/'.$value->id.'/2">Start</a>
                             </div>';
             }else if($value->status == 2){
                 $action .=  '<div class="dropdown-menu" role="menu">
@@ -391,9 +391,40 @@ class AjaxController extends Controller {
                                 <a class="dropdown-item" href="/todo-status/'.$value->id.'/5">Test</a>
                             </div>';
             }
-            else if($value->status == 5){
+            else if($value->status == 4){
                 $action .=  '<div class="dropdown-menu" role="menu">
                                 <a class="dropdown-item" href="/todo-status/'.$value->id.'/2">Start</a>
+                            </div>';
+            }
+            else if($value->status == 5){
+                $action .=  '<div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" href="/todo-status/'.$value->id.'/6">Start</a>
+                                <a class="dropdown-item" href="/todo-status/'.$value->id.'/4">Issue</a>
+                            </div>';
+            }
+            else if($value->status == 6){
+                $action .=  '<div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" href="/todo-status/'.$value->id.'/7">Pause</a>
+                                <a class="dropdown-item" href="/todo-status/'.$value->id.'/4">Issue</a>
+                                <a class="dropdown-item" href="/todo-status/'.$value->id.'/8">Publish</a>
+                            </div>';
+            }
+            else if($value->status == 7){
+                $action .=  '<div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" href="/todo-status/'.$value->id.'/6">Start</a>
+                                <a class="dropdown-item" href="/todo-status/'.$value->id.'/4">Issue</a>
+                                <a class="dropdown-item" href="/todo-status/'.$value->id.'/8">Publish</a>
+                            </div>';
+            }
+            else if($value->status == 8){
+                $action .=  '<div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" href="/todo-status/'.$value->id.'/9">Start</a>
+                                <a class="dropdown-item" href="/todo-status/'.$value->id.'/5">Test</a>
+                            </div>';
+            }
+            else if($value->status == 9){
+                $action .=  '<div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" href="/todo-status/'.$value->id.'/10">Complete</a>
                                 <a class="dropdown-item" href="/todo-status/'.$value->id.'/5">Test</a>
                             </div>';
             }
