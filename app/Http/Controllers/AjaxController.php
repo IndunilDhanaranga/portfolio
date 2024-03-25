@@ -48,8 +48,17 @@ class AjaxController extends Controller {
     {
         $query = Task::with('projectDetails','taskCategoryDetails','taskStatusDetails','taskTimeDetails','taskTeamDetails','taskAttachmentDetails','taskTeamDetails.devDetails','taskTeamDetails.qaDetails','taskTeamDetails.publisherDetails');
 
+        // filter
+        $project_filter = $request->columns[1]['search']['value'];
+        $task_status_filter = $request->columns[2]['search']['value'];
+        $task_category_filter = $request->columns[3]['search']['value'];
+        $dev_filter = $request->columns[4]['search']['value'];
+        $qa_filter = $request->columns[5]['search']['value'];
+        $publisher_filter = $request->columns[6]['search']['value'];
+        // $user_name_filter = $request->columns[0]['search']['value'];
+        // filter
 
-        // // ordering
+        // ordering
         $column_index = $request->order[0]['column'];
         $order_dir = $request->order[0]['dir'];
         $columns = $request->columns;
@@ -67,6 +76,33 @@ class AjaxController extends Controller {
 
         $query = $query->orderBy($column_name, $order_dir);
         // ordering end
+
+        // filter query
+        if($project_filter != null){
+            $query->where('project_id', $project_filter);
+        }
+        if($task_status_filter != null){
+            $query->where('status', $task_status_filter);
+        }
+        if($task_category_filter != null){
+            $query->where('task_category_id', $task_category_filter);
+        }
+        if($dev_filter != null){
+            $query = $query->whereHas('taskTeamDetails', function ($data) use ($dev_filter) {
+                $data->where('developer_id', $dev_filter);
+            });
+        }
+        if($qa_filter != null){
+            $query = $query->whereHas('taskTeamDetails', function ($data) use ($qa_filter) {
+                $data->where('qa_id', $qa_filter);
+            });
+        }
+        if($publisher_filter != null){
+            $query = $query->whereHas('taskTeamDetails', function ($data) use ($publisher_filter) {
+                $data->where('publisher_id', $publisher_filter);
+            });
+        }
+        // filter query
 
         if ($request->has('search') && $request->search['value'] != null) {
             $search_value = $request->search['value'];
