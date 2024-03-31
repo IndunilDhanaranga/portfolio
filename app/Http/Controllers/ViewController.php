@@ -23,7 +23,9 @@ class ViewController extends DataController {
             config( 'site-specific.themify-icons-css' ),
             config( 'site-specific.johndoe-css' ),
             config( 'site-specific.fontawesome-css' ),
-
+            config( 'site-specific.sweetalert-css' ),
+            config( 'site-specific.toastr-css' ),
+            config( 'site-specific.custom-css' ),
         );
 
         $script = array(
@@ -31,8 +33,12 @@ class ViewController extends DataController {
             config( 'site-specific.bootstrap-bundle-init-js' ),
             config( 'site-specific.bootstrap-affix-init-js' ),
             config( 'site-specific.isotope-package-init-js' ),
-            config( 'site-specific.google-map' ),
+            // config( 'site-specific.google-map' ),
             config( 'site-specific.johnedoe-init-js' ),
+            config( 'site-specific.sweetalert2-js' ),
+            config( 'site-specific.toastr-js' ),
+            config( 'site-specific.custom-init-js' ),
+
         );
 
         $data[ 'css' ] = $css;
@@ -336,11 +342,35 @@ class ViewController extends DataController {
             'title' => 'Project Details',
             'view' => 'back-end.project-details',
             'project' => $this->getProject(),
-            'languages' => $this->getLanguages(),
-            'work_experience' => $this->getWorkExperience(),
             'script' => array( config( 'site-specific.additional-details-init-js' ) ),
         ];
         // return $data[ 'education_qualification' ];
+        return $this->default( $data );
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW PROJECT DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function projectPublish() {
+        $data = [
+            'title' => 'Project Publication',
+            'view' => 'back-end.project-publish',
+            'project' => $this->getProjectsDetailsForPublished(),
+            'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
+                                config( 'site-specific.buttons-bootstrap-min-css' ) ),
+            'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
+                                config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
+                                config( 'site-specific.pdfmake-min-js' ),
+                                config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
+                                config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
+                                config( 'site-specific.project-publish-init-js' )
+                             ),
+        ];
+        // return $data[ 'project' ];
         return $this->default( $data );
     }
 

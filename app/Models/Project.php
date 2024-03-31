@@ -25,6 +25,7 @@ class Project extends Model
         'repository',
         'description',
         'status',
+        'is_publish',
         'created_at',
         'updated_at',
     ];

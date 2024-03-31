@@ -549,6 +549,36 @@ class ActionController extends Controller {
         }
     }
 
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE PROJECT PUBLISH
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function projectPublish( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'project_id' => 'required',
+                'is_publish' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $project = Project::find($request->project_id);
+            $project->is_publish = $request->is_publish;
+            $project->save();
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Projects Publish Status Change Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+
     //                                  FUNCTIONS FOR PROJECT DETAILS
 
     /*

@@ -58,6 +58,7 @@ function getAllPermissions() {
                 [ 'title' => 'Expertise', 'permission'=>'expertise', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Additional Details', 'permission'=>'additional-details', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Project Details', 'permission'=>'project-details', 'show_in_sidebar'=>true ],
+                [ 'title' => 'Project Publication', 'permission'=>'project-publish', 'show_in_sidebar'=>true ],
             )
         ],
         [

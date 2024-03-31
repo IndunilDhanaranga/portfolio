@@ -444,4 +444,27 @@ class AjaxController extends Controller {
 
         return response()->json($response);
     }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CLIENT SEND MESSAGE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function clientSendMessage( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'email' => 'required|email',
+                'sender_name' => 'required',
+                'message' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return response()->json( [ 'success' => false,'icon' => 'error', 'msg' => $validator->messages()->first() ] );
+            }
+            return response()->json(  [ 'success' => true,'icon' => 'success', 'msg' => "Thank you for contacting us! We'll respond shortly." ]  );
+        } catch ( \Throwable $th ) {
+            return response()->json( [ 'success' => false,'icon' => 'error', 'msg' => $th->getMessage() .' ' . $th->getLine() ] );
+        }
+    }
 }

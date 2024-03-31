@@ -181,7 +181,7 @@ class DataController extends Controller {
     */
 
     public function getDetailsForPortfolio() {
-        $project = Project::with('projectTypeDetails','clientDetails','projectStatusDetails','imageDetails','portfolioProjectDetails');
+        $project = Project::with('projectTypeDetails','clientDetails','projectStatusDetails','imageDetails','portfolioProjectDetails')->where('is_publish',1);
         $task = Task::with('projectDetails','taskCategoryDetails','taskStatusDetails','taskTimeDetails','taskTeamDetails','taskAttachmentDetails')->get();
         $client = ProjectClient::query();
         $project_type = ProjectType::query();
@@ -236,6 +236,17 @@ class DataController extends Controller {
             $data = $data->where( 'status', $status );
         }
         $data = $data->get();
+        return $data;
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET PUBLISHED PROJECT DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getProjectsDetailsForPublished() {
+        $data = Project::select('id','title','is_publish')->get();
         return $data;
     }
 

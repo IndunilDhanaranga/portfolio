@@ -20,6 +20,8 @@ return [
 
     'fontawesome-css'                   => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
 
+    'custom-css'                        =>'/assets/front-end/custom/css/custom.css',
+
     /*
     ----------------------------------------------------------------------------------------------------------------------------------
     Default JAVA SCRIPT
@@ -37,6 +39,15 @@ return [
     'google-map'                        => 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCtme10pzgKSPeJVJrG1O3tjR6lk98o4w8&callback=initMap',
 
     'johnedoe-init-js'                  => '/assets/front-end/default/js/johndoe.js',
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------------------------------
+    CUSTOM JAVA SCRIPT
+    ----------------------------------------------------------------------------------------------------------------------------------
+    */
+
+    'custom-init-js'                    =>'/assets/front-end/custom/js/custom.js',
 
     /*
     ----------------------------------------------------------------------------------------------------------------------------------
@@ -197,6 +208,8 @@ return [
     'task-list-init-js'                 =>'/assets/back-end/custom/js/task-list-init.js',
 
     'todo-list-init-js'                 =>'/assets/back-end/custom/js/todo-list-init.js',
+
+    'project-publish-init-js'           =>'/assets/back-end/custom/js/project-publish-init.js',
 
     'live-path'                         => ''
 

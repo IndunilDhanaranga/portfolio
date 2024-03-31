@@ -18,6 +18,20 @@ Route::group([
     ----------------------------------------------------------------------------------------------------------
     */
     Route::get('/'                              , 'ViewController@frontend')->name('home');
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    AJAX CONTROLLER
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+                                                    MESSAGE SEND
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    Route::post('/client-message-send'          , 'AjaxController@clientSendMessage')->name('client-message-send');
 });
 
 /*
@@ -109,6 +123,8 @@ Route::group([
 
     Route::get('/project-details'                   , 'ViewController@projectDetails')->name('project-details');
 
+    Route::get('/project-publish'                   , 'ViewController@projectPublish')->name('project-publish');
+
 
     /*
     ----------------------------------------------------------------------------------------------------------
@@ -196,6 +212,8 @@ Route::group([
     Route::post('/create-education-level'           , 'ActionController@createEducationLevel')->name('create-education-level');
 
     Route::post('/portfolio-project-details'        , 'ActionController@projectDetails')->name('portfolio-project-details');
+
+    Route::post('/portfolio-project-publish'        , 'ActionController@projectPublish')->name('portfolio-project-publish');
 
 
     /*

@@ -11,6 +11,7 @@
     @foreach ($css as $path)
         <link rel="stylesheet" href="{{ config('site-specific.live-path') . $path }}">
     @endforeach
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 
@@ -845,20 +846,20 @@
                 <div class="col-lg-8">
                     <div class="contact-form-card">
                         <h4 class="contact-title">Send a message</h4>
-                        <form action="">
+                        <div>
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="Name *" required>
+                                <input class="form-control" type="text" placeholder="Name *" id="name" >
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="email" placeholder="Email *" required>
+                                <input class="form-control" type="email" placeholder="Email *" id="email" >
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" id=" placeholder="Message *" rows="7" required></textarea>
+                                <textarea class="form-control" placeholder="Message *" rows="7" id="message" ></textarea>
                             </div>
                             <div class="form-group ">
-                                <button type="submit" class="form-control btn btn-primary">Send Message</button>
+                                <button type="button" class="form-control btn btn-primary" onclick="sendMessage()">Send Message</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -919,8 +920,8 @@
                 <script>
                     document.write(new Date().getFullYear())
                 </script> Created <i class="ti-heart text-danger"></i> By <a href="http://devcrud.com"
-                    target="_blank"><span class="text-danger"
-                        title="Bootstrap 4 Themes and Dashboards"><b>IDK</b> solution</span></a>
+                    target="_blank"><span class="text-danger" title="Bootstrap 4 Themes and Dashboards"><b>IDK</b>
+                        solution</span></a>
             </p>
         </div>
     </footer>
