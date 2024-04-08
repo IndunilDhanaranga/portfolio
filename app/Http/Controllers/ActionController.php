@@ -41,6 +41,7 @@ use App\Models\TaskModificationHistory;
 
 use App\Models\BankAccount;
 use App\Models\IncomeType;
+use App\Models\ExpenseType;
 
 class ActionController extends Controller {
 
@@ -1176,7 +1177,7 @@ class ActionController extends Controller {
             }
 
             DB::beginTransaction();
-            $bank_account = IncomeType::create( [
+            $income_type = IncomeType::create( [
                 'type' => $request->income_type,
             ] );
             DB::commit();
@@ -1211,6 +1212,66 @@ class ActionController extends Controller {
             $income_type->type = $request->income_type;
             $income_type->is_active = $request->is_active;
             $income_type->save();
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Expense Type Updated Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE EXPENSE TYPE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function createExpenseType( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'expense_type' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $expense_type = ExpenseType::create( [
+                'type' => $request->expense_type,
+            ] );
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Expense Type Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION EDIT EXPENSE TYPE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function editExpenseType( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'id' => 'required',
+                'expense_type' => 'required',
+                'is_active' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $expense_type = ExpenseType::find($request->id);
+            $expense_type->type = $request->expense_type;
+            $expense_type->is_active = $request->is_active;
+            $expense_type->save();
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'Income Type Updated Successfully !' ] );
         } catch ( \Throwable $th ) {

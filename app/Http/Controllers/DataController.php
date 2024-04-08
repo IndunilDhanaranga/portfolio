@@ -30,6 +30,7 @@ use App\Models\TaskStatus;
 
 use App\Models\BankAccount;
 use App\Models\IncomeType;
+use App\Models\ExpenseType;
 
 class DataController extends Controller {
 
@@ -335,6 +336,21 @@ class DataController extends Controller {
 
     public function getIncomeType($is_active = null) {
         $data = IncomeType::query();
+        if ($is_active !== null) {
+            $data = $data->where('is_active', $is_active);
+        }
+        $data = $data->get();
+        return $data;
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET INCOME TYPE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getExpenseType($is_active = null) {
+        $data = ExpenseType::query();
         if ($is_active !== null) {
             $data = $data->where('is_active', $is_active);
         }

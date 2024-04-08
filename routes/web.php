@@ -187,6 +187,8 @@ Route::group([
 
     Route::get('/income-types'                      , 'ViewController@incomeTypes')->name('income-types');
 
+    Route::get('/expense-types'                     , 'ViewController@expenseTypes')->name('expense-types');
+
 
 
 
@@ -290,6 +292,12 @@ Route::group([
     Route::post('/create-income-type'               , 'ActionController@createIncomeType')->name('create-income-type');
 
     Route::post('/edit-income-type'                 , 'ActionController@editIncomeType')->name('edit-income-type');
+
+    Route::post('/create-expense-type'              , 'ActionController@createExpenseType')->name('create-expense-type');
+
+    Route::post('/edit-expense-type'                , 'ActionController@editExpenseType')->name('edit-expense-type');
+
+
 
 
 

@@ -222,6 +222,8 @@ return [
 
     'income-types-init-js'              =>'/assets/back-end/custom/js/income-types-init.js',
 
+    'expense-types-init-js'             =>'/assets/back-end/custom/js/expense-types-init.js',
+
     'live-path'                         => ''
 
 ];
