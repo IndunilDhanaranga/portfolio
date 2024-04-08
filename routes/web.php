@@ -68,7 +68,7 @@ BACK END ROUTES WITH LOGIN VALIDATE
 */
 
 Route::group([
-    'middleware'=>['App\Http\Middleware\Login'],
+    'middleware'=>['App\Http\Middleware\Login','App\Http\Middleware\PermissionAuthentication'],
     'namespace'=>'App\Http\Controllers',
 ],function ($router) {
 
@@ -189,6 +189,8 @@ Route::group([
 
     Route::get('/expense-types'                     , 'ViewController@expenseTypes')->name('expense-types');
 
+    Route::get('/view-create-income'                , 'ViewController@createIncome')->name('view-create-income');
+
 
 
 
@@ -296,6 +298,8 @@ Route::group([
     Route::post('/create-expense-type'              , 'ActionController@createExpenseType')->name('create-expense-type');
 
     Route::post('/edit-expense-type'                , 'ActionController@editExpenseType')->name('edit-expense-type');
+
+    Route::post('/create-income'                    , 'ActionController@createIncome')->name('create-income');
 
 
 

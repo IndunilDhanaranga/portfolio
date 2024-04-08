@@ -42,6 +42,9 @@ use App\Models\TaskModificationHistory;
 use App\Models\BankAccount;
 use App\Models\IncomeType;
 use App\Models\ExpenseType;
+use App\Models\Income;
+use App\Models\IncomeAttachment;
+use App\Models\TansactionHistory;
 
 class ActionController extends Controller {
 
@@ -571,7 +574,7 @@ class ActionController extends Controller {
             }
 
             DB::beginTransaction();
-            $project = Project::find($request->project_id);
+            $project = Project::find( $request->project_id );
             $project->is_publish = $request->is_publish;
             $project->save();
             DB::commit();
@@ -581,7 +584,6 @@ class ActionController extends Controller {
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
         }
     }
-
 
     //                                  FUNCTIONS FOR PROJECT DETAILS
 
@@ -1036,22 +1038,22 @@ class ActionController extends Controller {
                     $last_modification->duration = $duration;
                     $last_modification->save();
 
-                    if($old_status == 2){
+                    if ( $old_status == 2 ) {
                         $column = 'development_time';
-                    }else if($old_status == 6){
+                    } else if ( $old_status == 6 ) {
                         $column = 'qa_time';
-                    }else if($old_status == 9){
+                    } else if ( $old_status == 9 ) {
                         $column = 'publish_time';
                     }
 
-                    $task_time = TaskTime::where('task_id',$id)->first();
+                    $task_time = TaskTime::where( 'task_id', $id )->first();
                     $task_time->$column = $task_time->$column + $duration;
                     $task_time->remaining_time = $task_time->remaining_time - $duration;
                     $task_time->full_wasted_time = $task_time->full_wasted_time + $duration;
                     $task_time->save();
 
-                }else if($last_modification->start_time && $last_modification->end_time ){
-                    if($status != 1 && $status != 4 && $status != 5 && $status != 8){
+                } else if ( $last_modification->start_time && $last_modification->end_time ) {
+                    if ( $status != 1 && $status != 4 && $status != 5 && $status != 8 ) {
                         TaskModificationHistory::create( [
                             'task_id' => $id,
                             'status' => $status,
@@ -1081,8 +1083,7 @@ class ActionController extends Controller {
         }
     }
 
-
-     //                                  FUNCTIONS FOR BANK DETAILS
+    //                                  FUNCTIONS FOR BANK DETAILS
 
     /*
     ----------------------------------------------------------------------------------------------------------
@@ -1120,7 +1121,6 @@ class ActionController extends Controller {
         }
     }
 
-
     /*
     ----------------------------------------------------------------------------------------------------------
     PUBLIC FUNCTION EDIT BANK ACCOUNT
@@ -1144,7 +1144,7 @@ class ActionController extends Controller {
             }
 
             DB::beginTransaction();
-            $bank_account = BankAccount::find($request->id);
+            $bank_account = BankAccount::find( $request->id );
             $bank_account->account_holder = $request->holder_name;
             $bank_account->bank_name = $request->bank_name;
             $bank_account->branch = $request->branch;
@@ -1188,7 +1188,6 @@ class ActionController extends Controller {
         }
     }
 
-
     /*
     ----------------------------------------------------------------------------------------------------------
     PUBLIC FUNCTION EDIT INCOME TYPE
@@ -1208,7 +1207,7 @@ class ActionController extends Controller {
             }
 
             DB::beginTransaction();
-            $income_type = IncomeType::find($request->id);
+            $income_type = IncomeType::find( $request->id );
             $income_type->type = $request->income_type;
             $income_type->is_active = $request->is_active;
             $income_type->save();
@@ -1248,7 +1247,6 @@ class ActionController extends Controller {
         }
     }
 
-
     /*
     ----------------------------------------------------------------------------------------------------------
     PUBLIC FUNCTION EDIT EXPENSE TYPE
@@ -1268,7 +1266,98 @@ class ActionController extends Controller {
             }
 
             DB::beginTransaction();
-            $expense_type = ExpenseType::find($request->id);
+            $expense_type = ExpenseType::find( $request->id );
+            $expense_type->type = $request->expense_type;
+            $expense_type->is_active = $request->is_active;
+            $expense_type->save();
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Income Type Updated Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE INCOME
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function createIncome( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'type_id' => 'required',
+                'project_id' => 'required_if:type_id,2',
+                'bank_account_id' => 'required',
+                'amount' => 'required',
+                'description' => 'required',
+                'date' => 'required',
+            ], [
+                'project_id.required_if' =>'Need to select a project if the income type is "projects".'
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $income = Income::create( [
+                'income_type_id' => $request->type_id,
+                'project_id' => $request->project_id,
+                'bank_account_id' => $request->bank_account_id,
+                'amount' => $request->amount,
+                'description' => $request->description,
+                'date' => $request->date,
+            ] );
+            if ( $request->hasFile( 'attachment' ) ) {
+                foreach ( $request->file( 'attachment' ) as $key => $attachment ) {
+                    $income_attachment = uploadAttachment( $attachment, 'income_attachment' );
+                    IncomeAttachment::create( [
+                        'income_id'       => $income->id,
+                        'attachment_name'    => $income_attachment,
+                    ] );
+                }
+            }
+            $bank_account = BankAccount::find( $request->bank_account_id );
+            $bank_account->balance = $bank_account->balance + $request->amount;
+            $bank_account->save();
+
+            $transaction_history = TansactionHistory::create([
+                'transaction_id'    => $income->id,
+                'bank_account_id'    => $request->bank_account_id,
+                'transaction_type'    => 1,
+                'amount'    => $request->amount,
+                'date'    => $request->date,
+            ]);
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Income Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION EDIT EXPENSE TYPE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function editIncome( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'id' => 'required',
+                'expense_type' => 'required',
+                'is_active' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $expense_type = ExpenseType::find( $request->id );
             $expense_type->type = $request->expense_type;
             $expense_type->is_active = $request->is_active;
             $expense_type->save();

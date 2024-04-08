@@ -13,7 +13,7 @@
                     <th>Bank Name</th>
                     <th>Branch</th>
                     <th>Account No</th>
-                    <th>Initial Balance</th>
+                    <th>Balance</th>
                     <th>Status</th>
                     <th>Created At</th>
                     <th>Action</th>

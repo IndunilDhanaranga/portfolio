@@ -721,4 +721,24 @@ class ViewController extends DataController {
         return $this->default( $data );
     }
 
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW CREATE INCOME
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function createIncome() {
+        $data = [
+            'title' => 'Create Income',
+            'view' => 'back-end.create-income',
+            'income_type' => $this->getIncomeType(1),
+            'project' => $this->getProject(),
+            'bank_details' => $this->getBankDetails(1),
+            'script'    => array(config('site-specific.create-income-init-js')),
+        ];
+        // return $data[ 'education_qualification' ];
+        return $this->default( $data );
+    }
+
 }
