@@ -66,7 +66,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 div-12">
-                            <input type="file" name="attachment[]" accept="image/*">
+                            <input type="file" name="attachment[]" accept="image/*" multiple>
                         </div>
                     </div>
                 </div>

@@ -191,6 +191,8 @@ Route::group([
 
     Route::get('/view-create-income'                , 'ViewController@createIncome')->name('view-create-income');
 
+    Route::get('/view-income'                       , 'ViewController@viewIncome')->name('view-income');
+
 
 
 

@@ -741,4 +741,30 @@ class ViewController extends DataController {
         return $this->default( $data );
     }
 
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW INCOME
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function viewIncome() {
+        $data = [
+            'title' => 'Income',
+            'view' => 'back-end.income',
+            'income' => $this->getIncome(),
+            'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
+                            config( 'site-specific.buttons-bootstrap-min-css' ) ),
+            'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
+                                    config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
+                                    config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
+                                    config( 'site-specific.pdfmake-min-js' ),
+                                    config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
+                                    config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
+                                    config( 'site-specific.expense-types-init-js' )
+                                    ),
+        ];
+        // return $data[ 'project' ];
+        return $this->default( $data );
+    }
+
 }

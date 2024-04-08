@@ -78,6 +78,7 @@ function getAllPermissions() {
             'icon'=>'nav-icon fas fa-money-check-alt',
             'type'=>'multiple',
             'data'=>array(
+                [ 'title' => 'Income', 'permission'=>'view-income', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Create Income', 'permission'=>'view-create-income', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Expense Type', 'permission'=>'expense-types', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Income Type', 'permission'=>'income-types', 'show_in_sidebar'=>true ],

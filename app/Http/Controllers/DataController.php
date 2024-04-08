@@ -31,6 +31,7 @@ use App\Models\TaskStatus;
 use App\Models\BankAccount;
 use App\Models\IncomeType;
 use App\Models\ExpenseType;
+use App\Models\Income;
 
 class DataController extends Controller {
 
@@ -355,6 +356,18 @@ class DataController extends Controller {
             $data = $data->where('is_active', $is_active);
         }
         $data = $data->get();
+        return $data;
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET INCOME
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getIncome() {
+        $data = Income::with('incomeType','projectDetails','bankDetails','attachmentDetails');
+        $data = $data->orderby('id','desc')->get();
         return $data;
     }
 
