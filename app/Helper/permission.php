@@ -61,6 +61,7 @@ function getAllPermissions() {
             'icon'=>'nav-icon fas fa-money-check-alt',
             'type'=>'multiple',
             'data'=>array(
+                [ 'title' => 'Income Type', 'permission'=>'income-types', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Bank Details', 'permission'=>'bank-account-details', 'show_in_sidebar'=>true ],
             )
         ],

@@ -40,6 +40,7 @@ use App\Models\TaskAttachment;
 use App\Models\TaskModificationHistory;
 
 use App\Models\BankAccount;
+use App\Models\IncomeType;
 
 class ActionController extends Controller {
 
@@ -1152,6 +1153,66 @@ class ActionController extends Controller {
             $bank_account->save();
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'Bank Account Updated Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE INCOME TYPE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function createIncomeType( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'income_type' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $bank_account = IncomeType::create( [
+                'type' => $request->income_type,
+            ] );
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Income Type Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION EDIT INCOME TYPE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function editIncomeType( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'id' => 'required',
+                'income_type' => 'required',
+                'is_active' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $income_type = IncomeType::find($request->id);
+            $income_type->type = $request->income_type;
+            $income_type->is_active = $request->is_active;
+            $income_type->save();
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Income Type Updated Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );

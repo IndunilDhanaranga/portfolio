@@ -33,7 +33,7 @@
                         @else
                             <td><span class="badge badge-success">Active</span></td>
                         @endif
-                        <td>{{ $item->created_at->format('y-m-d') }}</td>
+                        <td>{{ $item->created_at->format('Y-m-d') }}</td>
                         <td>
                             <a data-bank_account = "{{ json_encode($item) }}" onclick = "editBankAccount(this)"><i
                                     class="far fa-edit"></i></a>

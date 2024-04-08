@@ -220,6 +220,8 @@ return [
 
     'bank-account-init-js'              =>'/assets/back-end/custom/js/bank-account-init.js',
 
+    'income-types-init-js'              =>'/assets/back-end/custom/js/income-types-init.js',
+
     'live-path'                         => ''
 
 ];

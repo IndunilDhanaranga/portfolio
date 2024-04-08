@@ -185,6 +185,8 @@ Route::group([
 
     Route::get('/bank-account-details'              , 'ViewController@bankAccountDetails')->name('bank-account-details');
 
+    Route::get('/income-types'                      , 'ViewController@incomeTypes')->name('income-types');
+
 
 
 
@@ -284,6 +286,10 @@ Route::group([
     Route::post('/create-bank-account'              , 'ActionController@createBankAccount')->name('create-bank-account');
 
     Route::post('/edit-bank-account'                , 'ActionController@editBankAccount')->name('edit-bank-account');
+
+    Route::post('/create-income-type'               , 'ActionController@createIncomeType')->name('create-income-type');
+
+    Route::post('/edit-income-type'                 , 'ActionController@editIncomeType')->name('edit-income-type');
 
 
 

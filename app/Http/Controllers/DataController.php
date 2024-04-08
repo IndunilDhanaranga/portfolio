@@ -29,6 +29,7 @@ use App\Models\Task;
 use App\Models\TaskStatus;
 
 use App\Models\BankAccount;
+use App\Models\IncomeType;
 
 class DataController extends Controller {
 
@@ -319,6 +320,21 @@ class DataController extends Controller {
 
     public function getBankDetails($is_active = null) {
         $data = BankAccount::query();
+        if ($is_active !== null) {
+            $data = $data->where('is_active', $is_active);
+        }
+        $data = $data->get();
+        return $data;
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET INCOME TYPE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getIncomeType($is_active = null) {
+        $data = IncomeType::query();
         if ($is_active !== null) {
             $data = $data->where('is_active', $is_active);
         }
