@@ -28,6 +28,8 @@ use App\Models\TaskCategory;
 use App\Models\Task;
 use App\Models\TaskStatus;
 
+use App\Models\BankAccount;
+
 class DataController extends Controller {
 
     //                                  FUNCTIONS FOR GET DEVELOPER TOOLS DETAILS
@@ -305,4 +307,23 @@ class DataController extends Controller {
         $data = TaskStatus::all();
         return $data;
     }
+
+
+    //                                  FUNCTIONS FOR GET BANK DETAILS
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET BANK DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getBankDetails($is_active = null) {
+        $data = BankAccount::query();
+        if ($is_active !== null) {
+            $data = $data->where('is_active', $is_active);
+        }
+        $data = $data->get();
+        return $data;
+    }
+
 }

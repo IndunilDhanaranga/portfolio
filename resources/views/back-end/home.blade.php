@@ -7,6 +7,7 @@ use Carbon\Carbon;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>{{ Auth::user()->name }} | {{ $title }}</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -37,7 +38,7 @@ use Carbon\Carbon;
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                         <i class="fas fa-search"></i>
                     </a>
@@ -57,69 +58,17 @@ use Carbon\Carbon;
                             </div>
                         </form>
                     </div>
-                </li>
+                </li> --}}
 
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
+                    <a class="nav-link" href="/mailbox" data-toggle="tooltip" data-placement="left" title="Mails">
                         <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
+                        <span class="badge badge-danger navbar-badge d-none" id="message_count">0</span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Brad Diesel
-                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">Call me whenever you can...</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        John Pierce
-                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">I got your message bro</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i
-                                                class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">The subject goes here</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                    </div>
                 </li>
                 <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell"></i>
                         <span class="badge badge-warning navbar-badge">15</span>
@@ -144,15 +93,15 @@ use Carbon\Carbon;
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true"
-                        href="#" role="button">
+                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
+                        role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
@@ -216,15 +165,15 @@ use Carbon\Carbon;
                                     if ($item['show_in_sidebar'] && isPermissions($item['permission'])) {
                                         $links .=
                                             ' <li class="nav-item">
-                                                                                                                                                                                                                                                                                            <a href="' .
+                                                                                                                                                                                                                                                                                                                                                            <a href="' .
                                             route($item['permission']) .
                                             '" class="nav-link">
-                                                                                                                                                                                                                                                                                              <i class="far fa-circle nav-icon"></i>
-                                                                                                                                                                                                                                                                                              <p class="text-capitalize">' .
+                                                                                                                                                                                                                                                                                                                                                              <i class="far fa-circle nav-icon"></i>
+                                                                                                                                                                                                                                                                                                                                                              <p class="text-capitalize">' .
                                             $item['title'] .
                                             '</p>
-                                                                                                                                                                                                                                                                                            </a>
-                                                                                                                                                                                                                                                                                          </li>';
+                                                                                                                                                                                                                                                                                                                                                            </a>
+                                                                                                                                                                                                                                                                                                                                                          </li>';
                                     }
                                 }
                                 ?>
@@ -281,7 +230,8 @@ use Carbon\Carbon;
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; {{ Carbon::now()->year }} <a href="https://idksolution.ooo.pe">IDK solution</a>.</strong>
+            <strong>Copyright &copy; {{ Carbon::now()->year }} <a href="https://idksolution.ooo.pe">IDK
+                    solution</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 1.0.0
@@ -327,6 +277,27 @@ use Carbon\Carbon;
                 .addClass('menu-open').prev('a')
                 .addClass('active');
         });
+        $(document).ready(function () {
+            navbarDetails();
+            setInterval(navbarDetails, 60000);
+        });
+        function navbarDetails(){
+            $.ajax({
+            type: "GET",
+            url: "/get-navbar-details",
+            dataType: "json",
+            success: function (response) {
+                if(response.success == true){
+                    if(response.data.unreaded_count > 0){
+                        $("#message_count").removeClass("d-none");
+                        $("#message_count").html(response.data.unreaded_count);
+                    }else{
+                        $("#message_count").addClass("d-none");
+                    }
+                }
+            },
+        });
+        }
     </script>
     @if (session('temp-success'))
         <script>
@@ -409,6 +380,9 @@ use Carbon\Carbon;
                 confirmButtonText: "Ok",
             });
         }
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
 </body>
 

@@ -143,6 +143,11 @@ return [
 
     'select2-js'                        => '/assets/back-end/default/plugins/select2/js/select2.full.min.js',
 
+    'tooltip-core'                      => 'https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.0',
+
+    'tooltip-dom'                       => 'https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.3',
+
+
     /*
     ----------------------------------------------------------------------------------------------------------------------------------
     DATATABLE JAVA SCRIPT
@@ -210,6 +215,10 @@ return [
     'todo-list-init-js'                 =>'/assets/back-end/custom/js/todo-list-init.js',
 
     'project-publish-init-js'           =>'/assets/back-end/custom/js/project-publish-init.js',
+
+    'mail-box-init-js'                  =>'/assets/back-end/custom/js/mail-box-init.js',
+
+    'bank-account-init-js'              =>'/assets/back-end/custom/js/bank-account-init.js',
 
     'live-path'                         => ''
 

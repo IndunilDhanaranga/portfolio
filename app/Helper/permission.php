@@ -49,7 +49,23 @@ function getAllPermissions() {
             )
         ],
         [
-            'group'=>'Portfolio',
+            'group'=>'MailBox',
+            'icon'=>'nav-icon fas fa-inbox',
+            'type'=>'single',
+            'data'=>array(
+                [ 'title' => 'Mailbox', 'permission'=>'mailbox', 'show_in_sidebar'=>true ],
+            )
+        ],
+        [
+            'group'=>'Finance',
+            'icon'=>'nav-icon fas fa-money-check-alt',
+            'type'=>'multiple',
+            'data'=>array(
+                [ 'title' => 'Bank Details', 'permission'=>'bank-account-details', 'show_in_sidebar'=>true ],
+            )
+        ],
+        [
+            'group'=>'Portfolio Tools',
             'icon'=>'nav-icon fas fa-briefcase',
             'type'=>'multiple',
             'data'=>array(
@@ -59,13 +75,6 @@ function getAllPermissions() {
                 [ 'title' => 'Additional Details', 'permission'=>'additional-details', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Project Details', 'permission'=>'project-details', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Project Publication', 'permission'=>'project-publish', 'show_in_sidebar'=>true ],
-            )
-        ],
-        [
-            'group'=>'Education',
-            'icon'=>'nav-icon fas fa-graduation-cap',
-            'type'=>'multiple',
-            'data'=>array(
                 [ 'title' => 'Education Level', 'permission'=>'education-levels', 'show_in_sidebar'=>true ],
                 [ 'title' => 'School & Collages', 'permission'=>'schools-collages', 'show_in_sidebar'=>true ],
             )

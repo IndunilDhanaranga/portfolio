@@ -120,6 +120,8 @@ class ViewController extends DataController {
             config( 'site-specific.sweetalert2-js' ),
             config( 'site-specific.toastr-js' ),
             config( 'site-specific.select2-js' ),
+            config( 'site-specific.tooltip-core' ),
+            config( 'site-specific.tooltip-dom' ),
         );
 
         if ( isset( $data[ 'css' ] ) ) {
@@ -613,6 +615,55 @@ class ViewController extends DataController {
                                 config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
                                 config( 'site-specific.todo-list-init-js' )
                              ),
+        ];
+        // return $data[ 'project' ];
+        return $this->default( $data );
+    }
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW MAILBOX
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function mailBox() {
+        $data = [
+            'title' => 'Mail Box',
+            'view' => 'back-end.mail-box',
+            'project' => $this->getProject(),
+            'task_category' => $this->getAllTaskCategory(1),
+            'script'    => array( config( 'site-specific.mail-box-init-js' ) ),
+        ];
+        // return $data[ 'project' ];
+        return $this->default( $data );
+    }
+
+
+    //                                          FUNCTIONS FOR VIEW FINANCE DETAILS
+
+
+     /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW BANK ACCOUNT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function bankAccountDetails() {
+        $data = [
+            'title' => 'Bank Details',
+            'view' => 'back-end.bank-account',
+            'bank_details' => $this->getBankDetails(),
+            'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
+                            config( 'site-specific.buttons-bootstrap-min-css' ) ),
+            'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
+                                    config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
+                                    config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
+                                    config( 'site-specific.pdfmake-min-js' ),
+                                    config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
+                                    config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
+                                    config( 'site-specific.bank-account-init-js' )
+                                    ),
         ];
         // return $data[ 'project' ];
         return $this->default( $data );

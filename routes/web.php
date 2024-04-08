@@ -157,10 +157,7 @@ Route::group([
     Route::get('/todo'                              , 'ViewController@todoList')->name('todo');
 
 
-
-
-
-    /*
+     /*
     ----------------------------------------------------------------------------------------------------------
                                                     CLIENT DETAILS
     ----------------------------------------------------------------------------------------------------------
@@ -169,6 +166,24 @@ Route::group([
     Route::get('/create-client'                     , 'ViewController@createClient')->name('create-client');
 
     Route::get('/view-client'                       , 'ViewController@viewClient')->name('view-client');
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+                                                    MAILBOX
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    Route::get('/mailbox'                           , 'ViewController@mailBox')->name('mailbox');
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+                                                    FINANCE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    Route::get('/bank-account-details'              , 'ViewController@bankAccountDetails')->name('bank-account-details');
 
 
 
@@ -260,6 +275,17 @@ Route::group([
     Route::get('/todo-status/{id?}/{status?}'       , 'ActionController@taskStatusChange')->name('todo-status');
 
 
+    /*
+    ----------------------------------------------------------------------------------------------------------
+                                                    FINANCE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    Route::post('/create-bank-account'              , 'ActionController@createBankAccount')->name('create-bank-account');
+
+    Route::post('/edit-bank-account'                , 'ActionController@editBankAccount')->name('edit-bank-account');
+
+
 
 
     /*
@@ -267,6 +293,8 @@ Route::group([
     AJAX CONTROLLER
     ----------------------------------------------------------------------------------------------------------
     */
+
+    Route::get('/get-navbar-details'                    , 'AjaxController@navBarDetails')->name('get-navbar-details');
 
 
     /*
@@ -286,5 +314,16 @@ Route::group([
     Route::post('/get-task'                             , 'AjaxController@getTask')->name('get-task');
 
     Route::post('/get-todo'                             , 'AjaxController@getTodo')->name('get-todo');
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+                                                    MAIL BOX
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    Route::post('/client-message-get'                   , 'AjaxController@getClientMessage')->name('client-message-get');
+
+    Route::post('/client-message-markas-read'           , 'AjaxController@clientMessageMarkAsRead')->name('client-message-markas-read');
 
 });

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 use Validator;
+use Illuminate\Support\Facades\DB;
 
 
 use App\Models\Technology;
 
 use App\Models\UserImage;
+
+
+use App\Models\ClientMessage;
 
 
 use App\Models\Task;
@@ -31,9 +35,12 @@ class AjaxController extends Controller {
             if ( $validator->fails() ) {
                 return response()->json( [ 'icon' => 'error', 'msg' => $validator->messages()->first() ] );
             }
+            DB::beginTransaction();
             $technology = Technology::where('project_type_id',$request->type_id)->get('technology');
+            DB::commit();
             return response()->json( [ 'data' => $technology ] );
         } catch ( \Throwable $th ) {
+            DB::rollback();
             return response()->json( [ 'icon' => 'error', 'msg' => $th->getMessage() .' ' . $th->getLine() ] );
         }
     }
@@ -462,9 +469,95 @@ class AjaxController extends Controller {
             if ( $validator->fails() ) {
                 return response()->json( [ 'success' => false,'icon' => 'error', 'msg' => $validator->messages()->first() ] );
             }
+            DB::beginTransaction();
+            ClientMessage::create([
+                'email' => $request->email,
+                'name' => $request->sender_name,
+                'message' => $request->message,
+            ]);
+            DB::commit();
             return response()->json(  [ 'success' => true,'icon' => 'success', 'msg' => "Thank you for contacting us! We'll respond shortly." ]  );
         } catch ( \Throwable $th ) {
+            DB::rollback();
             return response()->json( [ 'success' => false,'icon' => 'error', 'msg' => $th->getMessage() .' ' . $th->getLine() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CLIENT GET CLIENT MESSAGE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getClientMessage(Request $request) {
+        try {
+            $client_message = ClientMessage::query();
+            $data['unreaded_count'] = ClientMessage::where('is_read',0)->count('id');
+            $data['readed_count'] = ClientMessage::where('is_read',1)->count('id');
+
+            if ($request->is_read !== null) {
+                $client_message->where('is_read', $request->is_read);
+            }
+
+            if ($request->searched_mail !== null) {
+                $client_message->where('email', 'like', '%' . $request->searched_mail . '%');
+            }
+
+            $message = $client_message->orderBy('created_at', 'desc')->get();
+
+            $data['message_details'] = $message;
+
+
+            return response()->json(['success' => true, "data" => $data]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(['success' => false, 'icon' => 'error', 'msg' => $th->getMessage() . ' ' . $th->getLine()]);
+        }
+    }
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CLIENT SEND MESSAGE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function clientMessageMarkAsRead( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'id' => 'required',
+                'is_read' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return response()->json( [ 'success' => false,'icon' => 'error', 'msg' => $validator->messages()->first() ] );
+            }
+            DB::beginTransaction();
+            $client_message = ClientMessage::find($request->id);
+            $client_message->is_read = $request->is_read;
+            $client_message->save();
+            DB::commit();
+            return response()->json(  [ 'success' => true,'icon' => 'success', 'msg' => "Thank you for contacting us! We'll respond shortly." ]  );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return response()->json( [ 'success' => false,'icon' => 'error', 'msg' => $th->getMessage() .' ' . $th->getLine() ] );
+        }
+    }
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CLIENT GET NAVBAR DATA
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function navBarDetails() {
+        try {
+            $data['unreaded_count'] = ClientMessage::where('is_read',0)->count('id');
+            return response()->json(['success' => true, "data" => $data]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(['success' => false, 'icon' => 'error', 'msg' => $th->getMessage() . ' ' . $th->getLine()]);
         }
     }
 }

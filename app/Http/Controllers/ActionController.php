@@ -39,6 +39,8 @@ use App\Models\TaskTeam;
 use App\Models\TaskAttachment;
 use App\Models\TaskModificationHistory;
 
+use App\Models\BankAccount;
+
 class ActionController extends Controller {
 
     //                                      FUNCTIONS FOR DEVELOPER TOOLS
@@ -1071,6 +1073,85 @@ class ActionController extends Controller {
 
             DB::commit();
             return redirect()->back()->with( [ 'temp-success' => true, 'message' => 'Task Updated Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+
+     //                                  FUNCTIONS FOR BANK DETAILS
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE BANK ACCOUNT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function createBankAccount( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'holder_name' => 'required',
+                'bank_name' => 'required',
+                'branch' => 'required',
+                'account_no' => 'required',
+                'balance' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $bank_account = BankAccount::create( [
+                'account_holder' => $request->holder_name,
+                'bank_name' => $request->bank_name,
+                'branch' => $request->branch,
+                'account_no' => $request->account_no,
+                'balance' => $request->balance,
+            ] );
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Bank Account Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION EDIT BANK ACCOUNT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function editBankAccount( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'id' => 'required',
+                'holder_name' => 'required',
+                'bank_name' => 'required',
+                'branch' => 'required',
+                'account_no' => 'required',
+                'balance' => 'required',
+                'is_active' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $bank_account = BankAccount::find($request->id);
+            $bank_account->account_holder = $request->holder_name;
+            $bank_account->bank_name = $request->bank_name;
+            $bank_account->branch = $request->branch;
+            $bank_account->account_no = $request->account_no;
+            $bank_account->balance = $request->balance;
+            $bank_account->is_active = $request->is_active;
+            $bank_account->save();
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Bank Account Updated Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
