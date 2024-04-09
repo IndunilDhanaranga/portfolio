@@ -14,6 +14,8 @@ use App\Models\ClientMessage;
 use App\Models\Task;
 
 use App\Models\Income;
+use App\Models\Expense;
+use App\Models\TransactionHistory;
 
 use Illuminate\Http\Request;
 
@@ -635,6 +637,163 @@ class AjaxController extends Controller {
 
             $edit = '<a href="/edit-income/'.$value->id.'"><i class="far fa-edit"></i></a>';
             $query[$key]->action = $edit;
+        }
+
+
+        $paginated_list = json_decode(json_encode($query));
+        $query = $query->map(function ($query) {
+            return $query;
+        })->all();
+
+        $response['draw'] = $request->draw;
+        $response['recordsFiltered'] = $paginated_list->total;
+        $response['recordsTotal'] = $paginated_list->total;
+        $response['data'] = $query;
+
+        return response()->json($response);
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET EXPENSE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getExpense(Request $request)
+    {
+        $query = Expense::with('expenseType','bankDetails','attachmentDetails');
+
+        $column_index = $request->order[0]['column'];
+        $order_dir = $request->order[0]['dir'];
+        $columns = $request->columns;
+        $column_name = $columns[$column_index]['data'];
+
+
+        $column_name_map = [
+            'expense_type.type' => 'expense_type_id',
+            'bank_details' => 'bank_account_id',
+        ];
+        $column_name = $column_name_map[$column_name] ?? $column_name;
+        $query = $query->orderBy($column_name, $order_dir);
+
+        if ($request->has('search') && $request->search['value'] != null) {
+            $search_value = $request->search['value'];
+            $query = $query->where(function ($data) use ($search_value) {
+                $data->orWhere('id', 'like', '%' . $search_value . '%')
+                    ->orWhere('amount', 'like', '%' . $search_value . '%')
+                    ->orWhere('description', 'like', '%' . $search_value . '%')
+                    ->orWhere('date', 'like', '%' . $search_value . '%')
+                    ->orWhereHas('expenseType', function ($data) use ($search_value) {
+                        $data->where('type', 'like', '%' . $search_value . '%');
+                    })
+                    ->orWhereHas('bankDetails', function ($data) use ($search_value) {
+                        $data->where('account_no', 'like', '%' . $search_value . '%')
+                        ->orWhere('account_holder', 'like', '%' . $search_value . '%')
+                        ->orWhere('bank_name', 'like', '%' . $search_value . '%')
+                        ->orWhere('branch', 'like', '%' . $search_value . '%');
+                    });
+            });
+        }
+
+
+        $page = ($request->start / $request->length);
+        $request->merge(['page' => $page]);
+        if ($request->length != -1) {
+            $query = $query->paginate($request->length);
+        } else {
+            $query = $query->paginate($query->count());
+        }
+
+
+
+        foreach ($query as $key => $value) {
+
+            $attachment = '<ul class="list-inline">';
+
+            foreach ($value->attachmentDetails as $key2 => $item) {
+                $attachment .= '<li class="list-inline-item">
+                                    <a target="_blank" href="'.getUploadAttachment($item->attachment_name,'expense_attachment').'"><i class="fa fa-image"></i></a>
+                                </li>';
+            }
+
+            $attachment .= '</ul>';
+
+            $query[$key]->attachments = $attachment;
+
+            $edit = '<a href="/edit-expense/'.$value->id.'"><i class="far fa-edit"></i></a>';
+            $query[$key]->action = $edit;
+        }
+
+
+        $paginated_list = json_decode(json_encode($query));
+        $query = $query->map(function ($query) {
+            return $query;
+        })->all();
+
+        $response['draw'] = $request->draw;
+        $response['recordsFiltered'] = $paginated_list->total;
+        $response['recordsTotal'] = $paginated_list->total;
+        $response['data'] = $query;
+
+        return response()->json($response);
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET BANK STATEMENT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getBankStatement(Request $request)
+    {
+        $query = TransactionHistory::with('bankDetails','transactionTypeDetails');
+
+        $column_index = $request->order[0]['column'];
+        $order_dir = $request->order[0]['dir'];
+        $columns = $request->columns;
+        $column_name = $columns[$column_index]['data'];
+
+
+        $column_name_map = [
+            'expense_type.type' => 'expense_type_id',
+            'bank_details' => 'bank_account_id',
+        ];
+        $column_name = $column_name_map[$column_name] ?? $column_name;
+        $query = $query->orderBy($column_name, $order_dir);
+
+        if ($request->has('search') && $request->search['value'] != null) {
+            $search_value = $request->search['value'];
+            $query = $query->where(function ($data) use ($search_value) {
+                $data->orWhere('id', 'like', '%' . $search_value . '%')
+                    ->orWhere('amount', 'like', '%' . $search_value . '%')
+                    ->orWhere('description', 'like', '%' . $search_value . '%')
+                    ->orWhere('date', 'like', '%' . $search_value . '%')
+                    ->orWhereHas('expenseType', function ($data) use ($search_value) {
+                        $data->where('type', 'like', '%' . $search_value . '%');
+                    })
+                    ->orWhereHas('bankDetails', function ($data) use ($search_value) {
+                        $data->where('account_no', 'like', '%' . $search_value . '%')
+                        ->orWhere('account_holder', 'like', '%' . $search_value . '%')
+                        ->orWhere('bank_name', 'like', '%' . $search_value . '%')
+                        ->orWhere('branch', 'like', '%' . $search_value . '%');
+                    });
+            });
+        }
+
+
+        $page = ($request->start / $request->length);
+        $request->merge(['page' => $page]);
+        if ($request->length != -1) {
+            $query = $query->paginate($request->length);
+        } else {
+            $query = $query->paginate($query->count());
+        }
+
+
+
+        foreach ($query as $key => $value) {
+            $transaction = '<a target="_blank" href="/view-transaction/'.$value->transaction_id.'/'.$value->transaction_type.'"><i class="fas fa-receipt"></i></a>';
+            $query[$key]->transaction = $transaction;
         }
 
 

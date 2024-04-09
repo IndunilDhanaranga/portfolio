@@ -225,8 +225,12 @@ return [
     'expense-types-init-js'             =>'/assets/back-end/custom/js/expense-types-init.js',
 
     'create-income-init-js'             =>'/assets/back-end/custom/js/create-income-init.js',
-    
+
     'income-init-js'                    =>'/assets/back-end/custom/js/income-init.js',
+
+    'expense-init-js'                   =>'/assets/back-end/custom/js/expense-init.js',
+
+    'bank-statement-init-js'            =>'/assets/back-end/custom/js/bank-statement-init.js',
 
     'live-path'                         => ''
 

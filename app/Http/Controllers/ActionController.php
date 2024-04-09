@@ -44,7 +44,9 @@ use App\Models\IncomeType;
 use App\Models\ExpenseType;
 use App\Models\Income;
 use App\Models\IncomeAttachment;
-use App\Models\TansactionHistory;
+use App\Models\TransactionHistory;
+use App\Models\Expense;
+use App\Models\ExpenseAttachment;
 
 class ActionController extends Controller {
 
@@ -1323,7 +1325,7 @@ class ActionController extends Controller {
             $bank_account->balance = $bank_account->balance + $request->amount;
             $bank_account->save();
 
-            $transaction_history = TansactionHistory::create( [
+            $transaction_history = TransactionHistory::create( [
                 'transaction_id'    => $income->id,
                 'bank_account_id'    => $request->bank_account_id,
                 'transaction_type'    => 1,
@@ -1340,7 +1342,7 @@ class ActionController extends Controller {
 
     /*
     ----------------------------------------------------------------------------------------------------------
-    PUBLIC FUNCTION EDIT EXPENSE TYPE
+    PUBLIC FUNCTION UPDATE INCOME
     ----------------------------------------------------------------------------------------------------------
     */
 
@@ -1394,8 +1396,142 @@ class ActionController extends Controller {
             $bank_account->balance = $bank_account->balance + $request->amount;
             $bank_account->save();
 
+            TransactionHistory::where( 'transaction_id', $id )->where( 'transaction_type', 1 )->delete();
+            $transaction_history = TransactionHistory::create( [
+                'transaction_id'    => $income->id,
+                'bank_account_id'    => $request->bank_account_id,
+                'transaction_type'    => 1,
+                'amount'    => $request->amount,
+                'date'    => $request->date,
+            ] );
+
             DB::commit();
             return redirect()->route( 'view-income' )->with( [ 'success' => true, 'message' => 'Income Updated Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE EXPENSE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function createExpense( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'type_id' => 'required',
+                'bank_account_id' => 'required',
+                'amount' => 'required',
+                'description' => 'required',
+                'date' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $expense = Expense::create( [
+                'expense_type_id' => $request->type_id,
+                'bank_account_id' => $request->bank_account_id,
+                'amount' => $request->amount,
+                'description' => $request->description,
+                'date' => $request->date,
+            ] );
+            if ( $request->hasFile( 'attachment' ) ) {
+                foreach ( $request->file( 'attachment' ) as $key => $attachment ) {
+                    $expense_attachment = uploadAttachment( $attachment, 'expense_attachment' );
+                    ExpenseAttachment::create( [
+                        'expense_id'       => $expense->id,
+                        'attachment_name'    => $expense_attachment,
+                    ] );
+                }
+            }
+            $bank_account = BankAccount::find( $request->bank_account_id );
+            $bank_account->balance = $bank_account->balance - $request->amount;
+            $bank_account->save();
+
+            $transaction_history = TransactionHistory::create( [
+                'transaction_id'    => $expense->id,
+                'bank_account_id'    => $request->bank_account_id,
+                'transaction_type'    => 2,
+                'amount'    => $request->amount,
+                'date'    => $request->date,
+            ] );
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Expense Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION UPDATE EXPENSE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function updateExpense( Request $request, $id ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'type_id' => 'required',
+                'bank_account_id' => 'required',
+                'amount' => 'required',
+                'description' => 'required',
+                'date' => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+
+            DB::beginTransaction();
+            $expense = Expense::find( $id );
+
+            $old_bank_account = $expense->bank_account_id;
+            $old_amount = $expense->amount;
+
+            $expense->expense_type_id = $request->type_id;
+            $expense->bank_account_id = $request->bank_account_id;
+            $expense->amount = $request->amount;
+            $expense->description = $request->description;
+            $expense->date = $request->date;
+            $expense->save();
+
+            if ( $request->hasFile( 'attachment' ) ) {
+                foreach ( $request->file( 'attachment' ) as $key => $attachment ) {
+                    $income_attachment = uploadAttachment( $attachment, 'expense_attachment' );
+                    ExpenseAttachment::where( 'expense_id', $id )->delete();
+                    ExpenseAttachment::create( [
+                        'expense_id'         => $income->id,
+                        'attachment_name'    => $income_attachment,
+                    ] );
+                }
+            }
+
+            $bank_account_old = BankAccount::find( $old_bank_account );
+            $bank_account_old->balance = $bank_account_old->balance + $old_amount;
+            $bank_account_old->save();
+
+            $bank_account = BankAccount::find( $request->bank_account_id );
+            $bank_account->balance = $bank_account->balance - $request->amount;
+            $bank_account->save();
+
+            TransactionHistory::where( 'transaction_id', $id )->where( 'transaction_type', 2 )->delete();
+            $transaction_history = TransactionHistory::create( [
+                'transaction_id'    => $expense->id,
+                'bank_account_id'    => $request->bank_account_id,
+                'transaction_type'    => 2,
+                'amount'    => $request->amount,
+                'date'    => $request->date,
+            ] );
+
+            DB::commit();
+            return redirect()->route( 'view-expense' )->with( [ 'success' => true, 'message' => 'Expense Updated Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );

@@ -803,4 +803,88 @@ class ViewController extends DataController {
         return $this->default( $data );
     }
 
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW EXPENSE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function viewExpense() {
+        $data = [
+            'title' => 'Expense',
+            'view' => 'back-end.expense',
+            'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
+                                config( 'site-specific.buttons-bootstrap-min-css' ) ),
+            'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
+                                    config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
+                                    config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
+                                    config( 'site-specific.pdfmake-min-js' ),
+                                    config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
+                                    config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
+                                    config( 'site-specific.expense-init-js' )
+                                ),
+        ];
+        // return $data[ 'project' ];
+        return $this->default( $data );
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW EDIT EXPENSE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function editExpense($id) {
+        $data = [
+            'title' => 'Edit Expense',
+            'view' => 'back-end.edit-expense',
+            'expense_type' => $this->getExpenseType(1),
+            'bank_details' => $this->getBankDetails(1),
+            'expense_details' => $this->getExpenseDetails($id),
+        ];
+        // return $data[ 'education_qualification' ];
+        return $this->default( $data );
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW BANK STATEMENT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function bankStatement() {
+        $data = [
+            'title' => 'Bank Statement',
+            'view' => 'back-end.bank-statement',
+            'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
+                                config( 'site-specific.buttons-bootstrap-min-css' ) ),
+            'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
+                                    config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
+                                    config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
+                                    config( 'site-specific.pdfmake-min-js' ),
+                                    config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
+                                    config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
+                                    config( 'site-specific.bank-statement-init-js' )
+                                ),
+        ];
+        // return $data[ 'project' ];
+        return $this->default( $data );
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW TRANSACTION
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function viewTransaction($transaction_id,$transaction_type) {
+        $data = [
+            'title' => 'Transaction Details',
+            'view' => 'back-end.view-transaction',
+            'transaction_details' => $this->getTransaction($transaction_id,$transaction_type),
+        ];
+        return $data[ 'transaction_details' ];
+        return $this->default( $data );
+    }
+
 }

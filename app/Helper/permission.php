@@ -80,6 +80,7 @@ function getAllPermissions() {
             'type'=>'multiple',
             'data'=>array(
                 [ 'title' => 'Income', 'permission'=>'view-income', 'show_in_sidebar'=>true ],
+                [ 'title' => 'Expense', 'permission'=>'view-expense', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Bank Details', 'permission'=>'bank-account-details', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Create Income', 'permission'=>'view-create-income', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Create Expense', 'permission'=>'view-create-expense', 'show_in_sidebar'=>true ],
@@ -95,6 +96,20 @@ function getAllPermissions() {
                 [ 'title' => 'Get Income', 'permission'=>'get-income', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Edit Income', 'permission'=>'edit-income', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Update Income', 'permission'=>'update-income', 'show_in_sidebar'=>false ],
+                [ 'title' => 'Add Expense', 'permission'=>'create-expense', 'show_in_sidebar'=>false ],
+                [ 'title' => 'Edit Expense', 'permission'=>'edit-expense', 'show_in_sidebar'=>false ],
+                [ 'title' => 'Get Expense', 'permission'=>'get-expense', 'show_in_sidebar'=>false ],
+                [ 'title' => 'Update Expense', 'permission'=>'update-expense', 'show_in_sidebar'=>false ],
+            )
+        ],
+        [
+            'group'=>'Reports',
+            'icon'=>'nav-icon fas fa-file-signature',
+            'type'=>'multiple',
+            'data'=>array(
+                [ 'title' => 'Bank Statement', 'permission'=>'bank-statement', 'show_in_sidebar'=>true ],
+                [ 'title' => 'Get Bank Statement', 'permission'=>'get-bank-statement', 'show_in_sidebar'=>false ],
+                [ 'title' => 'View Transaction', 'permission'=>'view-transaction', 'show_in_sidebar'=>false ],
             )
         ],
         [

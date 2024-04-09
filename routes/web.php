@@ -197,6 +197,14 @@ Route::group([
 
     Route::get('/view-create-expense'               , 'ViewController@createExpense')->name('view-create-expense');
 
+    Route::get('/view-expense'                      , 'ViewController@viewExpense')->name('view-expense');
+
+    Route::get('/edit-expense/{id?}'                , 'ViewController@editExpense')->name('edit-expense');
+
+    Route::get('/bank-statement'                    , 'ViewController@bankStatement')->name('bank-statement');
+
+    Route::get('/view-transaction/{transaction_id?}/{transaction_type?}'                    , 'ViewController@viewTransaction')->name('view-transaction');
+
 
 
 
@@ -309,6 +317,10 @@ Route::group([
 
     Route::post('/update-income/{id?}'              , 'ActionController@updateIncome')->name('update-income');
 
+    Route::post('/create-expense'                   , 'ActionController@createExpense')->name('create-expense');
+
+    Route::post('/update-expense/{id?}'             , 'ActionController@updateExpense')->name('update-expense');
+
 
 
 
@@ -359,5 +371,9 @@ Route::group([
     */
 
     Route::post('/get-income'                           , 'AjaxController@getIncome')->name('get-income');
+
+    Route::post('/get-expense'                          , 'AjaxController@getExpense')->name('get-expense');
+
+    Route::post('/get-bank-statement'                   , 'AjaxController@getBankStatement')->name('get-bank-statement');
 
 });

@@ -32,6 +32,7 @@ use App\Models\BankAccount;
 use App\Models\IncomeType;
 use App\Models\ExpenseType;
 use App\Models\Income;
+use App\Models\Expense;
 
 class DataController extends Controller {
 
@@ -367,6 +368,32 @@ class DataController extends Controller {
 
     public function getIncomeForEdit($id) {
         $data = Income::find($id);
+        return $data;
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET EXPENSE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getExpenseDetails($id) {
+        $data = Expense::find($id);
+        return $data;
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET TRANSACTION
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getTransaction($transaction_id,$transaction_type) {
+        if($transaction_type == 1){
+            $data = Income::with('incomeType','projectDetails','bankDetails','attachmentDetails')->where('id',$transaction_id)->first();
+        }else if($transaction_type == 2){
+            $data = Expense::with('expenseType','bankDetails','attachmentDetails')->where('id',$transaction_id)->first();
+        }
         return $data;
     }
 

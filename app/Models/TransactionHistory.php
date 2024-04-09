@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TansactionHistory extends Model
+class TransactionHistory extends Model
 {
     use HasFactory;
 
@@ -26,4 +26,11 @@ class TansactionHistory extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function bankDetails() {
+        return $this->hasOne( BankAccount::class, 'id', 'bank_account_id' );
+    }
+    public function transactionTypeDetails() {
+        return $this->hasOne( TransactionType::class, 'id', 'transaction_type' );
+    }
 }
