@@ -83,7 +83,7 @@
                         <div class="col-md-6 col-12">
                             <div class="from-group">
                                 <label for="">Description</label>
-                                <textarea class="form-control" name="description" placeholder="Description" rows="4">{{$task->description}}</textarea>
+                                <textarea class="form-control" name="description" placeholder="Description" rows="4">{{ $task->description }}</textarea>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
@@ -93,7 +93,9 @@
                                     data-select2-id="8" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($task_status as $item)
-                                        <option value="{{ $item->id }}" {{$task->status == $item->id ? 'selected' : ''}}>{{ $item->title }}</option>
+                                        <option value="{{ $item->id }}"
+                                            {{ $task->status == $item->id ? 'selected' : '' }}>{{ $item->title }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -118,7 +120,9 @@
                                     data-select2-id="5" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($users as $item)
-                                        <option value="{{ $item->id }}" {{$task->taskTeamDetails->developer_id == $item->id ? 'selected' : ''}}>{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}"
+                                            {{ $task->taskTeamDetails->developer_id == $item->id ? 'selected' : '' }}>
+                                            {{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -144,7 +148,9 @@
                                     data-select2-id="6" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($users as $item)
-                                        <option value="{{ $item->id }}" {{$task->taskTeamDetails->qa_id == $item->id ? 'selected' : ''}}>{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}"
+                                            {{ $task->taskTeamDetails->qa_id == $item->id ? 'selected' : '' }}>
+                                            {{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -158,7 +164,9 @@
                                     data-select2-id="7" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($users as $item)
-                                        <option value="{{ $item->id }}" {{$task->taskTeamDetails->publisher_id == $item->id ? 'selected' : ''}}>{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}"
+                                            {{ $task->taskTeamDetails->publisher_id == $item->id ? 'selected' : '' }}>
+                                            {{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

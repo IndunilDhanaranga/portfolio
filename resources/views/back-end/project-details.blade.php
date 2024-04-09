@@ -32,7 +32,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-12">
-                                    <input type="file" placeholder="Display Name" value="" name="video[]" multiple accept="*">
+                                    <input type="file" placeholder="Display Name" value="" name="video[]"
+                                        multiple accept="*">
                                 </div>
                             </div>
                         </div>
@@ -46,7 +47,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-12">
-                                    <input type="file" placeholder="Display Name" value="" name="image[]" multiple accept="image">
+                                    <input type="file" placeholder="Display Name" value="" name="image[]"
+                                        multiple accept="image">
                                 </div>
                             </div>
                         </div>

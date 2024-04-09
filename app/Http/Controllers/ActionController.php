@@ -1323,13 +1323,13 @@ class ActionController extends Controller {
             $bank_account->balance = $bank_account->balance + $request->amount;
             $bank_account->save();
 
-            $transaction_history = TansactionHistory::create([
+            $transaction_history = TansactionHistory::create( [
                 'transaction_id'    => $income->id,
                 'bank_account_id'    => $request->bank_account_id,
                 'transaction_type'    => 1,
                 'amount'    => $request->amount,
                 'date'    => $request->date,
-            ]);
+            ] );
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'Income Created Successfully !' ] );
         } catch ( \Throwable $th ) {
@@ -1344,12 +1344,17 @@ class ActionController extends Controller {
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function editIncome( Request $request ) {
+    public function updateIncome( Request $request, $id ) {
         try {
             $validator = Validator::make( $request->all(), [
-                'id' => 'required',
-                'expense_type' => 'required',
-                'is_active' => 'required',
+                'type_id' => 'required',
+                'project_id' => 'required_if:type_id,2',
+                'bank_account_id' => 'required',
+                'amount' => 'required',
+                'description' => 'required',
+                'date' => 'required',
+            ], [
+                'project_id.required_if' =>'Need to select a project if the income type is "projects".'
             ] );
 
             if ( $validator->fails() ) {
@@ -1357,12 +1362,40 @@ class ActionController extends Controller {
             }
 
             DB::beginTransaction();
-            $expense_type = ExpenseType::find( $request->id );
-            $expense_type->type = $request->expense_type;
-            $expense_type->is_active = $request->is_active;
-            $expense_type->save();
+            $income = Income::find( $id );
+
+            $old_bank_account = $income->bank_account_id;
+            $old_amount = $income->amount;
+
+            $income->income_type_id = $request->type_id;
+            $income->project_id = $request->project_id;
+            $income->bank_account_id = $request->bank_account_id;
+            $income->amount = $request->amount;
+            $income->description = $request->description;
+            $income->date = $request->date;
+            $income->save();
+
+            if ( $request->hasFile( 'attachment' ) ) {
+                foreach ( $request->file( 'attachment' ) as $key => $attachment ) {
+                    $income_attachment = uploadAttachment( $attachment, 'income_attachment' );
+                    IncomeAttachment::where( 'income_id', $id )->delete();
+                    IncomeAttachment::create( [
+                        'income_id'         => $income->id,
+                        'attachment_name'    => $income_attachment,
+                    ] );
+                }
+            }
+
+            $bank_account_old = BankAccount::find( $old_bank_account );
+            $bank_account_old->balance = $bank_account_old->balance - $old_amount;
+            $bank_account_old->save();
+
+            $bank_account = BankAccount::find( $request->bank_account_id );
+            $bank_account->balance = $bank_account->balance + $request->amount;
+            $bank_account->save();
+
             DB::commit();
-            return redirect()->back()->with( [ 'success' => true, 'message' => 'Income Type Updated Successfully !' ] );
+            return redirect()->route( 'view-income' )->with( [ 'success' => true, 'message' => 'Income Updated Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
             return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );

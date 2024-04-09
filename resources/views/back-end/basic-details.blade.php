@@ -67,7 +67,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-12">
-                                    <input type="file" placeholder="Display Name" value="" id="user_image" name="user_image"  accept="image">
+                                    <input type="file" placeholder="Display Name" value="" id="user_image"
+                                        name="user_image" accept="image">
                                 </div>
                             </div>
                         </div>
@@ -79,7 +80,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-12">
-                                    <input type="file" placeholder="Display Name" value="" id="cover_image" name="cover_image" accept="image">
+                                    <input type="file" placeholder="Display Name" value="" id="cover_image"
+                                        name="cover_image" accept="image">
                                 </div>
                             </div>
                         </div>

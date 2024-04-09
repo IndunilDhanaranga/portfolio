@@ -193,6 +193,10 @@ Route::group([
 
     Route::get('/view-income'                       , 'ViewController@viewIncome')->name('view-income');
 
+    Route::get('/edit-income/{id?}'                 , 'ViewController@editIncome')->name('edit-income');
+
+    Route::get('/view-create-expense'               , 'ViewController@createExpense')->name('view-create-expense');
+
 
 
 
@@ -303,6 +307,8 @@ Route::group([
 
     Route::post('/create-income'                    , 'ActionController@createIncome')->name('create-income');
 
+    Route::post('/update-income/{id?}'              , 'ActionController@updateIncome')->name('update-income');
+
 
 
 
@@ -345,5 +351,13 @@ Route::group([
     Route::post('/client-message-get'                   , 'AjaxController@getClientMessage')->name('client-message-get');
 
     Route::post('/client-message-markas-read'           , 'AjaxController@clientMessageMarkAsRead')->name('client-message-markas-read');
+
+     /*
+    ----------------------------------------------------------------------------------------------------------
+                                                    FINANCE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    Route::post('/get-income'                           , 'AjaxController@getIncome')->name('get-income');
 
 });

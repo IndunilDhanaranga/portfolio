@@ -225,6 +225,8 @@ return [
     'expense-types-init-js'             =>'/assets/back-end/custom/js/expense-types-init.js',
 
     'create-income-init-js'             =>'/assets/back-end/custom/js/create-income-init.js',
+    
+    'income-init-js'                    =>'/assets/back-end/custom/js/income-init.js',
 
     'live-path'                         => ''
 

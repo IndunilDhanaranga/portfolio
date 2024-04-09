@@ -50,4 +50,32 @@ $(document).ready(function () {
     });
 });
 
-// Rest of your code remains the same
+$("#project_id").change(function() {
+    var value = $("#project_id").val();
+    table.columns(1).search(value).draw();
+});
+
+$("#status").change(function() {
+    var value = $("#status").val();
+    table.columns(2).search(value).draw();
+});
+
+$("#task_category_id").change(function() {
+    var value = $("#task_category_id").val();
+    table.columns(3).search(value).draw();
+});
+
+$("#developer").change(function() {
+    var value = $("#developer").val();
+    table.columns(4).search(value).draw();
+});
+
+$("#qa").change(function() {
+    var value = $("#qa").val();
+    table.columns(5).search(value).draw();
+});
+
+$("#live").change(function() {
+    var value = $("#live").val();
+    table.columns(6).search(value).draw();
+});

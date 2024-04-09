@@ -19,8 +19,8 @@
                 <div class="col-md-6 col-12">
                     <div class="form-group" data-select2-id="1">
                         <label for="">Project Type</label>
-                        <select class="form-control select2 " name="type_id"
-                            style="width: 100%;" data-select2-id="1" aria-hidden="true">
+                        <select class="form-control select2 " name="type_id" style="width: 100%;" data-select2-id="1"
+                            aria-hidden="true">
                             <option value="">No Select</option>
                             @foreach ($project_type as $item)
                                 <option value="{{ $item->id }}">{{ $item->type }}</option>
@@ -33,8 +33,8 @@
                 <div class="col-md-6 col-12">
                     <div class="form-group" data-select2-id="2">
                         <label for="">Client</label>
-                        <select class="form-control select2 " name="client_id"
-                            style="width: 100%;" data-select2-id="2" aria-hidden="true">
+                        <select class="form-control select2 " name="client_id" style="width: 100%;" data-select2-id="2"
+                            aria-hidden="true">
                             <option value="">No Select</option>
                             @foreach ($all_clients as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -45,7 +45,8 @@
                 <div class="col-md-6 col-12">
                     <div class="from-group">
                         <label for="">Estimate (Rs.)</label>
-                        <input type="number" class="form-control" name="estimate" min="0" placeholder="Estimate">
+                        <input type="number" class="form-control" name="estimate" min="0"
+                            placeholder="Estimate">
                     </div>
                 </div>
             </div>
@@ -53,7 +54,8 @@
                 <div class="col-md-6 col-12">
                     <div class="from-group">
                         <label for="">Repository</label>
-                        <input type="text" class="form-control" name="repository" min="0" placeholder="Repository">
+                        <input type="text" class="form-control" name="repository" min="0"
+                            placeholder="Repository">
                     </div>
                 </div>
                 <div class="col-md-6 col-12">

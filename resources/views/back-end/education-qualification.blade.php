@@ -9,12 +9,12 @@
                             <div class="card-title">Qualifications</div>
                         </div>
                         <div class="col-md-1">
-                           <div class="float-right">
-                            <span class="btn btn-warning btn-xs" onclick="addQualification()"><i
-                                class="fa fa-plus"></i></span>
-                        <span class="btn btn-warning btn-xs ml-1" onclick="removeQualification()"><i
-                                class="fa fa-minus"></i></span>
-                           </div>
+                            <div class="float-right">
+                                <span class="btn btn-warning btn-xs" onclick="addQualification()"><i
+                                        class="fa fa-plus"></i></span>
+                                <span class="btn btn-warning btn-xs ml-1" onclick="removeQualification()"><i
+                                        class="fa fa-minus"></i></span>
+                            </div>
                         </div>
                     </div>
                 </div>

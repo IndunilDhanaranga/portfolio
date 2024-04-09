@@ -112,9 +112,9 @@ use Carbon\Carbon;
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="{{ getAuthImage('user_image') }}" alt="AdminLTE Logo"
-                    class="brand-image img-circle elevation-3" style="opacity: .8">
+            <a href="/" class="brand-link">
+                <img src="{{ getAuthImage('user_image') }}" alt="Logo" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
                 <span class="brand-text font-weight-light">Portfolio</span>
             </a>
 
@@ -165,15 +165,15 @@ use Carbon\Carbon;
                                     if ($item['show_in_sidebar'] && isPermissions($item['permission'])) {
                                         $links .=
                                             ' <li class="nav-item">
-                                                                                                                                                                                                                                                                                                                                                            <a href="' .
+                                                                                                                                                                                                                                                                                                                                                                                                                            <a href="' .
                                             route($item['permission']) .
                                             '" class="nav-link">
-                                                                                                                                                                                                                                                                                                                                                              <i class="far fa-circle nav-icon"></i>
-                                                                                                                                                                                                                                                                                                                                                              <p class="text-capitalize">' .
+                                                                                                                                                                                                                                                                                                                                                                                                                              <i class="far fa-circle nav-icon"></i>
+                                                                                                                                                                                                                                                                                                                                                                                                                              <p class="text-capitalize">' .
                                             $item['title'] .
                                             '</p>
-                                                                                                                                                                                                                                                                                                                                                            </a>
-                                                                                                                                                                                                                                                                                                                                                          </li>';
+                                                                                                                                                                                                                                                                                                                                                                                                                            </a>
+                                                                                                                                                                                                                                                                                                                                                                                                                          </li>';
                                     }
                                 }
                                 ?>
@@ -277,26 +277,27 @@ use Carbon\Carbon;
                 .addClass('menu-open').prev('a')
                 .addClass('active');
         });
-        $(document).ready(function () {
+        $(document).ready(function() {
             navbarDetails();
             setInterval(navbarDetails, 60000);
         });
-        function navbarDetails(){
+
+        function navbarDetails() {
             $.ajax({
-            type: "GET",
-            url: "/get-navbar-details",
-            dataType: "json",
-            success: function (response) {
-                if(response.success == true){
-                    if(response.data.unreaded_count > 0){
-                        $("#message_count").removeClass("d-none");
-                        $("#message_count").html(response.data.unreaded_count);
-                    }else{
-                        $("#message_count").addClass("d-none");
+                type: "GET",
+                url: "/get-navbar-details",
+                dataType: "json",
+                success: function(response) {
+                    if (response.success == true) {
+                        if (response.data.unreaded_count > 0) {
+                            $("#message_count").removeClass("d-none");
+                            $("#message_count").html(response.data.unreaded_count);
+                        } else {
+                            $("#message_count").addClass("d-none");
+                        }
                     }
-                }
-            },
-        });
+                },
+            });
         }
     </script>
     @if (session('temp-success'))

@@ -33,8 +33,8 @@
                             <div class="float-right">
                                 <span class="btn btn-warning btn-xs" onclick="addLanguages()"><i
                                         class="fa fa-plus"></i></span>
-                                <span class="btn btn-warning btn-xs ml-1" id="remove_lang" onclick="removeLanguages()"><i
-                                        class="fa fa-minus"></i></span>
+                                <span class="btn btn-warning btn-xs ml-1" id="remove_lang"
+                                    onclick="removeLanguages()"><i class="fa fa-minus"></i></span>
                             </div>
                         </div>
                     </div>

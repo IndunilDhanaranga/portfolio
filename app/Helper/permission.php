@@ -49,7 +49,7 @@ function getAllPermissions() {
                 [ 'title' => 'Create Project Types', 'permission'=>'add-project-type', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Update Project Types', 'permission'=>'update-project-type', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Add Project', 'permission'=>'add-project', 'show_in_sidebar'=>false ],
-                [ 'title' => 'Update Project', 'permission'=>'', 'show_in_sidebar'=>false ],
+                [ 'title' => 'Update Project', 'permission'=>'update-project', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Get Technology', 'permission'=>'get-technology', 'show_in_sidebar'=>false ],
             )
         ],
@@ -80,10 +80,11 @@ function getAllPermissions() {
             'type'=>'multiple',
             'data'=>array(
                 [ 'title' => 'Income', 'permission'=>'view-income', 'show_in_sidebar'=>true ],
+                [ 'title' => 'Bank Details', 'permission'=>'bank-account-details', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Create Income', 'permission'=>'view-create-income', 'show_in_sidebar'=>true ],
+                [ 'title' => 'Create Expense', 'permission'=>'view-create-expense', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Expense Type', 'permission'=>'expense-types', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Income Type', 'permission'=>'income-types', 'show_in_sidebar'=>true ],
-                [ 'title' => 'Bank Details', 'permission'=>'bank-account-details', 'show_in_sidebar'=>true ],
                 [ 'title' => 'Create Bank Account', 'permission'=>'create-bank-account', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Edit Bank Account', 'permission'=>'edit-bank-account', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Create Income Type', 'permission'=>'create-income-type', 'show_in_sidebar'=>false ],
@@ -91,6 +92,9 @@ function getAllPermissions() {
                 [ 'title' => 'Create Expense Type', 'permission'=>'create-expense-type', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Edit Expense Type', 'permission'=>'edit-expense-type', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Add Income', 'permission'=>'create-income', 'show_in_sidebar'=>false ],
+                [ 'title' => 'Get Income', 'permission'=>'get-income', 'show_in_sidebar'=>false ],
+                [ 'title' => 'Edit Income', 'permission'=>'edit-income', 'show_in_sidebar'=>false ],
+                [ 'title' => 'Update Income', 'permission'=>'update-income', 'show_in_sidebar'=>false ],
             )
         ],
         [

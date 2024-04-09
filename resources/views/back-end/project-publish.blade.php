@@ -15,8 +15,8 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group" data-select2-id="1">
                                 <label for="">Project</label>
-                                <select class="form-control select2" onchange="projectID(this)" name="project_id" style="width: 100%;"
-                                    data-select2-id="1" aria-hidden="true">
+                                <select class="form-control select2" onchange="projectID(this)" name="project_id"
+                                    style="width: 100%;" data-select2-id="1" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($project as $item)
                                         <option value="{{ $item->id }}">{{ $item->title }}</option>

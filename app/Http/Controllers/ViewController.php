@@ -751,19 +751,55 @@ class ViewController extends DataController {
         $data = [
             'title' => 'Income',
             'view' => 'back-end.income',
-            'income' => $this->getIncome(),
             'css'       => array( config( 'site-specific.datatable-bootstrap-min-css' ), config( 'site-specific.responsive-bootstrap-min-css' ),
-                            config( 'site-specific.buttons-bootstrap-min-css' ) ),
+                                config( 'site-specific.buttons-bootstrap-min-css' ) ),
             'script'    => array( config( 'site-specific.jquery-datatable-min-js' ), config( 'site-specific.datatable-bootstrap-min-js' ),
                                     config( 'site-specific.datatable-responsive-min-js' ),config( 'site-specific.responsive-bootstrap-min-js' ),
                                     config( 'site-specific.datatable-buttons-min-js' ),config( 'site-specific.buttons-bootstrap-min-js' ),
                                     config( 'site-specific.pdfmake-min-js' ),
                                     config( 'site-specific.vfs_fonts-min-js' ),config( 'site-specific.buttons-html5-min-js' ),
                                     config( 'site-specific.buttons-print-min-js' ),config( 'site-specific.buttons-colvis-min-js' ),
-                                    config( 'site-specific.expense-types-init-js' )
-                                    ),
+                                    config( 'site-specific.income-init-js' )
+                                ),
         ];
         // return $data[ 'project' ];
+        return $this->default( $data );
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW EDIT INCOME
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function editIncome($id) {
+        $data = [
+            'title' => 'Edit Income',
+            'view' => 'back-end.edit-income',
+            'income_type' => $this->getIncomeType(1),
+            'project' => $this->getProject(),
+            'bank_details' => $this->getBankDetails(1),
+            'income_details' => $this->getIncomeForEdit($id),
+            'script'    => array(config('site-specific.create-income-init-js')),
+        ];
+        // return $data[ 'income_details' ];
+        return $this->default( $data );
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW CREATE EXPENSE
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function createExpense() {
+        $data = [
+            'title' => 'Create Expense',
+            'view' => 'back-end.create-expense',
+            'expense_type' => $this->getExpenseType(1),
+            'bank_details' => $this->getBankDetails(1),
+        ];
+        // return $data[ 'education_qualification' ];
         return $this->default( $data );
     }
 

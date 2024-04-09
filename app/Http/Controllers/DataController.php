@@ -365,9 +365,8 @@ class DataController extends Controller {
     ----------------------------------------------------------------------------------------------------------
     */
 
-    public function getIncome() {
-        $data = Income::with('incomeType','projectDetails','bankDetails','attachmentDetails');
-        $data = $data->orderby('id','desc')->get();
+    public function getIncomeForEdit($id) {
+        $data = Income::find($id);
         return $data;
     }
 

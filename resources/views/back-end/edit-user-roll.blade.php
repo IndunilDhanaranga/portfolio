@@ -2,24 +2,25 @@
     <div class="card-header">
         <h5 class="m-1">Edit User Roll</h5>
     </div>
-    <form action="/update-user-roll/{{$user_roll->id}}" method="post">
+    <form action="/update-user-roll/{{ $user_roll->id }}" method="post">
         <div class="card-body">
             @csrf
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="user_roll">User Roll</label>
-                        <input type="text" class="form-control" id="user_roll" name="user_roll" value="{{$user_roll->title}}" placeholder="User Roll">
+                        <input type="text" class="form-control" id="user_roll" name="user_roll"
+                            value="{{ $user_roll->title }}" placeholder="User Roll">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group" data-select2-id="1">
                         <label for="">Status</label>
-                        <select class="form-control select2 " name="is_active"
-                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                            <option value="" >No Select</option>
-                            <option value="1" {{$user_roll->is_active == 1 ? 'selected' : '' }}>Active</option>ෆ
-                            <option value="0" {{$user_roll->is_active == 0 ? 'selected' : ''}}>Inactive</option>
+                        <select class="form-control select2 " name="is_active" style="width: 100%;" data-select2-id="1"
+                            tabindex="-1" aria-hidden="true">
+                            <option value="">No Select</option>
+                            <option value="1" {{ $user_roll->is_active == 1 ? 'selected' : '' }}>Active</option>ෆ
+                            <option value="0" {{ $user_roll->is_active == 0 ? 'selected' : '' }}>Inactive</option>
                         </select>
                     </div>
                 </div>
@@ -54,7 +55,9 @@
                             <td class="cheack-all">
                                 @foreach ($item['data'] as $data)
                                     <input class="form-check-input" type="checkbox" name="permission[]"
-                                        value="{{ $data['permission'] }}" <?php if(in_array($data['permission'], json_decode($user_roll_permission))){ echo 'checked'; } ?>>
+                                        value="{{ $data['permission'] }}" <?php if (in_array($data['permission'], json_decode($user_roll_permission))) {
+                                            echo 'checked';
+                                        } ?>>
                                     <label>
                                         {{ $data['title'] }}
                                     </label>
