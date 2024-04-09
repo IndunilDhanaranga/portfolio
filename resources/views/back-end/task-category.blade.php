@@ -17,7 +17,9 @@
                     <th>ID</th>
                     <th>Category</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    @if (isPermissions('update-task-category'))
+                        <th>Action</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -30,10 +32,12 @@
                         @else
                             <td><span class="badge badge-success">Active</span></td>
                         @endif
-                        <td>
-                            <a data-task_category = "{{ json_encode($item) }}" onclick = "editTaskCategory(this)"><i
-                                    class="far fa-edit"></i></a>
-                        </td>
+                        @if (isPermissions('update-task-category'))
+                            <td>
+                                <a data-task_category = "{{ json_encode($item) }}" onclick = "editTaskCategory(this)"><i
+                                        class="far fa-edit"></i></a>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>

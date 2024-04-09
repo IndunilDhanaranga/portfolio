@@ -1,6 +1,7 @@
 <div class="card card-default color-palette-box">
     <div class="card-header">
-        <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#add-expense-type">
+        <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal"
+            data-target="#add-expense-type">
             <i class="fa fa-plus"></i>
         </button>
     </div>
@@ -12,7 +13,9 @@
                     <th>Type</th>
                     <th>Status</th>
                     <th>Created At</th>
-                    <th>Action</th>
+                    @if (isPermissions('edit-expense-type'))
+                        <th>Action</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -26,10 +29,12 @@
                             <td><span class="badge badge-success">Active</span></td>
                         @endif
                         <td>{{ $item->created_at->format('Y-m-d') }}</td>
-                        <td>
-                            <a data-expense_types = "{{ json_encode($item) }}" onclick = "editExpenseType(this)"><i
-                                    class="far fa-edit"></i></a>
-                        </td>
+                        @if (isPermissions('edit-expense-type'))
+                            <td>
+                                <a data-expense_types = "{{ json_encode($item) }}" onclick = "editExpenseType(this)"><i
+                                        class="far fa-edit"></i></a>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>
@@ -93,8 +98,8 @@
                     </div>
                     <div class="form-group" data-select2-id="1">
                         <label for="">Status</label>
-                        <select class="form-control select2 " name="is_active" style="width: 100%;"
-                            data-select2-id="1" tabindex="-1" aria-hidden="true">
+                        <select class="form-control select2 " name="is_active" style="width: 100%;" data-select2-id="1"
+                            tabindex="-1" aria-hidden="true">
                             <option value="">No Select</option>
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>

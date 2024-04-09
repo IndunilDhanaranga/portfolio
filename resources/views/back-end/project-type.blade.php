@@ -62,7 +62,9 @@
                             <th>ID</th>
                             <th>Project Type</th>
                             <th>Technologies</th>
-                            <th>Action</th>
+                            @if (isPermissions('update-project-type'))
+                                <th>Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -77,10 +79,12 @@
                                         @endforeach
                                     </ul>
                                 </td>
-                                <td>
-                                    <a href="#edit_project_type" data-project_type="{{ $item }}"
-                                        onclick="editProjectType(this)"><i class="far fa-edit"></i></a>
-                                </td>
+                                @if (isPermissions('update-project-type'))
+                                    <td>
+                                        <a href="#edit_project_type" data-project_type="{{ $item }}"
+                                            onclick="editProjectType(this)"><i class="far fa-edit"></i></a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

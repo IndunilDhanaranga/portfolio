@@ -16,7 +16,9 @@
                     <th>Phone No</th>
                     <th>Email</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    @if (isPermissions('update-cliente'))
+                        <th>Action</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -32,10 +34,12 @@
                         @else
                             <td><span class="badge badge-success">Active</span></td>
                         @endif
-                        <td>
-                            <a data-user = "{{ json_encode($item) }}" onclick = "editUser(this)"><i
-                                    class="far fa-edit"></i></a>
-                        </td>
+                        @if (isPermissions('update-cliente'))
+                            <td>
+                                <a data-user = "{{ json_encode($item) }}" onclick = "editUser(this)"><i
+                                        class="far fa-edit"></i></a>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>
@@ -87,8 +91,8 @@
                         <div class="col-md-6">
                             <div class="form-group" data-select2-id="1">
                                 <label for="">Status</label>
-                                <select class="form-control select2 " name="is_active"
-                                    style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                <select class="form-control select2 " name="is_active" style="width: 100%;"
+                                    data-select2-id="1" tabindex="-1" aria-hidden="true">
                                     <option value="">No Select</option>
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>

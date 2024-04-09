@@ -116,9 +116,11 @@
                         <th class="text-center">
                             Status
                         </th>
-                        <th>
-                            Action
-                        </th>
+                        @if (isPermissions('edit-task'))
+                            <th>
+                                Action
+                            </th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -127,5 +129,8 @@
             </table>
         </div>
     </div>
-
 </div>
+
+<script>
+    var is_permission = <?php echo isPermissions('edit-task') ? 'true' : 'false'; ?>;
+</script>

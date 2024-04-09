@@ -32,6 +32,7 @@ function getAllPermissions() {
                 [ 'title' => 'Create Task Category', 'permission'=>'create-task-category', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Update Task Category', 'permission'=>'update-task-category', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Add Task', 'permission'=>'add-task', 'show_in_sidebar'=>false ],
+                [ 'title' => 'Edit Task', 'permission'=>'edit-task', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Update Task', 'permission'=>'update-task', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Todo Status', 'permission'=>'todo-status', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Get Task', 'permission'=>'get-task', 'show_in_sidebar'=>false ],
@@ -48,7 +49,7 @@ function getAllPermissions() {
                 [ 'title' => 'Create Project Types', 'permission'=>'add-project-type', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Update Project Types', 'permission'=>'update-project-type', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Add Project', 'permission'=>'add-project', 'show_in_sidebar'=>false ],
-                [ 'title' => 'Update Project', 'permission'=>'update-project', 'show_in_sidebar'=>false ],
+                [ 'title' => 'Update Project', 'permission'=>'', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Get Technology', 'permission'=>'get-technology', 'show_in_sidebar'=>false ],
             )
         ],

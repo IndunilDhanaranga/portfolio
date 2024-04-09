@@ -28,19 +28,21 @@
                         <td>{{ $item->ClientDetails->name }}</td>
                         <td>
                             @foreach ($item->ImageDetails as $value)
-                                <a target="_blank" class="ml-2" href="{{ getUploadImage($value->image_name, 'project_image') }}"><i class="fa fa-image"></i></a>
+                                <a target="_blank" class="ml-2"
+                                    href="{{ getUploadImage($value->image_name, 'project_image') }}"><i
+                                        class="fa fa-image"></i></a>
                             @endforeach
                         </td>
                         <td><span
                                 class="badge badge-{{ $item->ProjectStatusDetails->badge_class }}">{{ $item->ProjectStatusDetails->title }}</span>
                         </td>
                         <td>
-                            @if (!empty($item->ImageDetails))
+                            <span class="ml-3" data-project="{{ json_encode($item) }}" onclick="viewProject(this)"><i
+                                    class="far fa-eye"></i></span>
+                            @if (isPermissions('update-project'))
                                 <span class="ml-3" data-project="{{ json_encode($item) }}"
-                                    onclick="viewProject(this)"><i class="far fa-eye"></i></span>
+                                    onclick="editProject(this)"><i class="far fa-edit"></i></span>
                             @endif
-                            <span class="ml-3" data-project="{{ json_encode($item) }}" onclick="editProject(this)"><i
-                                    class="far fa-edit"></i></span>
                         </td>
                     </tr>
                 @endforeach
@@ -72,8 +74,8 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group" data-select2-id="1">
                                 <label for="">Project Type</label>
-                                <select class="form-control select2 " name="type_id"
-                                    style="width: 100%;" data-select2-id="1" aria-hidden="true">
+                                <select class="form-control select2 " name="type_id" style="width: 100%;"
+                                    data-select2-id="1" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($project_type as $item)
                                         <option value="{{ $item->id }}">{{ $item->type }}</option>
@@ -86,8 +88,8 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group" data-select2-id="2">
                                 <label for="">Client</label>
-                                <select class="form-control select2 " name="client_id"
-                                    style="width: 100%;" data-select2-id="2" aria-hidden="true">
+                                <select class="form-control select2 " name="client_id" style="width: 100%;"
+                                    data-select2-id="2" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($all_clients as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -132,8 +134,8 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group" data-select2-id="3">
                                 <label for="">Project Status</label>
-                                <select class="form-control select2 " name="status"
-                                    style="width: 100%;" data-select2-id="3" aria-hidden="true">
+                                <select class="form-control select2 " name="status" style="width: 100%;"
+                                    data-select2-id="3" aria-hidden="true">
                                     <option value="">No Select</option>
                                     @foreach ($project_status as $item)
                                         <option value="{{ $item->id }}">{{ $item->title }}</option>
@@ -227,9 +229,8 @@
     </div>
 </div>
 <?php
-    $image_url = getUploadImage('test', 'project_image');
+$image_url = getUploadImage('test', 'project_image');
 ?>
 <script>
-    var image_url = "<?php echo $image_url ?>";
+    var image_url = "<?php echo $image_url; ?>";
 </script>
-
