@@ -21,6 +21,7 @@ class WorkExperience extends Model {
         'position',
         'from',
         'to',
+        'responsibility',
         'created_at',
         'updated_at',
     ];

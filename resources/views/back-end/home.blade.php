@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
     <!-- Google Font: Source Sans Pro -->
     @foreach ($css as $path)
-        <link rel="stylesheet"href="{{ config('site-specific.live-path') . $path }}">
+        <link rel="stylesheet" href="{{ config('site-specific.live-path') . $path }}">
     @endforeach
     <script>
         var token = "{{ csrf_token() }}";

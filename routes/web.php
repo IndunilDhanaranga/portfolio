@@ -19,6 +19,10 @@ Route::group([
     */
     Route::get('/'                              , 'ViewController@frontend')->name('home');
 
+    Route::get('/download-cv'                   , 'PDFController@generatePDF')->name('my-cv');
+
+    Route::get('/print-cv'                      , 'PDFController@printPDF')->name('print-cv');
+
     /*
     ----------------------------------------------------------------------------------------------------------
     AJAX CONTROLLER

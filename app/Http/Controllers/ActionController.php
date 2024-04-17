@@ -492,6 +492,7 @@ class ActionController extends Controller {
                         'position' => $request->position[ $key ],
                         'from' => $request->from[ $key ],
                         'to' => $request->to[ $key ],
+                        'responsibility' => $request->responsibility[ $key ],
                     ] );
                 }
             }

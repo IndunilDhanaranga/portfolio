@@ -4,6 +4,22 @@ $(document).ready(function () {
             addConnections(element.link, element.platform, element.icon);
         });
     }
+    $('#signature').summernote({
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['insert', ['picture', 'link', 'video', 'table']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ],
+        fontNames: ['Arial', 'Courier New', 'Roboto', 'Open Sans','brush script mt'],
+        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '26', '28', '30', '32', '36', '48', '64', '72'],
+        fontNamesIgnoreCheck: ['Roboto', 'Open Sans']
+    });
 });
 
 function addConnections(link, platform, icon) {

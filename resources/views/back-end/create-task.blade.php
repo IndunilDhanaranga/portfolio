@@ -52,18 +52,22 @@
                                         <select class="form-control select2 " name="hours" style="width: 100%;"
                                             data-select2-id="3" aria-hidden="true">
                                             <option value="">Hours</option>
-                                            @for ($i = 00; $i < 61; $i++)
-                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @for ($i = 0; $i <= 60; $i++)
+                                                <option value="{{ $i }}">
+                                                    {{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
                                             @endfor
+
                                         </select>
                                     </div>
                                     <div class="col-md-6 col-12 mt-2">
                                         <select class="form-control select2 " name="min" style="width: 100%;"
                                             data-select2-id="4" aria-hidden="true">
                                             <option value="">Minutes</option>
-                                            @for ($i = 00; $i < 61; $i++)
-                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @for ($i = 0; $i <= 59; $i++)
+                                                <option value="{{ $i }}">
+                                                    {{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
                                             @endfor
+
                                         </select>
                                     </div>
                                 </div>

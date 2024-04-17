@@ -42,7 +42,8 @@
                 <h4 class="header-subtitle">Hello, I am</h4>
                 <h1 class="header-title">{{ $basic_details->d_name }}</h1>
                 <h6 class="header-mono">{{ $basic_details->m_path }}</h6>
-                <a class="btn btn-primary btn-rounded"><i class="ti-printer pr-2"></i>Print Resume</a>
+                <a target="blank" href="/print-cv" class="btn btn-primary btn-rounded"><i
+                        class="ti-printer pr-2"></i>Print Resume</a>
             </div>
         </div>
     </header>
@@ -96,7 +97,8 @@
                 <span class="line mb-5"></span>
                 <h5 class="mb-3">{{ $basic_details->caption }}</h5>
                 <p class="mt-20">{{ $basic_details->about }}</p>
-                <button class="btn btn-outline-danger"><i class="icon-down-circled2 "></i>Download My CV</button>
+                <a href="/download-cv" class="btn btn-outline-danger"><i class="icon-down-circled2 "></i>Download My
+                    CV</a>
             </div>
             <div class="col-lg-4 about-card">
                 <h3 class="font-weight-light">Personal Info</h3>
@@ -130,7 +132,8 @@
                     <span class="line mb-5"></span>
                     @foreach ($expertise as $item)
                         <div class="row">
-                            <div class="col-1 text-danger pt-1"><i class="fab fa-2xl fa-{{ $item->icon }}"></i></div>
+                            <div class="col-1 text-danger pt-1"><i class="fab fa-2xl fa-{{ $item->icon }}"></i>
+                            </div>
                             <div class="col-10 ml-auto mr-3">
                                 <h6>{{ $item->title }}</h6>
                                 <p class="subtitle">{{ $item->short_title }}</p>
@@ -265,10 +268,13 @@
                             <div class="card-body">
                                 @foreach ($work_experience as $item)
                                     <h6 class="title text-danger">{{ $item->company }}</h6>
-                                    <P><b>{{ $item->position }}</b></P>
-                                    <P><b>{{ $item->from }} - {{ $item->to }}</b></P>
+                                    <p><b>{{ $item->position }}</b></p>
+                                    <p><b>{{ $item->from }} - {{ $item->to }}</b></p>
+                                    <p><b>Responsibility</b></p>
+                                    {!! $item->responsibility !!}
                                     <hr>
                                 @endforeach
+
 
                                 {{-- <h6 class="title text-danger">2016 - 2017</h6>
                             <P>Front-end Developer</P>
@@ -848,16 +854,17 @@
                         <h4 class="contact-title">Send a message</h4>
                         <div>
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="Name *" id="name" >
+                                <input class="form-control" type="text" placeholder="Name *" id="name">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="email" placeholder="Email *" id="email" >
+                                <input class="form-control" type="email" placeholder="Email *" id="email">
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" placeholder="Message *" rows="7" id="message" ></textarea>
+                                <textarea class="form-control" placeholder="Message *" rows="7" id="message"></textarea>
                             </div>
                             <div class="form-group ">
-                                <button type="button" class="form-control btn btn-primary" onclick="sendMessage()">Send Message</button>
+                                <button type="button" class="form-control btn btn-primary"
+                                    onclick="sendMessage()">Send Message</button>
                             </div>
                         </div>
                     </div>

@@ -132,7 +132,7 @@ class DataController extends Controller {
     */
 
     public function getEducationQualification() {
-        $data = EducationQualification::with( 'educationDetails', 'schoolDetails' )->get();
+        $data = EducationQualification::with( 'educationDetails', 'schoolDetails' )->orderBy('id','desc')->get();
         return $data;
     }
 
@@ -394,6 +394,21 @@ class DataController extends Controller {
         }else if($transaction_type == 2){
             $data = Expense::with('expenseType','bankDetails','attachmentDetails')->where('id',$transaction_id)->first();
         }
+        return $data;
+    }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET CV DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getCVDetails(){
+        $data['user_details'] = PortfolioUser::with('connections','userImage','coverImage')->first();
+        $data['project_details'] = Project::with('projectTypeDetails','imageDetails','portfolioProjectDetails')->get();
+        $data['work_experience'] = $this->getWorkExperience();
+        $data['skills'] = $this->getSkills();
+        $data['education_details'] = $this->getEducationQualification();
         return $data;
     }
 

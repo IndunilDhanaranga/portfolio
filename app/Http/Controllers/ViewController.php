@@ -238,6 +238,7 @@ class ViewController extends DataController {
             'title' => 'Basic Details',
             'view' => 'back-end.basic-details',
             'basic_details' => $this->getBasicDetails(),
+            'css'   => array( config('site-specific.summernote-min-css')),
             'script' => array( config( 'site-specific.basic-details-init-js' ) ),
         ];
         // return $data[ 'basic_details' ];
@@ -327,6 +328,7 @@ class ViewController extends DataController {
             'skills' => $this->getSkills(),
             'languages' => $this->getLanguages(),
             'work_experience' => $this->getWorkExperience(),
+            'css'   => array( config('site-specific.summernote-min-css')),
             'script' => array( config( 'site-specific.additional-details-init-js' ) ),
         ];
         // return $data[ 'education_qualification' ];
@@ -883,7 +885,7 @@ class ViewController extends DataController {
             'view' => 'back-end.view-transaction',
             'transaction_details' => $this->getTransaction($transaction_id,$transaction_type),
         ];
-        return $data[ 'transaction_details' ];
+        // return $data[ 'transaction_details' ];
         return $this->default( $data );
     }
 
