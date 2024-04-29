@@ -11,6 +11,7 @@ return array(
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DataController' => $baseDir . '/app/Http/Controllers/DataController.php',
+    'App\\Http\\Controllers\\PDFController' => $baseDir . '/app/Http/Controllers/PDFController.php',
     'App\\Http\\Controllers\\ViewController' => $baseDir . '/app/Http/Controllers/ViewController.php',
     'App\\Http\\Middleware\\EnsureTokenIsValid' => $baseDir . '/app/Http/Middleware/EnsureTokenIsValid.php',
     'App\\Http\\Middleware\\Login' => $baseDir . '/app/Http/Middleware/Login.php',

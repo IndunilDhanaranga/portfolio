@@ -12,7 +12,7 @@ $(document).ready(function () {
     }
 });
 
-function addExpertise(title, description, short_title) {
+function addExpertise(title, description, short_title,icon) {
     let index = parseInt($("#expertise-attempt").val());
     let html =
         '<div class="row mt-2" id="expertise_div_' +

@@ -577,6 +577,7 @@ class ComposerStaticInit968f73bcf5520ee401d641d0d79555ec
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DataController' => __DIR__ . '/../..' . '/app/Http/Controllers/DataController.php',
+        'App\\Http\\Controllers\\PDFController' => __DIR__ . '/../..' . '/app/Http/Controllers/PDFController.php',
         'App\\Http\\Controllers\\ViewController' => __DIR__ . '/../..' . '/app/Http/Controllers/ViewController.php',
         'App\\Http\\Middleware\\EnsureTokenIsValid' => __DIR__ . '/../..' . '/app/Http/Middleware/EnsureTokenIsValid.php',
         'App\\Http\\Middleware\\Login' => __DIR__ . '/../..' . '/app/Http/Middleware/Login.php',
