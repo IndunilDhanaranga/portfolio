@@ -16,7 +16,7 @@
                     <th>Phone No</th>
                     <th>Email</th>
                     <th>Status</th>
-                    @if (isPermissions('update-cliente'))
+                    @if (isPermissions('update-client'))
                         <th>Action</th>
                     @endif
                 </tr>
@@ -34,7 +34,7 @@
                         @else
                             <td><span class="badge badge-success">Active</span></td>
                         @endif
-                        @if (isPermissions('update-cliente'))
+                        @if (isPermissions('update-client'))
                             <td>
                                 <a data-user = "{{ json_encode($item) }}" onclick = "editUser(this)"><i
                                         class="far fa-edit"></i></a>
