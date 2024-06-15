@@ -40,7 +40,7 @@ class ViewController extends DataController {
             config( 'site-specific.custom-init-js' ),
 
         );
-
+        $data['site_settings'] = $this->getSiteSettings();
         $data[ 'css' ] = $css;
         $data[ 'script' ] = $script;
         $data[ 'basic_details' ] = $this->getBasicDetails();
@@ -74,7 +74,8 @@ class ViewController extends DataController {
     */
 
     public function login() {
-        return view::make( 'back-end.login' );
+        $data['site_settings'] = $this->getSiteSettings();
+        return view::make( 'back-end.login',$data );
     }
 
     /*
@@ -134,7 +135,27 @@ class ViewController extends DataController {
         } else {
             $data[ 'script' ] = $script;
         }
+        $data['site_settings'] = $this->getSiteSettings();
         return view::make( 'back-end.home', $data );
+    }
+
+
+     /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION VIEW BANK STATEMENT
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function siteSettings() {
+        $data = [
+            'title'         => 'Site Settings',
+            'view'          => 'back-end.site-settings',
+            'css'           => array( config( 'site-specific.dropify-css' )),
+            'script'        => array( config( 'site-specific.dropify-init-js' ) ),
+            'site_settings' => $this->getSiteSettings(),
+        ];
+        // return $data[ 'site_settings' ];
+        return $this->default( $data );
     }
 
     /*

@@ -711,6 +711,7 @@
     'datatable-bootstrap-min-css' => '/assets/back-end/default/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css',
     'responsive-bootstrap-min-css' => '/assets/back-end/default/plugins/datatables-responsive/css/responsive.bootstrap4.min.css',
     'buttons-bootstrap-min-css' => '/assets/back-end/default/plugins/datatables-buttons/css/buttons.bootstrap4.min.css',
+    'dropify-css' => '/assets/back-end/custom/css/dropify.css',
     'jquery-min-js' => '/assets/back-end/default/plugins/jquery/jquery.min.js',
     'jquery-ui-min-js' => '/assets/back-end/default/plugins/jquery-ui/jquery-ui.min.js',
     'bootstrap-bundle-min-js' => '/assets/back-end/default/plugins/bootstrap/js/bootstrap.bundle.min.js',
@@ -767,6 +768,7 @@
     'income-init-js' => '/assets/back-end/custom/js/income-init.js',
     'expense-init-js' => '/assets/back-end/custom/js/expense-init.js',
     'bank-statement-init-js' => '/assets/back-end/custom/js/bank-statement-init.js',
+    'dropify-init-js' => '/assets/back-end/custom/js/dropify.js',
     'live-path' => '',
   ),
   'broadcasting' => 

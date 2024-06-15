@@ -101,6 +101,17 @@ return [
 
     'buttons-bootstrap-min-css'         =>'/assets/back-end/default/plugins/datatables-buttons/css/buttons.bootstrap4.min.css',
 
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------------------------------
+    CUSTOM CSS
+    ----------------------------------------------------------------------------------------------------------------------------------
+    */
+
+
+    'dropify-css'                        =>'/assets/back-end/custom/css/dropify.css',
+
     /*
     ----------------------------------------------------------------------------------------------------------------------------------
     Default JAVA SCRIPT
@@ -231,6 +242,8 @@ return [
     'expense-init-js'                   =>'/assets/back-end/custom/js/expense-init.js',
 
     'bank-statement-init-js'            =>'/assets/back-end/custom/js/bank-statement-init.js',
+
+    'dropify-init-js'                   =>'/assets/back-end/custom/js/dropify.js',
 
     'live-path'                         => ''
 

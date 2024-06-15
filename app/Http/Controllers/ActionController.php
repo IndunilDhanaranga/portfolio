@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use Carbon\Carbon;
 
+use App\Models\SiteSettings;
 use App\Models\UserRoll;
 use App\Models\UserRollPermission;
 use App\Models\User;
@@ -51,6 +52,45 @@ use App\Models\ExpenseAttachment;
 class ActionController extends Controller {
 
     //                                      FUNCTIONS FOR DEVELOPER TOOLS
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION CREATE SITE SETTINGS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function createSiteSettings( Request $request ) {
+        try {
+            $validator = Validator::make( $request->all(), [
+                'site_name'     => 'required',
+                'logo'     => 'required',
+                'favicon'     => 'required',
+                'login_bg_image'     => 'required',
+            ] );
+
+            if ( $validator->fails() ) {
+                return redirect()->back()->with( [ 'error' => true, 'message' => implode( ' ', $validator->messages()->all() ) ] );
+            }
+            SiteSettings::truncate();
+            DB::beginTransaction();
+            $logo = uploadImage( $request->logo, 'site_assets' );
+            $favicon = uploadImage( $request->favicon, 'site_assets' );
+            $login_bg_image = uploadImage( $request->login_bg_image, 'site_assets' );
+
+            SiteSettings::create( [
+                'site_name'         => $request->site_name,
+                'logo'              => $logo,
+                'favicon'           => $favicon,
+                'login_bg_image'    => $login_bg_image,
+            ] );
+
+            DB::commit();
+            return redirect()->back()->with( [ 'success' => true, 'message' => 'Site Settings Created Successfully !' ] );
+        } catch ( \Throwable $th ) {
+            DB::rollback();
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+        }
+    }
 
     /*
     ----------------------------------------------------------------------------------------------------------

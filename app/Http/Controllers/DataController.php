@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\UserRoll;
 use App\Models\UserRollPermission;
 use App\Models\User;
+use App\Models\SiteSettings;
 
 use App\Models\PortfolioUser;
 use App\Models\PortfolioUserConnection;
@@ -37,6 +38,18 @@ use App\Models\Expense;
 class DataController extends Controller {
 
     //                                  FUNCTIONS FOR GET DEVELOPER TOOLS DETAILS
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET SITE SETTINGS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getSiteSettings(){
+        $data = SiteSettings::first();
+        return $data;
+    }
 
     /*
     ----------------------------------------------------------------------------------------------------------
@@ -411,5 +424,7 @@ class DataController extends Controller {
         $data['education_details'] = $this->getEducationQualification();
         return $data;
     }
+
+
 
 }

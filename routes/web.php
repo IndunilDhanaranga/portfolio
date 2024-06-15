@@ -76,15 +76,6 @@ Route::group([
     'namespace'=>'App\Http\Controllers',
 ],function ($router) {
 
-    /*
-    ----------------------------------------------------------------------------------------------------------
-    AUTH CONTROLLER
-    ----------------------------------------------------------------------------------------------------------
-    */
-
-    Route::get('/logout'                            , 'AuthController@dologout')->name('logout');
-
-
 
     /*
     ----------------------------------------------------------------------------------------------------------
@@ -97,6 +88,8 @@ Route::group([
                                                     DEVELOPER TOOLS
     ----------------------------------------------------------------------------------------------------------
     */
+
+    Route::get('/site-settings'                     , 'ViewController@siteSettings')->name('site-settings');
 
     Route::get('/user'                              , 'ViewController@userDetails')->name('user');
 
@@ -380,4 +373,34 @@ Route::group([
 
     Route::post('/get-bank-statement'                   , 'AjaxController@getBankStatement')->name('get-bank-statement');
 
+});
+
+
+/*
+----------------------------------------------------------------------------------------------------------
+BACK END ROUTES WITH LOGIN VALIDATE
+----------------------------------------------------------------------------------------------------------
+*/
+
+Route::group([
+    'middleware'=>['App\Http\Middleware\Login'],
+    'namespace'=>'App\Http\Controllers',
+
+],function ($router) {
+
+     /*
+    ----------------------------------------------------------------------------------------------------------
+    AUTH CONTROLLER
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    Route::get('/logout'                            , 'AuthController@dologout')->name('logout');
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    ACTION CONTROLLER
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    Route::post('/create-site-settings'                 , 'ActionController@createSiteSettings')->name('create-site-settings');
 });

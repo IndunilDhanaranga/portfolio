@@ -147,6 +147,7 @@ function getAllPermissions() {
                 [ 'title' => 'Update User Roll', 'permission'=>'update-user-roll', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Create User', 'permission'=>'create-user', 'show_in_sidebar'=>false ],
                 [ 'title' => 'Edit User', 'permission'=>'edit-user', 'show_in_sidebar'=>false ],
+                [ 'title' => 'Site Settings', 'permission'=>'site-settings', 'show_in_sidebar'=>true ],
             )
         ],
     );

@@ -8,7 +8,7 @@ use Carbon\Carbon;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>{{ Auth::user()->name }} | {{ $title }}</title>
+    <title>{{ $site_settings->site_name ?? '' }} | {{ $title }}</title>
 
     <!-- Google Font: Source Sans Pro -->
     @foreach ($css as $path)
@@ -113,9 +113,9 @@ use Carbon\Carbon;
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
-                <img src="{{ getAuthImage('user_image') }}" alt="Logo" class="brand-image img-circle elevation-3"
+                <img src="{{ getUploadImage( $site_settings->logo ?? '', 'site_assets' )}}" alt="Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
-                <span class="brand-text font-weight-light">Portfolio</span>
+                <span class="brand-text font-weight-light">{{ $site_settings->site_name ?? '' }}</span>
             </a>
 
             <!-- Sidebar -->
@@ -382,7 +382,8 @@ use Carbon\Carbon;
             });
         }
         $(function() {
-            $('[data-toggle="tooltip"]').tooltip()
+            $('[data-toggle="tooltip"]').tooltip();
+            $('.dropify').dropify();
         })
     </script>
 </body>

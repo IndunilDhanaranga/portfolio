@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with JohnDoe landing page.">
     <meta name="author" content="Devcrud">
-    <title>{{ $basic_details->d_name }} | Portfolio</title>
+    <title>{{ $site_settings->site_name ?? '' }} | Portfolio</title>
     <!-- font icons -->
     @foreach ($css as $path)
         <link rel="stylesheet" href="{{ config('site-specific.live-path') . $path }}">
@@ -19,14 +19,16 @@
     {{-- <a href="components.html" class="btn btn-primary btn-component" data-spy="affix" data-offset-top="600"><i
             class="ti-shift-left-alt"></i> Components</a> --}}
     <header class="header"
-        style="background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url({{ getUploadImage($basic_details->CoverImage->image_name, 'portfolio_cover_image') }});
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url({{ getUploadImage($basic_details->CoverImage->image_name, 'portfolio_cover_image') }});">
+        style="background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url({{ getUploadImage($basic_details->CoverImage->image_name ?? '', 'portfolio_cover_image') }});
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url({{ getUploadImage($basic_details->CoverImage->image_name ?? '', 'portfolio_cover_image') }});">
         <div class="container">
             <ul class="social-icons pt-3">
-                @foreach ($basic_details->Connections as $item)
-                    <li class="social-item"><a class="social-link text-light" href="{{ $item->link }}"><i
-                                class="ti-{{ $item->icon }}" aria-hidden="true"></i></a></li>
-                @endforeach
+                @if ($basic_details)
+                    @foreach ($basic_details->Connections as $item)
+                        <li class="social-item"><a class="social-link text-light" href="{{ $item->link }}"><i
+                                    class="ti-{{ $item->icon }}" aria-hidden="true"></i></a></li>
+                    @endforeach
+                @endif
                 {{-- <li class="social-item"><a class="social-link text-light" href="#"><i class="ti-facebook"
                             aria-hidden="true"></i></a></li>
                 <li class="social-item"><a class="social-link text-light" href="#"><i class="ti-twitter"
@@ -40,8 +42,8 @@
             </ul>
             <div class="header-content">
                 <h4 class="header-subtitle">Hello, I am</h4>
-                <h1 class="header-title">{{ $basic_details->d_name }}</h1>
-                <h6 class="header-mono">{{ $basic_details->m_path }}</h6>
+                <h1 class="header-title">{{ $basic_details->d_name ?? '' }}</h1>
+                <h6 class="header-mono">{{ $basic_details->m_path ?? '' }}</h6>
                 <a target="blank" href="/print-cv" class="btn btn-primary btn-rounded"><i
                         class="ti-printer pr-2"></i>Print Resume</a>
             </div>
@@ -67,11 +69,11 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav brand">
-                    <img src="{{ getUploadImage($basic_details->UserImage->image_name, 'portfolio_user_image') }}"
+                    <img src="{{ getUploadImage($basic_details->UserImage->image_name ?? '', 'portfolio_user_image') }}"
                         alt="" class="brand-img">
                     <li class="brand-txt">
-                        <h5 class="brand-title">{{ $basic_details->d_name }}</h5>
-                        <div class="brand-subtitle">{{ $basic_details->m_path }}</div>
+                        <h5 class="brand-title">{{ $basic_details->d_name ?? '' }}</h5>
+                        <div class="brand-subtitle">{{ $basic_details->m_path ?? '' }}</div>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -95,8 +97,8 @@
             <div class="col-lg-4 about-card">
                 <h3 class="font-weight-light">Who am I ?</h3>
                 <span class="line mb-5"></span>
-                <h5 class="mb-3">{{ $basic_details->caption }}</h5>
-                <p class="mt-20">{{ $basic_details->about }}</p>
+                <h5 class="mb-3">{{ $basic_details->caption ?? '' }}</h5>
+                <p class="mt-20">{{ $basic_details->about ?? '' }}</p>
                 <a href="/download-cv" class="btn btn-outline-danger"><i class="icon-down-circled2 "></i>Download My
                     CV</a>
             </div>
@@ -104,16 +106,18 @@
                 <h3 class="font-weight-light">Personal Info</h3>
                 <span class="line mb-5"></span>
                 <ul class="mt40 info list-unstyled">
-                    <li><span>Birthdate</span> : {{ $basic_details->b_date }}</li>
-                    <li><span>Email</span> : {{ $basic_details->email }}</li>
-                    <li><span>Phone</span> : + (94) {{ $basic_details->p_number }}</li>
-                    <li><span>Address</span> : {{ $basic_details->address }}</li>
+                    <li><span>Birthdate</span> : {{ $basic_details->b_date ?? '' }}</li>
+                    <li><span>Email</span> : {{ $basic_details->email ?? '' }}</li>
+                    <li><span>Phone</span> : + (94) {{ $basic_details->p_number ?? '' }}</li>
+                    <li><span>Address</span> : {{ $basic_details->address ?? '' }}</li>
                 </ul>
                 <ul class="social-icons pt-3">
-                    @foreach ($basic_details->Connections as $item)
-                        <li class="social-item"><a class="social-link" href="{{ $item->link }}"><i
-                                    class="ti-{{ $item->icon }}" aria-hidden="true"></i></a></li>
-                    @endforeach
+                    @if ($basic_details)
+                        @foreach ($basic_details->Connections as $item)
+                            <li class="social-item"><a class="social-link" href="{{ $item->link }}"><i
+                                        class="ti-{{ $item->icon }}" aria-hidden="true"></i></a></li>
+                        @endforeach
+                    @endif
                     {{-- <li class="social-item"><a class="social-link" href="#"><i class="ti-facebook"
                                 aria-hidden="true"></i></a></li>
                     <li class="social-item"><a class="social-link" href="#"><i class="ti-twitter"
@@ -878,7 +882,7 @@
                             </div>
                             <div class="col-10 ">
                                 <h6 class="d-inline">Phone : <br> <span class="text-muted">+ (94)
-                                        {{ $basic_details->p_number }}</span></h6>
+                                        {{ $basic_details->p_number ?? '' }}</span></h6>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -887,7 +891,7 @@
                             </div>
                             <div class="col-10">
                                 <h6 class="d-inline">Address :<br> <span
-                                        class="text-muted">{{ $basic_details->address }}</span></h6>
+                                        class="text-muted">{{ $basic_details->address ?? '' }}</span></h6>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -896,15 +900,17 @@
                             </div>
                             <div class="col-10">
                                 <h6 class="d-inline">Email :<br> <span
-                                        class="text-muted">{{ $basic_details->email }}</span></h6>
+                                        class="text-muted">{{ $basic_details->email ?? '' }}</span></h6>
                             </div>
                         </div>
                         <ul class="social-icons pt-4">
-                            @foreach ($basic_details->Connections as $item)
-                                <li class="social-item"><a class="social-link text-dark"
-                                        href="{{ $item->link }}"><i class="ti-{{ $item->icon }}"
-                                            aria-hidden="true"></i></a></li>
-                            @endforeach
+                            @if ($basic_details)
+                                @foreach ($basic_details->Connections as $item)
+                                    <li class="social-item"><a class="social-link text-dark"
+                                            href="{{ $item->link }}"><i class="ti-{{ $item->icon }}"
+                                                aria-hidden="true"></i></a></li>
+                                @endforeach
+                            @endif
                             {{-- <li class="social-item"><a class="social-link text-dark" href="#"><i
                                         class="ti-twitter" aria-hidden="true"></i></a></li>
                             <li class="social-item"><a class="social-link text-dark" href="#"><i
@@ -926,7 +932,7 @@
                 &copy;
                 <script>
                     document.write(new Date().getFullYear())
-                </script> Created <i class="ti-heart text-danger"></i> By <a href="http://devcrud.com"
+                </script> Created <i class="ti-heart text-danger"></i> By <a href="http://idksolution.byethost33.com/"
                     target="_blank"><span class="text-danger" title="Bootstrap 4 Themes and Dashboards"><b>IDK</b>
                         solution</span></a>
             </p>

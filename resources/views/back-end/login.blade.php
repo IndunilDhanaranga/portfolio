@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>IDK Solution | Log in </title>
+    <title>{{ $site_settings->site_name ?? '' }} | Log in </title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -18,6 +18,24 @@
     <!-- Theme style -->
     <link rel="stylesheet"
         href="{{ config('site-specific.live-path') }}/assets/back-end/default/dist/css/adminlte.min.css">
+    <style>
+        body {
+            background-image: url('{{ getUploadImage( $site_settings->login_bg_image ?? "", "site_assets" )}}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100%;
+        }
+
+        .card-primary {
+            background-color: rgba(255, 255, 255, 0.8);
+            /* Optional: Overlay to improve readability */
+            padding: 20px;
+            margin: auto;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 
 <body class="hold-transition login-page">
@@ -25,7 +43,11 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="/" class="h1"><b>IDK Solution</b></a>
+                <div>
+                    <img style="width: 100px;border-radius:5%" src="{{ getUploadImage($site_settings->logo ?? '', 'site_assets') }}"
+                        alt="">
+                </div>
+                <a href="/" class="h1"><b>{{ $site_settings->site_name ?? '' }}</b></a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>

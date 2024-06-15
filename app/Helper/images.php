@@ -8,7 +8,7 @@ UPLOAD IMAGE
 
 function uploadImage( $image, $disk )
  {
-    $extension = 'webp';
+    $extension = 'jpg';
     $name = $image->getClientOriginalName();
     $unique_name = md5( $name . time() );
     $full_name = $unique_name . '.' . $extension;

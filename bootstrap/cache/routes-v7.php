@@ -71,7 +71,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::pwdEtke5MAOxOHed',
+            '_route' => 'generated::clSqkPL2GKwzjum5',
           ),
           1 => NULL,
           2 => 
@@ -203,13 +203,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/logout' => 
+      '/site-settings' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'logout',
+            '_route' => 'site-settings',
           ),
           1 => NULL,
           2 => 
@@ -1488,6 +1488,45 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/logout' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'logout',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/create-site-settings' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'create-site-settings',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
     ),
     2 => 
     array (
@@ -1882,7 +1921,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::pwdEtke5MAOxOHed' => 
+    'generated::clSqkPL2GKwzjum5' => 
     array (
       'methods' => 
       array (
@@ -1901,7 +1940,7 @@ app('router')->setCompiledRoutes(
 
                     return \\Illuminate\\Support\\Facades\\View::file(\'C:\\\\Users\\\\Indunil\\\\Desktop\\\\PROJECTS\\\\PERSONAL\\\\portfolio\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Configuration\'.\'/../resources/health-up.blade.php\');
                 }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"000000000000055a0000000000000000";}}',
-        'as' => 'generated::pwdEtke5MAOxOHed',
+        'as' => 'generated::clSqkPL2GKwzjum5',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2137,14 +2176,14 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'logout' => 
+    'site-settings' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'logout',
+      'uri' => 'site-settings',
       'action' => 
       array (
         'middleware' => 
@@ -2153,14 +2192,14 @@ app('router')->setCompiledRoutes(
           1 => 'App\\Http\\Middleware\\Login',
           2 => 'App\\Http\\Middleware\\PermissionAuthentication',
         ),
-        'uses' => 'App\\Http\\Controllers\\AuthController@dologout',
-        'controller' => 'App\\Http\\Controllers\\AuthController@dologout',
+        'uses' => 'App\\Http\\Controllers\\ViewController@siteSettings',
+        'controller' => 'App\\Http\\Controllers\\ViewController@siteSettings',
         'namespace' => 'App\\Http\\Controllers',
         'prefix' => '',
         'where' => 
         array (
         ),
-        'as' => 'logout',
+        'as' => 'site-settings',
       ),
       'fallback' => false,
       'defaults' => 
@@ -5085,6 +5124,81 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'get-bank-statement',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'logout' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'logout',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'App\\Http\\Middleware\\Login',
+        ),
+        'uses' => 'App\\Http\\Controllers\\AuthController@dologout',
+        'controller' => 'App\\Http\\Controllers\\AuthController@dologout',
+        'namespace' => 'App\\Http\\Controllers',
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'logout',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'create-site-settings' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'create-site-settings',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'App\\Http\\Middleware\\Login',
+        ),
+        'uses' => 'App\\Http\\Controllers\\ActionController@createSiteSettings',
+        'controller' => 'App\\Http\\Controllers\\ActionController@createSiteSettings',
+        'namespace' => 'App\\Http\\Controllers',
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'create-site-settings',
       ),
       'fallback' => false,
       'defaults' => 
