@@ -230,7 +230,7 @@ use Carbon\Carbon;
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; {{ Carbon::now()->year }} <a href="https://idksolution.ooo.pe">IDK
+            <strong>Copyright &copy; {{ Carbon::now()->year }} <a href="http://idksolution.byethost33.com">IDK
                     solution</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
@@ -383,8 +383,10 @@ use Carbon\Carbon;
         }
         $(function() {
             $('[data-toggle="tooltip"]').tooltip();
-            $('.dropify').dropify();
         })
+        $(document).ready(function () {
+            $('.dropify').dropify();
+        });
     </script>
 </body>
 

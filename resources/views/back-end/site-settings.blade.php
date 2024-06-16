@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-3">
                     <div class="form-group">
-                        <label for="income_type">Login Background</label>
+                        <label for="income_type">Login</label>
                         <input type="file" class="dropify" name="login_bg_image" data-default-file="{{ getUploadImage( $site_settings->login_bg_image ?? '', 'site_assets' )}}">
                     </div>
                 </div>

@@ -71,7 +71,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::clSqkPL2GKwzjum5',
+            '_route' => 'generated::SNfCBHJFP8BoMemm',
           ),
           1 => NULL,
           2 => 
@@ -184,13 +184,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/signin' => 
+      '/sign-in' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'signin',
+            '_route' => 'sign-in',
           ),
           1 => NULL,
           2 => 
@@ -1921,7 +1921,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::clSqkPL2GKwzjum5' => 
+    'generated::SNfCBHJFP8BoMemm' => 
     array (
       'methods' => 
       array (
@@ -1940,7 +1940,7 @@ app('router')->setCompiledRoutes(
 
                     return \\Illuminate\\Support\\Facades\\View::file(\'C:\\\\Users\\\\Indunil\\\\Desktop\\\\PROJECTS\\\\PERSONAL\\\\portfolio\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Configuration\'.\'/../resources/health-up.blade.php\');
                 }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"000000000000055a0000000000000000";}}',
-        'as' => 'generated::clSqkPL2GKwzjum5',
+        'as' => 'generated::SNfCBHJFP8BoMemm',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1970,8 +1970,8 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'uses' => 'App\\Http\\Controllers\\ViewController@frontend',
-        'controller' => 'App\\Http\\Controllers\\ViewController@frontend',
+        'uses' => 'App\\Http\\Controllers\\ViewController@login',
+        'controller' => 'App\\Http\\Controllers\\ViewController@login',
         'namespace' => 'App\\Http\\Controllers',
         'prefix' => '',
         'where' => 
@@ -2140,13 +2140,13 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'signin' => 
+    'sign-in' => 
     array (
       'methods' => 
       array (
         0 => 'POST',
       ),
-      'uri' => 'signin',
+      'uri' => 'sign-in',
       'action' => 
       array (
         'middleware' => 
@@ -2160,7 +2160,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'signin',
+        'as' => 'sign-in',
       ),
       'fallback' => false,
       'defaults' => 

@@ -95,7 +95,7 @@ class DataController extends Controller {
     */
 
     public function getUser( $is_active = null ) {
-        $data = User::with( 'userRollDetails' );
+        $data = User::with( 'userRollDetails','userImage' );
         if ( $is_active ) {
             $data->where( 'is_active', $is_active );
         }

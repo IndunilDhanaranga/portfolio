@@ -85,17 +85,9 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-12 col-12">
-                            <label for="image">Image</label>
-                        </div>
-                        <div class="col-md-12 div-12">
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="image" name="image">
-                                    <label class="custom-file-label">Choose
-                                        file</label>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label for="income_type">Profile Image</label>
+                            <input type="file" class="dropify" name="image">
                         </div>
                     </div>
                     <div class="row">
@@ -121,7 +113,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit User Roll</h4>
+                <h4 class="modal-title">Edit User</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -149,17 +141,9 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-12 col-12">
-                            <label for="edit_image">Image</label>
-                        </div>
-                        <div class="col-md-12 div-12">
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="edit_image" name="image">
-                                    <label class="custom-file-label">Choose
-                                        file</label>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label for="income_type">Profile Image</label>
+                            <input type="file" class="dropify" name="image">
                         </div>
                     </div>
                     <div class="row">
@@ -213,3 +197,7 @@
         </div>
     </div>
 </div>
+<script>
+    var image_url = "<?= getUploadImage('no', 'user_image') ?>";
+</script>
+

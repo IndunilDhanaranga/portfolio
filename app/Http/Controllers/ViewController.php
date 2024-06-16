@@ -101,6 +101,7 @@ class ViewController extends DataController {
             config( 'site-specific.toastr-css' ),
             config( 'site-specific.select2-css' ),
             config( 'site-specific.select2-bootstrap4-css' ),
+            config( 'site-specific.dropify-css' ),
         );
 
         $script = array(
@@ -123,6 +124,7 @@ class ViewController extends DataController {
             config( 'site-specific.select2-js' ),
             config( 'site-specific.tooltip-core' ),
             config( 'site-specific.tooltip-dom' ),
+            config( 'site-specific.dropify-init-js' ),
         );
 
         if ( isset( $data[ 'css' ] ) ) {
@@ -150,8 +152,6 @@ class ViewController extends DataController {
         $data = [
             'title'         => 'Site Settings',
             'view'          => 'back-end.site-settings',
-            'css'           => array( config( 'site-specific.dropify-css' )),
-            'script'        => array( config( 'site-specific.dropify-init-js' ) ),
             'site_settings' => $this->getSiteSettings(),
         ];
         // return $data[ 'site_settings' ];

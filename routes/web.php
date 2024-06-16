@@ -17,7 +17,7 @@ Route::group([
     VIEW CONTROLLER
     ----------------------------------------------------------------------------------------------------------
     */
-    Route::get('/'                              , 'ViewController@frontend')->name('home');
+    Route::get('/'                              , 'ViewController@login')->name('home');
 
     Route::get('/download-cv'                   , 'PDFController@generatePDF')->name('my-cv');
 
@@ -62,7 +62,7 @@ Route::group([
     */
 
     Route::get('/login'                             , 'ViewController@login')->name('login');
-    Route::post('/signin'                           , 'AuthController@dologin')->name('signin');
+    Route::post('/sign-in'                           , 'AuthController@dologin')->name('sign-in');
 });
 
 /*

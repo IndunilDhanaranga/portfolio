@@ -141,7 +141,7 @@ class ActionController extends Controller {
                 'name'          => 'required',
                 'email'         => 'required',
                 'user_roll'     => 'required',
-                'image'         => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                'image'         => 'required|image|mimes:jpeg,png,jpg,webp',
                 'password'      => 'required',
             ] );
 
@@ -240,11 +240,11 @@ class ActionController extends Controller {
                 // return redirect()->back()->with( [ 'error' => true, 'message' => 'This is you !' ] );
             }
             DB::beginTransaction();
-            $user                     = User::find( $request->id );
-            $user->name       = $request->name;
-            $user->email   = $request->email;
-            $user->user_roll   = $request->user_roll;
-            $user->is_active   = $request->is_active;
+            $user                       = User::find( $request->id );
+            $user->name                 = $request->name;
+            $user->email                = $request->email;
+            $user->user_roll            = $request->user_roll;
+            $user->is_active            = $request->is_active;
             if ( $request->password ) {
                 $user->password = $request->password;
             }
@@ -252,15 +252,23 @@ class ActionController extends Controller {
             if ( $request->hasFile( 'image' ) ) {
                 $user_image = uploadImage( $request->image, 'user_image' );
                 $user_image_table = UserImage::where( 'user_id', $request->id )->first();
-                $user_image_table->image_name = $user_image;
-                $user_image_table->save();
+                if ( !$user_image_table ) {
+                    UserImage::create( [
+                        'user_id' => $request->id,
+                        'image_name' => $user_image,
+                    ] );
+                } else {
+                    $user_image_table->image_name = $user_image;
+                    $user_image_table->save();
+                }
+
             }
 
             DB::commit();
             return redirect()->back()->with( [ 'success' => true, 'message' => 'User Updated Successfully !' ] );
         } catch ( \Throwable $th ) {
             DB::rollback();
-            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage() ] );
+            return redirect()->back()->with( [ 'error' => true, 'message' => $th->getMessage().$th->getLine() ] );
         }
     }
 

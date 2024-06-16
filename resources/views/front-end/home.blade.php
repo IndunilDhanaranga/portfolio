@@ -932,7 +932,7 @@
                 &copy;
                 <script>
                     document.write(new Date().getFullYear())
-                </script> Created <i class="ti-heart text-danger"></i> By <a href="http://idksolution.byethost33.com/"
+                </script> Created <i class="ti-heart text-danger"></i> By <a href="http://idksolution.byethost33.com"
                     target="_blank"><span class="text-danger" title="Bootstrap 4 Themes and Dashboards"><b>IDK</b>
                         solution</span></a>
             </p>

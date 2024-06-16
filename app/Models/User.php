@@ -51,4 +51,8 @@ class User extends Authenticatable {
     public function userRollDetails() {
         return $this->hasOne( UserRoll::class, 'id', 'user_roll' );
     }
+
+    public function userImage() {
+        return $this->hasOne( UserImage::class, 'user_id', 'id' );
+    }
 }
