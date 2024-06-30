@@ -149,8 +149,8 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\storage\\framework/cache/data',
-        'lock_path' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\storage\\framework/cache/data',
+        'path' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\storage\\framework/cache/data',
+        'lock_path' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -318,10 +318,10 @@
     'convert_entities' => true,
     'options' => 
     array (
-      'font_dir' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\storage\\fonts',
-      'font_cache' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\storage\\fonts',
+      'font_dir' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\storage\\fonts',
+      'font_cache' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\storage\\fonts',
       'temp_dir' => 'C:\\Users\\Indunil\\AppData\\Local\\Temp',
-      'chroot' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio',
+      'chroot' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio',
       'allowed_protocols' => 
       array (
         'file://' => 
@@ -366,13 +366,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\storage\\app',
+        'root' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\storage\\app',
         'throw' => false,
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\storage\\app/public',
+        'root' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
         'throw' => false,
@@ -392,22 +392,22 @@
       'image' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\public\\uploads/images',
+        'root' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\public\\uploads/images',
       ),
       'attachment' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\public\\uploads/attachment',
+        'root' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\public\\uploads/attachment',
       ),
       'video' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\public\\uploads/video',
+        'root' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\public\\uploads/video',
       ),
     ),
     'links' => 
     array (
-      'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\public\\storage' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\storage\\app/public',
+      'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\public\\storage' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\storage\\app/public',
     ),
   ),
   'logging' => 
@@ -432,14 +432,14 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\storage\\logs/laravel.log',
         'level' => 'debug',
         'replace_placeholders' => true,
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
         'replace_placeholders' => true,
@@ -504,7 +504,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -567,7 +567,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\resources\\views/vendor/mail',
+        0 => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -664,7 +664,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\storage\\framework/sessions',
+    'files' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -769,6 +769,7 @@
     'expense-init-js' => '/assets/back-end/custom/js/expense-init.js',
     'bank-statement-init-js' => '/assets/back-end/custom/js/bank-statement-init.js',
     'dropify-init-js' => '/assets/back-end/custom/js/dropify.js',
+    'dashboard-init-js' => '/assets/back-end/custom/js/dashboard-init.js',
     'live-path' => '',
   ),
   'broadcasting' => 
@@ -876,9 +877,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\resources\\views',
+      0 => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\resources\\views',
     ),
-    'compiled' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio\\storage\\framework\\views',
+    'compiled' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio\\storage\\framework\\views',
   ),
   'flare' => 
   array (
@@ -960,7 +961,7 @@
     array (
     ),
     'enable_runnable_solutions' => NULL,
-    'remote_sites_path' => 'C:\\Users\\Indunil\\Desktop\\PROJECTS\\PERSONAL\\portfolio',
+    'remote_sites_path' => 'C:\\Users\\Indunil\\Desktop\\Projects\\personal\\portfolio',
     'local_sites_path' => '',
     'housekeeping_endpoint_prefix' => '_ignition',
     'settings_file_path' => '',

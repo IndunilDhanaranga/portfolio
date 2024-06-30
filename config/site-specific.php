@@ -244,6 +244,8 @@ return [
     'bank-statement-init-js'            =>'/assets/back-end/custom/js/bank-statement-init.js',
 
     'dropify-init-js'                   =>'/assets/back-end/custom/js/dropify.js',
+    
+    'dashboard-init-js'                 =>'/assets/back-end/custom/js/dashboard-init.js',
 
     'live-path'                         => ''
 

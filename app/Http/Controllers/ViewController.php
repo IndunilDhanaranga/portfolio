@@ -168,8 +168,11 @@ class ViewController extends DataController {
         $data = [
             'title' => 'Dashboard',
             'view' => 'back-end.dashboard',
+            'script'    => array( config( 'site-specific.dashboard-init-js' ),
+                             ),
+            'dashboard_data' => $this->getDashboardData(),
         ];
-
+        // return $data['dashboard_data'];
         return $this->default( $data );
     }
 

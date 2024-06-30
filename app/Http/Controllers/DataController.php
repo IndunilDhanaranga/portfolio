@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\UserRoll;
 use App\Models\UserRollPermission;
@@ -424,6 +426,73 @@ class DataController extends Controller {
         $data['education_details'] = $this->getEducationQualification();
         return $data;
     }
+
+    /*
+    ----------------------------------------------------------------------------------------------------------
+    PUBLIC FUNCTION GET DASHBOARD DETAILS
+    ----------------------------------------------------------------------------------------------------------
+    */
+
+    public function getDashboardData()
+        {
+            $incomeData = [];
+            $expenseData = [];
+            $labels = [];
+
+            for ($i = 0; $i < 6; $i++) {
+                $date = Carbon::now()->subMonths($i);
+                $monthYearLabel = $date->format('F');
+                if($i == 5){
+                    $start_date = $date->format('d F Y');
+                }
+                if($i == 0){
+                    $end_date = $date->format('d F Y');
+                }
+
+                $labels[] = $monthYearLabel;
+
+                $incomeData[] = Income::whereMonth('date', $date->month)
+                                    ->whereYear('date', $date->year)
+                                    ->sum('amount');
+
+                $expenseData[] = Expense::whereMonth('date', $date->month)
+                                        ->whereYear('date', $date->year)
+                                        ->sum('amount');
+            }
+
+            $incomeData = array_reverse($incomeData);
+            $expenseData = array_reverse($expenseData);
+            $labels = array_reverse($labels);
+
+            $data = [
+                'complete_project' => Project::where('status', 3)->count(),
+                'ongoing_project' => Project::where('status', 2)->count(),
+                'closed_project' => Project::where('status', 4)->count(),
+                'clients' => ProjectClient::where('is_active', 1)->count(),
+                'bank_details' => BankAccount::where('is_active', 1)->orderBy('id', 'asc')->get(['bank_name', 'branch','account_no', 'balance']),
+                'income' => Income::select('bank_account_id', DB::raw('SUM(amount) as total_income'))
+                                  ->groupBy('bank_account_id')
+                                  ->orderBy('bank_account_id', 'asc')
+                                  ->get(),
+                'expense' => Expense::select('bank_account_id', DB::raw('SUM(amount) as total_expense'))
+                                    ->groupBy('bank_account_id')
+                                    ->orderBy('bank_account_id', 'asc')
+                                    ->get(),
+                'this_month_income' => Income::whereMonth('date', Carbon::now()->month)
+                                         ->whereYear('date', Carbon::now()->year)
+                                         ->sum('amount'),
+                'this_month_expense' => Expense::whereMonth('date', Carbon::now()->month)
+                                         ->whereYear('date', Carbon::now()->year)
+                                         ->sum('amount'),
+                'income_sums' => $incomeData,
+                'expense_sums' => $expenseData,
+                'month_labels' => $labels,
+                'start_date' => $start_date,
+                'end_date' => $end_date,
+            ];
+    
+            return $data;
+        }   
 
 
 

@@ -30,9 +30,6 @@ use Carbon\Carbon;
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
                             class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/logout" class="nav-link">Logout</a>
-                </li>
             </ul>
 
             <!-- Right navbar links -->
@@ -62,7 +59,7 @@ use Carbon\Carbon;
 
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="/mailbox" data-toggle="tooltip" data-placement="left" title="Mails">
+                    <a class="nav-link" href="/mailbox" data-toggle="tooltip" data-placement="bottom" title="Mails">
                         <i class="far fa-comments"></i>
                         <span class="badge badge-danger navbar-badge d-none" id="message_count">0</span>
                     </a>
@@ -94,7 +91,10 @@ use Carbon\Carbon;
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
                 </li> --}}
-                <li class="nav-item">
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="/logout" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class='fas fa-sign-out-alt'></i></a>
+                </li>
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
@@ -104,7 +104,7 @@ use Carbon\Carbon;
                         role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
         <!-- /.navbar -->

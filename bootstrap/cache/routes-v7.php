@@ -71,7 +71,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::SNfCBHJFP8BoMemm',
+            '_route' => 'generated::80fTHYjFlWUp7OaT',
           ),
           1 => NULL,
           2 => 
@@ -92,6 +92,26 @@ app('router')->setCompiledRoutes(
           0 => 
           array (
             '_route' => 'home',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/login' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'login',
           ),
           1 => NULL,
           2 => 
@@ -157,26 +177,6 @@ app('router')->setCompiledRoutes(
           2 => 
           array (
             'POST' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/login' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'login',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
           ),
           3 => NULL,
           4 => false,
@@ -1921,7 +1921,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::SNfCBHJFP8BoMemm' => 
+    'generated::80fTHYjFlWUp7OaT' => 
     array (
       'methods' => 
       array (
@@ -1938,9 +1938,9 @@ app('router')->setCompiledRoutes(
         'uses' => 'O:55:"Laravel\\SerializableClosure\\UnsignedSerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:386:"function () {
                     \\Illuminate\\Support\\Facades\\Event::dispatch(new \\Illuminate\\Foundation\\Events\\DiagnosingHealth);
 
-                    return \\Illuminate\\Support\\Facades\\View::file(\'C:\\\\Users\\\\Indunil\\\\Desktop\\\\PROJECTS\\\\PERSONAL\\\\portfolio\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Configuration\'.\'/../resources/health-up.blade.php\');
+                    return \\Illuminate\\Support\\Facades\\View::file(\'C:\\\\Users\\\\Indunil\\\\Desktop\\\\Projects\\\\personal\\\\portfolio\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Configuration\'.\'/../resources/health-up.blade.php\');
                 }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"000000000000055a0000000000000000";}}',
-        'as' => 'generated::SNfCBHJFP8BoMemm',
+        'as' => 'generated::80fTHYjFlWUp7OaT',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1970,6 +1970,43 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
+        'uses' => 'App\\Http\\Controllers\\ViewController@frontend',
+        'controller' => 'App\\Http\\Controllers\\ViewController@frontend',
+        'namespace' => 'App\\Http\\Controllers',
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'home',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'login' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'login',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
         'uses' => 'App\\Http\\Controllers\\ViewController@login',
         'controller' => 'App\\Http\\Controllers\\ViewController@login',
         'namespace' => 'App\\Http\\Controllers',
@@ -1977,7 +2014,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'home',
+        'as' => 'login',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2088,43 +2125,6 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'client-message-send',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'login' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'login',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\ViewController@login',
-        'controller' => 'App\\Http\\Controllers\\ViewController@login',
-        'namespace' => 'App\\Http\\Controllers',
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'login',
       ),
       'fallback' => false,
       'defaults' => 

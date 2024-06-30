@@ -44,8 +44,8 @@
                 <h4 class="header-subtitle">Hello, I am</h4>
                 <h1 class="header-title">{{ $basic_details->d_name ?? '' }}</h1>
                 <h6 class="header-mono">{{ $basic_details->m_path ?? '' }}</h6>
-                <a target="blank" href="/print-cv" class="btn btn-primary btn-rounded"><i
-                        class="ti-printer pr-2"></i>Print Resume</a>
+                {{-- <a target="blank" href="/print-cv" class="btn btn-primary btn-rounded"><i
+                        class="ti-printer pr-2"></i>Print Resume</a> --}}
             </div>
         </div>
     </header>
@@ -99,8 +99,8 @@
                 <span class="line mb-5"></span>
                 <h5 class="mb-3">{{ $basic_details->caption ?? '' }}</h5>
                 <p class="mt-20">{{ $basic_details->about ?? '' }}</p>
-                <a href="/download-cv" class="btn btn-outline-danger"><i class="icon-down-circled2 "></i>Download My
-                    CV</a>
+                {{-- <a href="/download-cv" class="btn btn-outline-danger"><i class="icon-down-circled2 "></i>Download My
+                    CV</a> --}}
             </div>
             <div class="col-lg-4 about-card">
                 <h3 class="font-weight-light">Personal Info</h3>
