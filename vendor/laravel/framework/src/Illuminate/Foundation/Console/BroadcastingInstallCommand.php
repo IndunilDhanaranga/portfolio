@@ -23,7 +23,9 @@ class BroadcastingInstallCommand extends Command
      */
     protected $signature = 'install:broadcasting
                     {--composer=global : Absolute path to the Composer binary which should be used to install packages}
-                    {--force : Overwrite any existing broadcasting routes file}';
+                    {--force : Overwrite any existing broadcasting routes file}
+                    {--without-reverb : Do not prompt to install Laravel Reverb}
+                    {--without-node : Do not prompt to install Node dependencies}';
 
     /**
      * The console command description.
@@ -53,6 +55,10 @@ class BroadcastingInstallCommand extends Command
 
         // Install bootstrapping...
         if (! file_exists($echoScriptPath = $this->laravel->resourcePath('js/echo.js'))) {
+            if (! is_dir($directory = $this->laravel->resourcePath('js'))) {
+                mkdir($directory, 0755, true);
+            }
+
             copy(__DIR__.'/stubs/echo-js.stub', $echoScriptPath);
         }
 
@@ -109,7 +115,14 @@ class BroadcastingInstallCommand extends Command
      */
     protected function enableBroadcastServiceProvider()
     {
-        $config = ($filesystem = new Filesystem)->get(app()->configPath('app.php'));
+        $filesystem = new Filesystem;
+
+        if (! $filesystem->exists(app()->configPath('app.php')) ||
+            ! $filesystem->exists('app/Providers/BroadcastServiceProvider.php')) {
+            return;
+        }
+
+        $config = $filesystem->get(app()->configPath('app.php'));
 
         if (str_contains($config, '// App\Providers\BroadcastServiceProvider::class')) {
             $filesystem->replaceInFile(
@@ -127,7 +140,7 @@ class BroadcastingInstallCommand extends Command
      */
     protected function installReverb()
     {
-        if (InstalledVersions::isInstalled('laravel/reverb')) {
+        if ($this->option('without-reverb') || InstalledVersions::isInstalled('laravel/reverb')) {
             return;
         }
 
@@ -159,7 +172,7 @@ class BroadcastingInstallCommand extends Command
      */
     protected function installNodeDependencies()
     {
-        if (! confirm('Would you like to install and build the Node dependencies required for broadcasting?', default: true)) {
+        if ($this->option('without-node') || ! confirm('Would you like to install and build the Node dependencies required for broadcasting?', default: true)) {
             return;
         }
 

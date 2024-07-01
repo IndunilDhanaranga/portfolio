@@ -13,10 +13,13 @@ declare(strict_types=1);
 
 namespace Carbon\Traits;
 
+use BackedEnum;
 use BadMethodCallException;
 use Carbon\CarbonInterface;
 use Carbon\Exceptions\BadComparisonUnitException;
 use Carbon\FactoryImmutable;
+use Carbon\Month;
+use Carbon\WeekDay;
 use DateTimeInterface;
 use InvalidArgumentException;
 
@@ -831,14 +834,13 @@ trait Comparison
      * Carbon::canBeCreatedFromFormat('11:12:45', 'h:i:s'); // true
      * Carbon::canBeCreatedFromFormat('13:12:45', 'h:i:s'); // false
      * ```
-     *
-     * @param string $date
-     * @param string $format
-     *
-     * @return bool
      */
     public static function canBeCreatedFromFormat(?string $date, string $format): bool
     {
+        if ($date === null) {
+            return false;
+        }
+
         try {
             // Try to create a DateTime object. Throws an InvalidArgumentException if the provided time string
             // doesn't match the format in any way.
@@ -874,12 +876,23 @@ trait Comparison
      *
      * @param string $tester day name, month name, hour, date, etc. as string
      */
-    public function is(string $tester): bool
+    public function is(WeekDay|Month|string $tester): bool
     {
+        if ($tester instanceof BackedEnum) {
+            $tester = $tester->name;
+        }
+
         $tester = trim($tester);
 
         if (preg_match('/^\d+$/', $tester)) {
             return $this->year === (int) $tester;
+        }
+
+        if (preg_match('/^(?:Jan|January|Feb|February|Mar|March|Apr|April|May|Jun|June|Jul|July|Aug|August|Sep|September|Oct|October|Nov|November|Dec|December)$/i', $tester)) {
+            return $this->isSameMonth(
+                $this->transmitFactory(static fn () => static::parse($tester)),
+                false,
+            );
         }
 
         if (preg_match('/^\d{3,}-\d{1,2}$/', $tester)) {

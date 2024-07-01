@@ -71,7 +71,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::80fTHYjFlWUp7OaT',
+            '_route' => 'generated::PKDAjXFpS736Sp60',
           ),
           1 => NULL,
           2 => 
@@ -1921,7 +1921,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::80fTHYjFlWUp7OaT' => 
+    'generated::PKDAjXFpS736Sp60' => 
     array (
       'methods' => 
       array (
@@ -1939,8 +1939,8 @@ app('router')->setCompiledRoutes(
                     \\Illuminate\\Support\\Facades\\Event::dispatch(new \\Illuminate\\Foundation\\Events\\DiagnosingHealth);
 
                     return \\Illuminate\\Support\\Facades\\View::file(\'C:\\\\Users\\\\Indunil\\\\Desktop\\\\Projects\\\\personal\\\\portfolio\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Configuration\'.\'/../resources/health-up.blade.php\');
-                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"000000000000055a0000000000000000";}}',
-        'as' => 'generated::80fTHYjFlWUp7OaT',
+                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000005240000000000000000";}}',
+        'as' => 'generated::PKDAjXFpS736Sp60',
       ),
       'fallback' => false,
       'defaults' => 

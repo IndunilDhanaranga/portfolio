@@ -1,4 +1,8 @@
 <?php return array (
+  2 => 'broadcasting',
+  4 => 'cors',
+  7 => 'hashing',
+  13 => 'view',
   'app' => 
   array (
     'name' => 'Laravel',
@@ -533,6 +537,10 @@
       array (
         'transport' => 'postmark',
       ),
+      'resend' => 
+      array (
+        'transport' => 'resend',
+      ),
       'sendmail' => 
       array (
         'transport' => 'sendmail',
@@ -554,6 +562,15 @@
         array (
           0 => 'smtp',
           1 => 'log',
+        ),
+      ),
+      'roundrobin' => 
+      array (
+        'transport' => 'roundrobin',
+        'mailers' => 
+        array (
+          0 => 'ses',
+          1 => 'postmark',
         ),
       ),
     ),
@@ -642,6 +659,10 @@
       'key' => '',
       'secret' => '',
       'region' => 'us-east-1',
+    ),
+    'resend' => 
+    array (
+      'key' => NULL,
     ),
     'slack' => 
     array (
@@ -905,6 +926,8 @@
       array (
         'max_chained_job_reporting_depth' => 5,
       ),
+      6 => 'Spatie\\LaravelIgnition\\FlareMiddleware\\AddContext',
+      7 => 'Spatie\\LaravelIgnition\\FlareMiddleware\\AddExceptionHandledStatus',
       'Spatie\\FlareClient\\FlareMiddleware\\CensorRequestBodyFields' => 
       array (
         'censor_fields' => 
@@ -956,6 +979,8 @@
       17 => 'Spatie\\LaravelIgnition\\Solutions\\SolutionProviders\\GenericLaravelExceptionSolutionProvider',
       18 => 'Spatie\\LaravelIgnition\\Solutions\\SolutionProviders\\OpenAiSolutionProvider',
       19 => 'Spatie\\LaravelIgnition\\Solutions\\SolutionProviders\\SailNetworkSolutionProvider',
+      20 => 'Spatie\\LaravelIgnition\\Solutions\\SolutionProviders\\UnknownMysql8CollationSolutionProvider',
+      21 => 'Spatie\\LaravelIgnition\\Solutions\\SolutionProviders\\UnknownMariadbCollationSolutionProvider',
     ),
     'ignored_solution_providers' => 
     array (
